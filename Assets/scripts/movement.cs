@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.ProBuilder;
+using UnityEngine.UIElements;
 
 public class movement : MonoBehaviour
 {
     public Rigidbody rb;
+    public GameObject cam;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,25 +41,27 @@ public class movement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            moveDirection += transform.forward;
+            moveDirection += cam.transform.forward;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            moveDirection -= transform.forward;
+            moveDirection -= cam.transform.forward;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            moveDirection += transform.right;
+            moveDirection += cam.transform.right;
+            
         }
         if (Input.GetKey(KeyCode.A))
         {
-            moveDirection -= transform.right;
+            moveDirection -= cam.transform.right;
         }
 
         moveDirection.Normalize(); // To prevent faster diagonal movement
         moveDirection *= 5f; // Speed
 
         rb.linearVelocity = new Vector3(moveDirection.x, rb.linearVelocity.y, moveDirection.z);
+        
     }
     
 }
