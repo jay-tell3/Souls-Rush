@@ -6,6 +6,8 @@ public class movement : MonoBehaviour
 {
     public Rigidbody rb;
     public GameObject cam;
+    
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

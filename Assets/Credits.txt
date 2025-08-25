@@ -1,2 +1,4 @@
 Low Poly Axe Warrior by polymiragee
 https://assetstore.unity.com/packages/3d/characters/humanoids/low-poly-axe-warrior-314095
+Eazy Camera by Lint & Buttons
+https://assetstore.unity.com/packages/3d/characters/eazy-camera-102275
