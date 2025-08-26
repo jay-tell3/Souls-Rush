@@ -129126,6 +129126,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Axe_Warrior_2
       objectReference: {fileID: 0}
+    - target: {fileID: 6189023500858380238, guid: 5891485f1f429a14e87a01628842307d, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6189023500858380238, guid: 5891485f1f429a14e87a01628842307d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fb358dcb3c063da479364c6f9750f034, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4602858065105118204, guid: 5891485f1f429a14e87a01628842307d, type: 3}
