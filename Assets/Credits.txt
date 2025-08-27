@@ -4,3 +4,5 @@ Eazy Camera by Lint & Buttons
 https://assetstore.unity.com/packages/3d/characters/eazy-camera-102275
 FREE-Low Poly SwordS - RPG Weapons by Blink
 https://assetstore.unity.com/packages/3d/props/weapons/free-low-poly-swords-rpg-weapons-198166
+RPG_AnimationsPack_FREE by DoubleL
+https://assetstore.unity.com/packages/3d/animations/rpg-animations-pack-free-288783
