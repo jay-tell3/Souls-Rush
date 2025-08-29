@@ -3,9 +3,10 @@ using UnityEngine.ProBuilder;
 using UnityEngine.UIElements;
 
 public class movement : MonoBehaviour
-{
+{   //variable place
     public Rigidbody rb;
     public GameObject cam;
+    public Animator animator;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,20 +45,37 @@ public class movement : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             moveDirection += cam.transform.forward;
+            animator.SetBool("moving", true);
         }
+        else { animator.SetBool("moving", false); }
         if (Input.GetKey(KeyCode.S))
         {
             moveDirection -= cam.transform.forward;
+           // animator.SetBool("moving", true);
         }
+        
         if (Input.GetKey(KeyCode.D))
         {
             moveDirection += cam.transform.right;
-            
+           // animator.SetBool("moving", true);
+
         }
+      
         if (Input.GetKey(KeyCode.A))
         {
             moveDirection -= cam.transform.right;
+           // animator.SetBool("moving", true);
         }
+        /*
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            animator.SetBool("moving", true);
+        }
+        else
+        {
+            animator.SetBool("moving", false);
+        }*/
+
 
         moveDirection.Normalize(); // To prevent faster diagonal movement
         moveDirection *= 5f; // Speed

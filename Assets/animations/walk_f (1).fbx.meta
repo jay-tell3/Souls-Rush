@@ -3,7 +3,27 @@ guid: 72387fce6fed24e4ba4ae0ceba6bf94a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Knight_MAT2
+    second: {fileID: 2100000, guid: 8f7f7baba83995443bd3372ea78b83d1, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Knight_diffuse_f56d0616188a5eac8ec3ead5ce7fa9a5
+    second: {fileID: 2800000, guid: 299435caff787da4ba9a3f3a37223a9e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Knight_normal_9ad4a2aa394a221f324595f614ce8af8
+    second: {fileID: 2800000, guid: 4f3d18892fdc467449b3a88c500c1e59, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Knight_specular_29511681878009d0496d2cab83a14448
+    second: {fileID: 2800000, guid: 91b6a58a255964d4483602218d515ae2, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
