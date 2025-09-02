@@ -7,7 +7,7 @@ public class movement : MonoBehaviour
     public Rigidbody rb;
     public GameObject cam;
     public Animator animator;
-    
+    private float ver, horiz;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,30 +42,34 @@ public class movement : MonoBehaviour
     {
         Vector3 moveDirection = Vector3.zero;
 
-        if (Input.GetKey(KeyCode.W))
+        ver = Input.GetAxis("Vertical");
+        horiz = Input.GetAxis("Horizontal");
+        animator.SetFloat("ver", ver);
+        animator.SetFloat("horiz",horiz);
+
+        if (ver > 0)
         {
             moveDirection += cam.transform.forward;
-            animator.SetBool("moving", true);
+            transform.localRotation = new Quaternion(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z, 1);
+            //transform.Rotate(Vector3.up, cam.transform.rotation.y);
         }
-        else { animator.SetBool("moving", false); }
-        if (Input.GetKey(KeyCode.S))
+        if (ver < 0)
         {
             moveDirection -= cam.transform.forward;
-           // animator.SetBool("moving", true);
+            
         }
-        
-        if (Input.GetKey(KeyCode.D))
+
+        if (horiz > 0)
         {
             moveDirection += cam.transform.right;
-           // animator.SetBool("moving", true);
+            
 
         }
-      
-        if (Input.GetKey(KeyCode.A))
+        if (horiz < 0)
         {
             moveDirection -= cam.transform.right;
-           // animator.SetBool("moving", true);
         }
+        
         /*
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
