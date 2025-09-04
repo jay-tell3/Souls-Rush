@@ -50,26 +50,31 @@ public class movement : MonoBehaviour
         if (ver > 0)
         {
             moveDirection += cam.transform.forward;
-            transform.localRotation = new Quaternion(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z, 1);
+            transform.localRotation =  Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
             //transform.Rotate(Vector3.up, cam.transform.rotation.y);
         }
         if (ver < 0)
         {
             moveDirection -= cam.transform.forward;
-            
+            transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
         }
 
         if (horiz > 0)
         {
             moveDirection += cam.transform.right;
-            
+            transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
 
         }
         if (horiz < 0)
         {
             moveDirection -= cam.transform.right;
+            transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
         }
-        
+        if (Input.GetKey(KeyCode.E))
+        {
+            animator.SetBool("roll", true);
+        }
+        else { animator.SetBool("roll", false); }
         /*
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
