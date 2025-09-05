@@ -8,6 +8,7 @@ public class movement : MonoBehaviour
     public GameObject cam;
     public Animator animator;
     private float ver, horiz;
+    public bool rolling;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,34 +48,63 @@ public class movement : MonoBehaviour
         animator.SetFloat("ver", ver);
         animator.SetFloat("horiz",horiz);
 
-        if (ver > 0)
+        if (ver > 0 && !rolling)
         {
             moveDirection += cam.transform.forward;
             transform.localRotation =  Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
             //transform.Rotate(Vector3.up, cam.transform.rotation.y);
         }
-        if (ver < 0)
+        if (ver < 0 && !rolling)
         {
             moveDirection -= cam.transform.forward;
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
         }
 
-        if (horiz > 0)
+        if (horiz > 0 && !rolling)
         {
             moveDirection += cam.transform.right;
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
 
         }
-        if (horiz < 0)
+        if (horiz < 0 && !rolling)
         {
             moveDirection -= cam.transform.right;
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
         }
-        if (Input.GetKey(KeyCode.E))
+       
+        
+        
+        if (Input.GetKey(KeyCode.E) && !rolling)
         {
-            animator.SetBool("roll", true);
+            rolling = true;
+            animator.SetTrigger("Roll");
+            Invoke("NoRoll", 1.2f);
         }
-        else { animator.SetBool("roll", false); }
+        if (Input.GetKey(KeyCode.E) && ver < 0 && !rolling)
+        {
+            rolling = true;
+            animator.SetTrigger("Roll");
+            Invoke("NoRoll", 1.2f);
+        }
+        if (Input.GetKey(KeyCode.E) && horiz > 0 && !rolling)
+        {
+            rolling = true;
+            animator.SetTrigger("sideRoll");
+            transform.Rotate(0, -90, 0);
+            Invoke("NoRoll", 1.2f);
+        }
+        if (Input.GetKey(KeyCode.E) && horiz < 0 && !rolling)
+        {
+            rolling = true;
+            animator.SetTrigger("sideRoll");
+            transform.Rotate(0, 90, 0);
+            Invoke("NoRoll", 1.2f);
+        }
+        if (rolling)
+        {
+            //transform.Rotate(0, 90, 0);
+            //transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
+        }
         /*
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
@@ -91,6 +121,11 @@ public class movement : MonoBehaviour
 
         rb.linearVelocity = new Vector3(moveDirection.x, rb.linearVelocity.y, moveDirection.z);
         
+    }
+
+    public void NoRoll()
+    {
+        rolling = false;
     }
     
 }
