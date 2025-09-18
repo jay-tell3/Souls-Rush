@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.UIElements;
@@ -9,7 +10,12 @@ public class movement : MonoBehaviour
     public Animator animator;
     private float ver, horiz;
     public bool rolling;
-    
+    public bool Frolling;
+    public bool Brolling;
+    public bool Rrolling;
+    public bool Lrolling;
+    private float attack;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -47,6 +53,7 @@ public class movement : MonoBehaviour
         horiz = Input.GetAxis("Horizontal");
         animator.SetFloat("ver", ver);
         animator.SetFloat("horiz",horiz);
+        
 
         if (ver > 0 && !rolling)
         {
@@ -74,47 +81,51 @@ public class movement : MonoBehaviour
        
         
         
-        if (Input.GetKey(KeyCode.E) && !rolling)
+        if (Input.GetKey(KeyCode.E) && ver > 0 && !rolling)
         {
             rolling = true;
-            animator.SetTrigger("Roll");
-            Invoke("NoRoll", 1.2f);
+            //StartCoroutine(MoveRoll());
+            
+             animator.SetTrigger("Roll");
+            Invoke("NoRoll", 1f);
         }
         if (Input.GetKey(KeyCode.E) && ver < 0 && !rolling)
         {
+            Brolling = true;
             rolling = true;
             animator.SetTrigger("Roll");
-            Invoke("NoRoll", 1.2f);
+            Invoke("NoRoll", 1f);
         }
         if (Input.GetKey(KeyCode.E) && horiz > 0 && !rolling)
         {
             rolling = true;
+            //StartCoroutine(MoveRoll());
             animator.SetTrigger("sideRoll");
-            transform.Rotate(0, -90, 0);
-            Invoke("NoRoll", 1.2f);
+            transform.Rotate(0, 90, 0);
+            Invoke("NoRoll", 1f);
         }
         if (Input.GetKey(KeyCode.E) && horiz < 0 && !rolling)
         {
             rolling = true;
             animator.SetTrigger("sideRoll");
-            transform.Rotate(0, 90, 0);
-            Invoke("NoRoll", 1.2f);
+            transform.Rotate(0, -90, 0);
+            Invoke("NoRoll", 1f);
         }
-        if (rolling)
+       
+        if (rolling && !Brolling )
         {
-            //transform.Rotate(0, 90, 0);
-            //transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
+            transform.Translate(Vector3.forward * 5 * Time.deltaTime);
         }
-        /*
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        if (rolling && Brolling)
         {
-            animator.SetBool("moving", true);
+            transform.Translate(Vector3.forward * -5 * Time.deltaTime);
         }
-        else
+        if (Input.GetMouseButtonDown(0))
         {
-            animator.SetBool("moving", false);
-        }*/
-
+            attack = Random.Range(0,3);
+            animator.SetFloat("attack", attack);
+            animator.SetTrigger("Attack");
+        }
 
         moveDirection.Normalize(); // To prevent faster diagonal movement
         moveDirection *= 5f; // Speed
@@ -126,6 +137,20 @@ public class movement : MonoBehaviour
     public void NoRoll()
     {
         rolling = false;
+        Frolling = false;
+        Brolling = false;
+        Rrolling = false;
+        Lrolling = false;
+
+    }
+   
+    public IEnumerator MoveRoll()
+    {
+       // while (rolling)
+            //transform.Translate(Vector3.forward * 10 * Time.deltaTime); 
+            transform.Translate(Vector3.forward * 5);
+        yield return null;
+       
     }
     
 }
