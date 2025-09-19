@@ -15,7 +15,7 @@ public class movement : MonoBehaviour
     public bool Rrolling;
     public bool Lrolling;
     private float attack;
-
+    private bool attacking;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -55,25 +55,25 @@ public class movement : MonoBehaviour
         animator.SetFloat("horiz",horiz);
         
 
-        if (ver > 0 && !rolling)
+        if (ver > 0 && !rolling && !attacking)
         {
             moveDirection += cam.transform.forward;
             transform.localRotation =  Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
             //transform.Rotate(Vector3.up, cam.transform.rotation.y);
         }
-        if (ver < 0 && !rolling)
+        if (ver < 0 && !rolling && !attacking)
         {
             moveDirection -= cam.transform.forward;
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
         }
 
-        if (horiz > 0 && !rolling)
+        if (horiz > 0 && !rolling && !attacking )
         {
             moveDirection += cam.transform.right;
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
 
         }
-        if (horiz < 0 && !rolling)
+        if (horiz < 0 && !rolling && !attacking)
         {
             moveDirection -= cam.transform.right;
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
@@ -81,7 +81,7 @@ public class movement : MonoBehaviour
        
         
         
-        if (Input.GetKey(KeyCode.E) && ver > 0 && !rolling)
+        if (Input.GetKey(KeyCode.E) && ver > 0 && !rolling && !attacking )
         {
             rolling = true;
             //StartCoroutine(MoveRoll());
@@ -89,14 +89,14 @@ public class movement : MonoBehaviour
              animator.SetTrigger("Roll");
             Invoke("NoRoll", 1f);
         }
-        if (Input.GetKey(KeyCode.E) && ver < 0 && !rolling)
+        if (Input.GetKey(KeyCode.E) && ver < 0 && !rolling && !attacking )
         {
             Brolling = true;
             rolling = true;
             animator.SetTrigger("Roll");
             Invoke("NoRoll", 1f);
         }
-        if (Input.GetKey(KeyCode.E) && horiz > 0 && !rolling)
+        if (Input.GetKey(KeyCode.E) && horiz > 0 && !rolling && !attacking )
         {
             rolling = true;
             //StartCoroutine(MoveRoll());
@@ -104,7 +104,7 @@ public class movement : MonoBehaviour
             transform.Rotate(0, 90, 0);
             Invoke("NoRoll", 1f);
         }
-        if (Input.GetKey(KeyCode.E) && horiz < 0 && !rolling)
+        if (Input.GetKey(KeyCode.E) && horiz < 0 && !rolling && !attacking)
         {
             rolling = true;
             animator.SetTrigger("sideRoll");
@@ -120,11 +120,14 @@ public class movement : MonoBehaviour
         {
             transform.Translate(Vector3.forward * -5 * Time.deltaTime);
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !attacking && !rolling)
         {
+            attacking = true;
+            transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
             attack = Random.Range(0,3);
             animator.SetFloat("attack", attack);
             animator.SetTrigger("Attack");
+            Invoke("NoAttacking", 1.9f);
         }
 
         moveDirection.Normalize(); // To prevent faster diagonal movement
@@ -143,7 +146,10 @@ public class movement : MonoBehaviour
         Lrolling = false;
 
     }
-   
+    public void NoAttacking()
+    {
+        attacking = false;
+    }
     public IEnumerator MoveRoll()
     {
        // while (rolling)
