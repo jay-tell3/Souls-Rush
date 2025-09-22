@@ -127,7 +127,7 @@ public class movement : MonoBehaviour
             attack = Random.Range(0,3);
             animator.SetFloat("attack", attack);
             animator.SetTrigger("Attack");
-            Invoke("NoAttacking", 1.9f);
+            Invoke("NoAttacking", 1f);
         }
 
         moveDirection.Normalize(); // To prevent faster diagonal movement
