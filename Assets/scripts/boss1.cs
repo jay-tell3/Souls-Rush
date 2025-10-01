@@ -38,10 +38,31 @@ public class boss1 : MonoBehaviour
                 radiusCheck.animator.SetBool("inRange", false);
                 animator.SetTrigger("A1");
                 attack = Random.Range(0, 2);
-                if (attack == 1)
-                { ps.Play(); }
                 animator.SetFloat("attack", attack);
-                Invoke("NoAttacking", 4f);
+                // Get the direction to the target
+                Vector3 direction = target.position - transform.position;
+
+                // Zero out the Y component to constrain rotation to the Y-axis
+                direction.y = 0;
+
+                // Check if the direction is valid (non-zero)
+                if (direction != Vector3.zero)
+                {
+                    // Apply LookRotation constrained to the Y-axis
+                    transform.rotation = Quaternion.LookRotation(direction);
+                }
+                if (attack == 1)
+                {
+                    Invoke("Par", 0.5f);
+                    Invoke("NoPar", 1f);
+                    Invoke("NoAttacking", 4f);
+                }
+                else
+                {
+                    Invoke("NoAttacking", 3.5f);
+                }
+                
+                
             }
         
         }
@@ -57,11 +78,14 @@ public class boss1 : MonoBehaviour
     {
         
     }*/
-
+    public void Par()
+    { ps.Play(); }
+    public void NoPar()
+    { ps.Stop(); }
     public void NoAttacking()
     {
         attacking = false;
-        ps.Stop();
+        
     }
 
 }
