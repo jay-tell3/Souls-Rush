@@ -11,6 +11,7 @@ public class FollowObject : MonoBehaviour
         {
             // Update the position of this object relative to the target
             transform.position = targetObject.position + offset;
+            transform.Translate(Vector3.back * 7);
         }
     }
 }

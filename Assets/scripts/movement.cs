@@ -7,6 +7,7 @@ public class movement : MonoBehaviour
 {   //variable place
     public Rigidbody rb;
     public GameObject cam;
+    public GameObject targetCam, playerCam;
     public Animator animator;
     private float ver, horiz;
     public bool rolling;
@@ -78,8 +79,30 @@ public class movement : MonoBehaviour
             moveDirection -= cam.transform.right;
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
         }
-       
-        
+
+        if (cam == playerCam)
+        {
+            playerCam.SetActive(true);
+            targetCam.SetActive(false);
+        }
+        else
+        {
+            playerCam.SetActive(false);
+            targetCam.SetActive(true);
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.T)) 
+        { 
+            if(cam == playerCam)
+            {
+                cam = targetCam;
+            }
+            else if (cam == targetCam)
+            {
+                cam = playerCam;
+            }
+        }
         
         if (Input.GetKey(KeyCode.E) && ver > 0 && !rolling && !attacking )
         {

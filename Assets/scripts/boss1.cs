@@ -37,7 +37,7 @@ public class boss1 : MonoBehaviour
                 attacking = true;
                 radiusCheck.animator.SetBool("inRange", false);
                 animator.SetTrigger("A1");
-                attack = Random.Range(0, 2);
+                attack = Random.Range(0, 3);
                 animator.SetFloat("attack", attack);
                 // Get the direction to the target
                 Vector3 direction = target.position - transform.position;
@@ -57,9 +57,13 @@ public class boss1 : MonoBehaviour
                     Invoke("NoPar", 1f);
                     Invoke("NoAttacking", 4f);
                 }
-                else
+                else if (attack == 0)
                 {
                     Invoke("NoAttacking", 3.5f);
+                }
+                else if (attack == 2)
+                {
+                    StartCoroutine("JumpAttack");
                 }
                 
                 
@@ -74,10 +78,25 @@ public class boss1 : MonoBehaviour
         
     }
 
-    /*IEnumerator Attack()
+    IEnumerator JumpAttack()
     {
-        
-    }*/
+        float jumpTime = 0;
+        float jumpStrong= 50;
+        while (jumpTime <= 3.5f)
+        {
+            jumpTime += Time.deltaTime;
+          /* transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+            transform.Translate(Vector3.up * jumpStrong * Time.deltaTime);
+            if (jumpStrong >= 1)
+            {
+                jumpStrong--;
+            }*/
+            yield return null;
+        }
+        attacking = false;
+        yield return null;
+    }
+
     public void Par()
     { ps.Play(); }
     public void NoPar()
