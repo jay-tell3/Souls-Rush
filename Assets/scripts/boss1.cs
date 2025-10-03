@@ -9,6 +9,8 @@ public class boss1 : MonoBehaviour
     private ParticleSystem ps;
     private bool attacking;
     private int attack;
+    private float farRange = 10;
+    private bool InfarRange;
     void Update()
     {
         radiusCheck = GetComponent<RadiusCheck>();
@@ -23,7 +25,7 @@ public class boss1 : MonoBehaviour
             direction.y = 0;
 
             // Check if the direction is valid (non-zero)
-            if (direction != Vector3.zero)
+            if (direction != Vector3.zero && !attacking)
             {
                 // Apply LookRotation constrained to the Y-axis
                 transform.rotation = Quaternion.LookRotation(direction);
@@ -45,12 +47,12 @@ public class boss1 : MonoBehaviour
                 // Zero out the Y component to constrain rotation to the Y-axis
                 direction.y = 0;
 
-                // Check if the direction is valid (non-zero)
+                /*/ Check if the direction is valid (non-zero)
                 if (direction != Vector3.zero)
                 {
                     // Apply LookRotation constrained to the Y-axis
                     transform.rotation = Quaternion.LookRotation(direction);
-                }
+                }*/
                 if (attack == 1)
                 {
                     Invoke("Par", 0.5f);
@@ -66,31 +68,51 @@ public class boss1 : MonoBehaviour
                     StartCoroutine("JumpAttack");
                 }
                 
-                
+
             }
         
         }
-        
-        /*if (target != null)
+        if (Vector3.Distance(transform.position, target.position) <= farRange)
         {
-            transform.LookAt(target.position, Vector3.up); // Makes this object look at the target
-        }*/
-        
-    }
+
+            InfarRange = true;
+            Debug.Log("far range") ;
+        }
+        else
+        {
+
+            InfarRange = false;
+        }
+        if (attacking == false && InfarRange)
+        {
+            attacking = true;
+            radiusCheck.animator.SetBool("inRange", true);
+            animator.SetTrigger("A1");
+            attack = 2;
+            animator.SetFloat("attack", attack);
+            StartCoroutine("JumpAttack");
+        }
+            /*if (target != null)
+            {
+                transform.LookAt(target.position, Vector3.up); // Makes this object look at the target
+            }*/
+
+        }
 
     IEnumerator JumpAttack()
     {
         float jumpTime = 0;
-        float jumpStrong= 50;
+        float jumpStrong= 60;
         while (jumpTime <= 3.5f)
         {
+            radiusCheck.animator.SetBool("inRange", true);
             jumpTime += Time.deltaTime;
-          /* transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+            transform.Translate(Vector3.forward * 6 * Time.deltaTime);
             transform.Translate(Vector3.up * jumpStrong * Time.deltaTime);
             if (jumpStrong >= 1)
             {
                 jumpStrong--;
-            }*/
+            }
             yield return null;
         }
         attacking = false;
