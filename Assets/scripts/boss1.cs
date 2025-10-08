@@ -35,17 +35,19 @@ public class boss1 : MonoBehaviour
         {
             if (attacking == false)
             {
-
+                // Get the direction to the target
+                Vector3 direction = target.position - transform.position;
+                // Zero out the Y component to constrain rotation to the Y-axis
+                direction.y = 0;
+                transform.rotation = Quaternion.LookRotation(direction);
                 attacking = true;
                 radiusCheck.animator.SetBool("inRange", false);
                 animator.SetTrigger("A1");
                 attack = Random.Range(0, 3);
                 animator.SetFloat("attack", attack);
-                // Get the direction to the target
-                Vector3 direction = target.position - transform.position;
+              
 
-                // Zero out the Y component to constrain rotation to the Y-axis
-                direction.y = 0;
+               
 
                 /*/ Check if the direction is valid (non-zero)
                 if (direction != Vector3.zero)
@@ -102,17 +104,11 @@ public class boss1 : MonoBehaviour
     IEnumerator JumpAttack()
     {
         float jumpTime = 0;
-        float jumpStrong= 60;
         while (jumpTime <= 3.5f)
         {
             radiusCheck.animator.SetBool("inRange", true);
             jumpTime += Time.deltaTime;
-            transform.Translate(Vector3.forward * 6 * Time.deltaTime);
-            transform.Translate(Vector3.up * jumpStrong * Time.deltaTime);
-            if (jumpStrong >= 1)
-            {
-                jumpStrong--;
-            }
+            transform.Translate(Vector3.forward * 2 * Time.deltaTime);
             yield return null;
         }
         attacking = false;
