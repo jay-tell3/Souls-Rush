@@ -78,7 +78,7 @@ public class boss1 : MonoBehaviour
         {
 
             InfarRange = true;
-            Debug.Log("far range") ;
+            //Debug.Log("far range") ;
         }
         else
         {
@@ -124,5 +124,14 @@ public class boss1 : MonoBehaviour
         attacking = false;
         
     }
+    void OnTriggerEnter(Collider other)
+    {
+        // Check if the entering collider has a specific tag
+        if (other.CompareTag("Player")) // Replace "Player" with your desired tag
+        {
+            Debug.Log("Player entered the trigger!");
+            // Perform actions specific to the Player entering
+        }
 
+    }
 }
