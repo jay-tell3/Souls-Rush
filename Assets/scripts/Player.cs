@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.UIElements;
 
-public class movement : MonoBehaviour
+public class Player : MonoBehaviour
 {   //variable place
     public Rigidbody rb;
     public GameObject cam;

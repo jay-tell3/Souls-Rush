@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - enemy
+  - Player weopon
   layers:
   - Default
   - TransparentFX

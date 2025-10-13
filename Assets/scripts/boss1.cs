@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class boss1 : MonoBehaviour
+public class Boss1 : MonoBehaviour
 {
     public RadiusCheck radiusCheck;
     public Transform target;
@@ -11,6 +12,7 @@ public class boss1 : MonoBehaviour
     private int attack;
     private float farRange = 10;
     private bool InfarRange;
+    public Slider hp;
     void Update()
     {
         radiusCheck = GetComponent<RadiusCheck>();
@@ -98,8 +100,8 @@ public class boss1 : MonoBehaviour
             {
                 transform.LookAt(target.position, Vector3.up); // Makes this object look at the target
             }*/
-
-        }
+            hp.value = 3;
+    }
 
     IEnumerator JumpAttack()
     {
@@ -127,7 +129,7 @@ public class boss1 : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // Check if the entering collider has a specific tag
-        if (other.CompareTag("Player")) // Replace "Player" with your desired tag
+        if (other.CompareTag("Player") && attacking) // Replace "Player" with your desired tag
         {
             Debug.Log("Player entered the trigger!");
             // Perform actions specific to the Player entering
