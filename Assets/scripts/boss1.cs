@@ -9,6 +9,7 @@ public class Boss1 : MonoBehaviour
     public Animator animator;
     private ParticleSystem ps;
     private bool attacking;
+    private bool Farattacking = false;
     private int attack;
     private float farRange = 10;
     private bool InfarRange;
@@ -87,14 +88,10 @@ public class Boss1 : MonoBehaviour
 
             InfarRange = false;
         }
-        if (attacking == false && InfarRange)
+        if (Farattacking == false && InfarRange)
         {
-            attacking = true;
-            radiusCheck.animator.SetBool("inRange", true);
-            animator.SetTrigger("A1");
-            attack = 2;
-            animator.SetFloat("attack", attack);
-            StartCoroutine("JumpAttack");
+            Farattacking = true;
+            Invoke("FarAttack",Random.Range(1,25));
         }
             /*if (target != null)
             {
@@ -108,6 +105,7 @@ public class Boss1 : MonoBehaviour
         float jumpTime = 0;
         while (jumpTime <= 3.5f)
         {
+
             radiusCheck.animator.SetBool("inRange", true);
             jumpTime += Time.deltaTime;
             transform.Translate(Vector3.forward * 2 * Time.deltaTime);
@@ -116,7 +114,16 @@ public class Boss1 : MonoBehaviour
         attacking = false;
         yield return null;
     }
-
+    void FarAttack()
+    {
+        Farattacking = true;
+        attacking = true;
+        radiusCheck.animator.SetBool("inRange", true);
+        animator.SetTrigger("A1");
+        attack = 2;
+        animator.SetFloat("attack", attack);
+        StartCoroutine("JumpAttack");
+    }
     public void Par()
     { ps.Play(); }
     public void NoPar()
