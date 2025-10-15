@@ -576,7 +576,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1308,7 +1308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72387fce6fed24e4ba4ae0ceba6bf94a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.41
+      value: 3.56
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72387fce6fed24e4ba4ae0ceba6bf94a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1316,7 +1316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72387fce6fed24e4ba4ae0ceba6bf94a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -98.55
+      value: -88.59
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72387fce6fed24e4ba4ae0ceba6bf94a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5456,7 +5456,7 @@ Transform:
   m_GameObject: {fileID: 414001595}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.606, y: 1.0262339, z: -101.222}
+  m_LocalPosition: {x: 3.65, y: 1.32, z: -92.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7288,7 +7288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4036685162768839143, guid: e562a044313886c43a9e34edf7f8b259, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 33055
+      value: 33087
       objectReference: {fileID: 0}
     - target: {fileID: 4055929309831659383, guid: e562a044313886c43a9e34edf7f8b259, type: 3}
       propertyPath: m_Name
@@ -7304,7 +7304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4061309984124418449, guid: e562a044313886c43a9e34edf7f8b259, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.4431243
+      value: 3.5931244
       objectReference: {fileID: 0}
     - target: {fileID: 4061309984124418449, guid: e562a044313886c43a9e34edf7f8b259, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7312,7 +7312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4061309984124418449, guid: e562a044313886c43a9e34edf7f8b259, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -102.34387
+      value: -92.383865
       objectReference: {fileID: 0}
     - target: {fileID: 4061309984124418449, guid: e562a044313886c43a9e34edf7f8b259, type: 3}
       propertyPath: m_LocalRotation.w
@@ -84391,6 +84391,7 @@ MonoBehaviour:
   radiusCheck: {fileID: 0}
   target: {fileID: 481829686}
   animator: {fileID: 871358699}
+  attacking: 0
   hp: {fileID: 77042804}
 --- !u!54 &871358696
 Rigidbody:
@@ -84481,6 +84482,7 @@ MonoBehaviour:
   radiuss: 2
   close: 0
   animator: {fileID: 871358699}
+  boss1: {fileID: 871358695}
 --- !u!4 &871358701 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6fe6d16ede5928343b5df89056853d4e, type: 3}
@@ -143029,7 +143031,7 @@ GameObject:
   - component: {fileID: 1456304586}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

@@ -8,12 +8,13 @@ public class Boss1 : MonoBehaviour
     public Transform target;
     public Animator animator;
     private ParticleSystem ps;
-    private bool attacking;
+    public bool attacking;
     private bool Farattacking = false;
     private int attack;
     private float farRange = 10;
     private bool InfarRange;
     public Slider hp;
+    private bool grounded;
     void Update()
     {
         radiusCheck = GetComponent<RadiusCheck>();
@@ -91,7 +92,7 @@ public class Boss1 : MonoBehaviour
         if (Farattacking == false && InfarRange)
         {
             Farattacking = true;
-            Invoke("FarAttack",Random.Range(1,25));
+           // Invoke("FarAttack",Random.Range(1,25));
         }
             /*if (target != null)
             {
@@ -103,12 +104,15 @@ public class Boss1 : MonoBehaviour
     IEnumerator JumpAttack()
     {
         float jumpTime = 0;
-        while (jumpTime <= 3.5f)
+        while (jumpTime <= 5f)
         {
-
-            radiusCheck.animator.SetBool("inRange", true);
-            jumpTime += Time.deltaTime;
-            transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+           radiusCheck.close = true;
+                radiusCheck.animator.SetBool("inRange", true);
+                jumpTime += Time.deltaTime;
+           if (!grounded)
+            {
+                transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+            }
             yield return null;
         }
         attacking = false;
@@ -143,4 +147,22 @@ public class Boss1 : MonoBehaviour
         }
 
     }
-}
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("ground"))
+        {
+            grounded = true;
+          
+        }
+        
+    }
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("ground"))
+        {
+            grounded = false;
+          ;
+        }
+    }
+
+    }

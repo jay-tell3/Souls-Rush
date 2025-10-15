@@ -8,20 +8,25 @@ public class RadiusCheck : MonoBehaviour
     public bool close;
     private bool farRange;
     public Animator animator;
+    public Boss1 boss1;
     void Update()
     {
 
         if (Vector3.Distance(transform.position, target.position) <= radius)
         {
-            animator.SetBool("inRange",true);
+
+            animator.SetBool("inRange", true);
             close = true;
+
+        }
+        else 
+        {
+           
+            
+                animator.SetBool("inRange", false);
+                close = false;
+
             
         }
-        else
-        {
-            animator.SetBool("inRange", false);
-            close = false;
-        }
-       
     }
 }
