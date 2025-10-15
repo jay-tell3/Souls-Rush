@@ -21,12 +21,8 @@ public class RadiusCheck : MonoBehaviour
         }
         else 
         {
-           
-            
                 animator.SetBool("inRange", false);
                 close = false;
-
-            
         }
     }
 }
