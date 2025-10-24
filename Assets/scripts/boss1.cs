@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,11 +14,26 @@ public class Boss1 : MonoBehaviour
     private int attack;
     private float farRange = 10;
     private bool InfarRange;
-    public Slider hp;
+    public Slider boss1Hp;
     private bool grounded;
+    public Collider armCollider;
+    public Player player;
+    private void Start()
+    {
+       
+
+    }
     void Update()
     {
-        radiusCheck = GetComponent<RadiusCheck>();
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("boss1 run"))
+        {
+            armCollider.enabled = false;
+        }
+        else
+        {
+            armCollider.enabled = true;
+        }
+            radiusCheck = GetComponent<RadiusCheck>();
         ps = GetComponentInChildren<ParticleSystem>();
         if (!radiusCheck.close)
         {
@@ -98,7 +114,7 @@ public class Boss1 : MonoBehaviour
             {
                 transform.LookAt(target.position, Vector3.up); // Makes this object look at the target
             }*/
-            hp.value = 3;
+           
     }
 
     IEnumerator JumpAttack()
@@ -144,6 +160,7 @@ public class Boss1 : MonoBehaviour
         {
             Debug.Log("Player entered the trigger!");
             // Perform actions specific to the Player entering
+            player.playerHp.value -=10;
         }
 
     }
@@ -161,8 +178,9 @@ public class Boss1 : MonoBehaviour
         if (collision.gameObject.CompareTag("ground"))
         {
             grounded = false;
-          ;
+          
         }
     }
+    
 
-    }
+}

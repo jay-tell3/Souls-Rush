@@ -13,4 +13,10 @@ public class Boss1G : MonoBehaviour
     {
         
     }
+    private void OnParticleCollision(GameObject other)
+    {
+
+        // You can also use other.CompareTag("YourTag") to check for specific objects
+        if (other.CompareTag("Player")) { Debug.Log("A particle collided with: " + other.name); }
+    }
 }

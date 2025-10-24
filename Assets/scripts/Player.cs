@@ -19,10 +19,11 @@ public class Player : MonoBehaviour
     private bool attacking;
     public Sword SwordPar;
     public ParticleSystem fire;
+    public Slider playerHp;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // SwordPar = GetComponent<Sword>();
+        //playerHp = GetComponentInChildren<>();
     }
 
     // Update is called once per frame
