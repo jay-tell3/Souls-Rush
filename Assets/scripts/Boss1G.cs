@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss1G : MonoBehaviour
 {
+    public Player player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,6 +19,10 @@ public class Boss1G : MonoBehaviour
     {
 
         // You can also use other.CompareTag("YourTag") to check for specific objects
-        if (other.CompareTag("Player")) { Debug.Log("A particle collided with: " + other.name); }
+        if (other.CompareTag("Player")) 
+        { 
+            Debug.Log("A particle collided with: " + other.name);
+            player.playerHp.value -= 10;
+        }
     }
 }

@@ -4,7 +4,7 @@ public class Sword : MonoBehaviour
 {
     // public ParticleSystem fire;
     public Boss1 boss1;
-    
+    public Player player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,10 +19,11 @@ public class Sword : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // Check if the entering collider has a specific tag
-        if (other.CompareTag("enemy")) // Replace "Player" with your desired tag
+        if (other.CompareTag("enemy") && player.attacking) // Replace "Player" with your desired tag
         {
             Debug.Log("enemy entered the trigger!");
             // Perform actions specific to the Player entering
+            boss1.boss1Hp.value -= 10;
         }
 
     }

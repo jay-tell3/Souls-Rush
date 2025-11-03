@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.ProBuilder;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {   //variable place
@@ -9,6 +10,10 @@ public class Player : MonoBehaviour
     public GameObject cam;
     public GameObject targetCam, playerCam;
     public Animator animator;
+    public Sword SwordPar;
+    public ParticleSystem fire;
+    public Slider playerHp;
+
     private float ver, horiz;
     public bool rolling;
     public bool Frolling;
@@ -16,14 +21,12 @@ public class Player : MonoBehaviour
     public bool Rrolling;
     public bool Lrolling;
     private float attack;
-    private bool attacking;
-    public Sword SwordPar;
-    public ParticleSystem fire;
-    public Slider playerHp;
+    public bool attacking;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //playerHp = GetComponentInChildren<>();
+        playerHp = GetComponentInChildren<Slider>();
     }
 
     // Update is called once per frame
@@ -51,7 +54,10 @@ public class Player : MonoBehaviour
     */
     void Update()
     {
-
+        if(playerHp.value < 1)
+        {
+            SceneManager.LoadScene(0);
+        }
         Vector3 moveDirection = Vector3.zero;
 
         ver = Input.GetAxis("Vertical");
@@ -157,6 +163,14 @@ public class Player : MonoBehaviour
             animator.SetTrigger("Attack");
             Invoke("NoAttacking", 1f);
         }
+        if (rolling)
+        {
+           gameObject.tag = "roll";
+        }
+        else
+        { 
+           gameObject.tag = "Player";
+        }
 
         moveDirection.Normalize(); // To prevent faster diagonal movement
         moveDirection *= 5f; // Speed
@@ -189,3 +203,10 @@ public class Player : MonoBehaviour
     }
     
 }
+
+
+
+
+
+
+// There 200.

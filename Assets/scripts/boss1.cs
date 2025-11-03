@@ -18,13 +18,18 @@ public class Boss1 : MonoBehaviour
     private bool grounded;
     public Collider armCollider;
     public Player player;
+    public GameObject myPrefab;
     private void Start()
     {
-       
-
+      
     }
     void Update()
     {
+        if (boss1Hp.value < 1)
+        {
+            Instantiate(myPrefab, transform.position, transform.rotation);
+            gameObject.SetActive(false);
+        }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("boss1 run"))
         {
             armCollider.enabled = false;
@@ -55,18 +60,9 @@ public class Boss1 : MonoBehaviour
         {
             if (attacking == false)
             {
-                // Get the direction to the target
-                Vector3 direction = target.position - transform.position;
-                // Zero out the Y component to constrain rotation to the Y-axis
-                direction.y = 0;
-                transform.rotation = Quaternion.LookRotation(direction);
-                attacking = true;
-                radiusCheck.animator.SetBool("inRange", false);
-                animator.SetTrigger("A1");
-                attack = Random.Range(0, 3);
-                animator.SetFloat("attack", attack);
-              
 
+
+                Invoke("StartAttack", 4f);
                
 
                 /*/ Check if the direction is valid (non-zero)
@@ -144,6 +140,19 @@ public class Boss1 : MonoBehaviour
         animator.SetFloat("attack", attack);
         StartCoroutine("JumpAttack");
     }
+    void StarAttack()
+    {
+        // Get the direction to the target
+        Vector3 direction = target.position - transform.position;
+        // Zero out the Y component to constrain rotation to the Y-axis
+        direction.y = 0;
+        transform.rotation = Quaternion.LookRotation(direction);
+        attacking = true;
+        radiusCheck.animator.SetBool("inRange", false);
+        animator.SetTrigger("A1");
+        attack = Random.Range(0, 3);
+        animator.SetFloat("attack", attack);
+    }
     public void Par()
     { ps.Play(); }
     public void NoPar()
@@ -160,7 +169,7 @@ public class Boss1 : MonoBehaviour
         {
             Debug.Log("Player entered the trigger!");
             // Perform actions specific to the Player entering
-            player.playerHp.value -=10;
+            player.playerHp.value -= 10;
         }
 
     }
@@ -181,6 +190,6 @@ public class Boss1 : MonoBehaviour
           
         }
     }
-    
+     
 
 }
