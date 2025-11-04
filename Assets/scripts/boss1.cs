@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +10,7 @@ public class Boss1 : MonoBehaviour
     private ParticleSystem ps;
     public bool attacking;
     private bool Farattacking = false;
-    private int attack;
+    private int attack = 99;
     private float farRange = 10;
     private bool InfarRange;
     public Slider boss1Hp;
@@ -19,9 +18,11 @@ public class Boss1 : MonoBehaviour
     public Collider armCollider;
     public Player player;
     public GameObject myPrefab;
+    public bool roar = false;
+    public bool pickedAttack;
     private void Start()
     {
-      
+        animator.SetBool("hasRoared", false);
     }
     void Update()
     {
@@ -38,8 +39,9 @@ public class Boss1 : MonoBehaviour
         {
             armCollider.enabled = true;
         }
-            radiusCheck = GetComponent<RadiusCheck>();
+        radiusCheck = GetComponent<RadiusCheck>();
         ps = GetComponentInChildren<ParticleSystem>();
+
         if (!radiusCheck.close)
         {
             transform.Translate(Vector3.forward * 2 * Time.deltaTime);
@@ -60,10 +62,20 @@ public class Boss1 : MonoBehaviour
         {
             if (attacking == false)
             {
+                Vector3 direction = target.position - transform.position;
+                // radiusCheck.animator.SetBool("inRange", false);
+
+                if (roar == false)
+                {
+                    animator.SetTrigger("A1");
+                    roar = true;
+
+                    Debug.Log("attacked");
+                    Invoke("StartAttack", 8f);
+
+                }
 
 
-                Invoke("StartAttack", 4f);
-               
 
                 /*/ Check if the direction is valid (non-zero)
                 if (direction != Vector3.zero)
@@ -71,25 +83,40 @@ public class Boss1 : MonoBehaviour
                     // Apply LookRotation constrained to the Y-axis
                     transform.rotation = Quaternion.LookRotation(direction);
                 }*/
-                if (attack == 1)
+
+
+
+            }
+            else
+            {
+                if (attack == 1 &&!pickedAttack)
                 {
+                    pickedAttack = true;
                     Invoke("Par", 0.5f);
                     Invoke("NoPar", 1f);
                     Invoke("NoAttacking", 4f);
+
+
                 }
-                else if (attack == 0)
+                else if (attack == 0 && !pickedAttack)
                 {
+                    pickedAttack = true;
                     Invoke("NoAttacking", 3.5f);
+
+
                 }
-                else if (attack == 2)
+                else if (attack == 2 && !pickedAttack)
                 {
+                    pickedAttack = true;
+                    Debug.Log("jumping");
                     StartCoroutine("JumpAttack");
                 }
-                
-
             }
-        
+
+
         }
+
+
         if (Vector3.Distance(transform.position, target.position) <= farRange)
         {
 
@@ -104,13 +131,13 @@ public class Boss1 : MonoBehaviour
         if (Farattacking == false && InfarRange)
         {
             Farattacking = true;
-           // Invoke("FarAttack",Random.Range(1,25));
+            // Invoke("FarAttack",Random.Range(1,25));
         }
-            /*if (target != null)
-            {
-                transform.LookAt(target.position, Vector3.up); // Makes this object look at the target
-            }*/
-           
+        /*if (target != null)
+        {
+            transform.LookAt(target.position, Vector3.up); // Makes this object look at the target
+        }*/
+
     }
 
     IEnumerator JumpAttack()
@@ -118,16 +145,17 @@ public class Boss1 : MonoBehaviour
         float jumpTime = 0;
         while (jumpTime <= 5f)
         {
-           radiusCheck.close = true;
-                radiusCheck.animator.SetBool("inRange", true);
-                jumpTime += Time.deltaTime;
-           if (!grounded)
+            radiusCheck.close = true;
+            radiusCheck.animator.SetBool("inRange", true);
+            jumpTime += Time.deltaTime;
+            if (!grounded)
             {
                 transform.Translate(Vector3.forward * 2 * Time.deltaTime);
             }
             yield return null;
         }
         attacking = false;
+        NoAttacking();
         yield return null;
     }
     void FarAttack()
@@ -140,18 +168,24 @@ public class Boss1 : MonoBehaviour
         animator.SetFloat("attack", attack);
         StartCoroutine("JumpAttack");
     }
-    void StarAttack()
+    void StartAttack()
     {
-        // Get the direction to the target
-        Vector3 direction = target.position - transform.position;
-        // Zero out the Y component to constrain rotation to the Y-axis
-        direction.y = 0;
-        transform.rotation = Quaternion.LookRotation(direction);
-        attacking = true;
-        radiusCheck.animator.SetBool("inRange", false);
-        animator.SetTrigger("A1");
-        attack = Random.Range(0, 3);
-        animator.SetFloat("attack", attack);
+        //if (!roar)
+        {
+            animator.SetBool("hasRoared", true);
+            Debug.Log("is attacking");
+            // Get the direction to the target
+            Vector3 direction = target.position - transform.position;
+            // Zero out the Y component to constrain rotation to the Y-axis
+            direction.y = 0;
+            transform.rotation = Quaternion.LookRotation(direction);
+            attacking = true;
+            radiusCheck.animator.SetBool("inRange", false);
+            animator.SetTrigger("A1");
+            attack = Random.Range(0, 3);
+            animator.SetFloat("attack", attack);
+            roar = true;
+        }
     }
     public void Par()
     { ps.Play(); }
@@ -159,8 +193,12 @@ public class Boss1 : MonoBehaviour
     { ps.Stop(); }
     public void NoAttacking()
     {
+        pickedAttack = false;
+        Debug.Log("no attack");
+           animator.SetBool("hasRoared", false);
+        roar = false;
         attacking = false;
-        
+
     }
     void OnTriggerEnter(Collider other)
     {
@@ -178,18 +216,19 @@ public class Boss1 : MonoBehaviour
         if (collision.gameObject.CompareTag("ground"))
         {
             grounded = true;
-          
+
         }
-        
+
     }
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("ground"))
         {
+
             grounded = false;
-          
+
         }
     }
-     
+
 
 }
