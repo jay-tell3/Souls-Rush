@@ -7,7 +7,7 @@ public class Boss1 : MonoBehaviour
     public RadiusCheck radiusCheck;
     public Transform target;
     public Animator animator;
-    private ParticleSystem ps;
+    public ParticleSystem ps;
     public bool attacking;
     private bool Farattacking = false;
     private int attack = 99;
@@ -20,6 +20,7 @@ public class Boss1 : MonoBehaviour
     public GameObject myPrefab;
     public bool roar = false;
     public bool pickedAttack;
+    public ParticleSystem wave;
     private void Start()
     {
         animator.SetBool("hasRoared", false);
@@ -40,9 +41,9 @@ public class Boss1 : MonoBehaviour
             armCollider.enabled = true;
         }
         radiusCheck = GetComponent<RadiusCheck>();
-        ps = GetComponentInChildren<ParticleSystem>();
+       // ps = GetComponentInChildren<ParticleSystem>();
 
-        if (!radiusCheck.close)
+        if (!radiusCheck.close && !animator.GetCurrentAnimatorStateInfo(0).IsName("BossA3"))
         {
             transform.Translate(Vector3.forward * 2 * Time.deltaTime);
             // Get the direction to the target
@@ -52,7 +53,7 @@ public class Boss1 : MonoBehaviour
             direction.y = 0;
 
             // Check if the direction is valid (non-zero)
-            if (direction != Vector3.zero && !attacking)
+            if (direction != Vector3.zero && !attacking )
             {
                 // Apply LookRotation constrained to the Y-axis
                 transform.rotation = Quaternion.LookRotation(direction);
@@ -60,19 +61,20 @@ public class Boss1 : MonoBehaviour
         }
         else
         {
-            if (attacking == false)
+            if (attacking == false )
             {
                 Vector3 direction = target.position - transform.position;
                 // radiusCheck.animator.SetBool("inRange", false);
 
                 if (roar == false)
                 {
+                    transform.rotation = Quaternion.LookRotation(direction);
                     animator.SetTrigger("A1");
                     roar = true;
-
+                    
                     Debug.Log("attacked");
-                    Invoke("StartAttack", 8f);
-
+                    Invoke("StartAttack", 6f);
+                    Invoke("Wave", 3);
                 }
 
 
@@ -172,6 +174,8 @@ public class Boss1 : MonoBehaviour
     {
         //if (!roar)
         {
+            wave.Clear();
+            wave.Stop();
             animator.SetBool("hasRoared", true);
             Debug.Log("is attacking");
             // Get the direction to the target
@@ -186,6 +190,10 @@ public class Boss1 : MonoBehaviour
             animator.SetFloat("attack", attack);
             roar = true;
         }
+    }
+    void Wave()
+    {
+        wave.Play();
     }
     public void Par()
     { ps.Play(); }

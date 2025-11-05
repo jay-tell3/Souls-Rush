@@ -3228,7 +3228,7 @@ RectTransform:
   m_Father: {fileID: 1090142490}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -85257,6 +85257,7 @@ MonoBehaviour:
   radiusCheck: {fileID: 0}
   target: {fileID: 481829686}
   animator: {fileID: 871358699}
+  ps: {fileID: 602697008}
   attacking: 0
   boss1Hp: {fileID: 77042804}
   armCollider: {fileID: 53162610}
@@ -85264,6 +85265,7 @@ MonoBehaviour:
   myPrefab: {fileID: 3298182557176294229, guid: 0838ec00f4f5b8a478e3e78de18f8a61, type: 3}
   roar: 0
   pickedAttack: 0
+  wave: {fileID: 1898818185}
 --- !u!54 &871358696
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -89522,7 +89524,7 @@ RectTransform:
   m_Father: {fileID: 583380803}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -89579,7 +89581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &981001049
 Transform:
   m_ObjectHideFlags: 0
@@ -180932,6 +180934,7 @@ GameObject:
   - component: {fileID: 1898818183}
   - component: {fileID: 1898818185}
   - component: {fileID: 1898818184}
+  - component: {fileID: 1898818186}
   m_Layer: 0
   m_Name: par
   m_TagString: Untagged
@@ -180948,7 +180951,7 @@ Transform:
   m_GameObject: {fileID: 1898818182}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.1462187, z: -0, w: 0.98925227}
-  m_LocalPosition: {x: 0.045, y: 0.375, z: -0.09}
+  m_LocalPosition: {x: 0.045, y: 0.37, z: -0.09}
   m_LocalScale: {x: 0.3703704, y: 0.3703704, z: 0.3703704}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -180981,7 +180984,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 9d2b7e8c77b845f46b4305d5a957b519, type: 2}
-  - {fileID: 2100000, guid: 9d2b7e8c77b845f46b4305d5a957b519, type: 2}
+  - {fileID: 3237051307333310163, guid: 383fd11998af86b47a7145f4dd95947e, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -181108,7 +181111,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -181613,7 +181616,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -184740,7 +184743,7 @@ ParticleSystem:
     m_EnergyLossOnCollision:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -184795,7 +184798,7 @@ ParticleSystem:
     radiusScale: 1.84
     collidesWith:
       serializedVersion: 2
-      m_Bits: 136
+      m_Bits: 8
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -184807,11 +184810,12 @@ ParticleSystem:
     serializedVersion: 2
     inside: 1
     outside: 0
-    enter: 0
+    enter: 2
     exit: 0
     colliderQueryMode: 0
     radiusScale: 1
-    primitives: []
+    primitives:
+    - {fileID: 481829686}
   SubModule:
     serializedVersion: 2
     enabled: 0
@@ -184999,7 +185003,7 @@ ParticleSystem:
     ribbonCount: 1
     shadowBias: 0.5
     worldSpace: 0
-    dieWithParticles: 1
+    dieWithParticles: 0
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
@@ -185074,7 +185078,7 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 10
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -185759,6 +185763,19 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &1898818186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898818182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9805f21f24385bd43a5ae8c8f905207d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Boss1G
+  player: {fileID: 481829683}
 --- !u!43 &1932092262
 Mesh:
   m_ObjectHideFlags: 0

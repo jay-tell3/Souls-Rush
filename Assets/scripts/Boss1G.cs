@@ -22,7 +22,8 @@ public class Boss1G : MonoBehaviour
         if (other.CompareTag("Player")) 
         { 
             Debug.Log("A particle collided with: " + other.name);
-            player.playerHp.value -= 10;
+            player.playerHp.value -= 1;
         }
     }
+    
 }
