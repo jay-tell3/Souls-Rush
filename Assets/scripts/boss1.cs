@@ -21,6 +21,7 @@ public class Boss1 : MonoBehaviour
     public bool roar = false;
     public bool pickedAttack;
     public ParticleSystem wave;
+    public ParticleSystem arm;
     private void Start()
     {
         animator.SetBool("hasRoared", false);
@@ -41,7 +42,7 @@ public class Boss1 : MonoBehaviour
             armCollider.enabled = true;
         }
         radiusCheck = GetComponent<RadiusCheck>();
-       // ps = GetComponentInChildren<ParticleSystem>();
+        // ps = GetComponentInChildren<ParticleSystem>();
 
         if (!radiusCheck.close && !animator.GetCurrentAnimatorStateInfo(0).IsName("BossA3"))
         {
@@ -53,7 +54,7 @@ public class Boss1 : MonoBehaviour
             direction.y = 0;
 
             // Check if the direction is valid (non-zero)
-            if (direction != Vector3.zero && !attacking )
+            if (direction != Vector3.zero && !attacking)
             {
                 // Apply LookRotation constrained to the Y-axis
                 transform.rotation = Quaternion.LookRotation(direction);
@@ -61,7 +62,7 @@ public class Boss1 : MonoBehaviour
         }
         else
         {
-            if (attacking == false )
+            if (attacking == false)
             {
                 Vector3 direction = target.position - transform.position;
                 // radiusCheck.animator.SetBool("inRange", false);
@@ -71,10 +72,11 @@ public class Boss1 : MonoBehaviour
                     transform.rotation = Quaternion.LookRotation(direction);
                     animator.SetTrigger("A1");
                     roar = true;
-                    
+
                     Debug.Log("attacked");
                     Invoke("StartAttack", 6f);
-                    Invoke("Wave", 3);
+                    Invoke("Wave", 2);
+                    Invoke("NoWave", 4);
                 }
 
 
@@ -91,7 +93,7 @@ public class Boss1 : MonoBehaviour
             }
             else
             {
-                if (attack == 1 &&!pickedAttack)
+                if (attack == 1 && !pickedAttack)
                 {
                     pickedAttack = true;
                     Invoke("Par", 0.5f);
@@ -103,6 +105,7 @@ public class Boss1 : MonoBehaviour
                 else if (attack == 0 && !pickedAttack)
                 {
                     pickedAttack = true;
+                    arm.Play();
                     Invoke("NoAttacking", 3.5f);
 
 
@@ -111,6 +114,7 @@ public class Boss1 : MonoBehaviour
                 {
                     pickedAttack = true;
                     Debug.Log("jumping");
+                    arm.Play();
                     StartCoroutine("JumpAttack");
                 }
             }
@@ -174,8 +178,7 @@ public class Boss1 : MonoBehaviour
     {
         //if (!roar)
         {
-            wave.Clear();
-            wave.Stop();
+           
             animator.SetBool("hasRoared", true);
             Debug.Log("is attacking");
             // Get the direction to the target
@@ -195,12 +198,17 @@ public class Boss1 : MonoBehaviour
     {
         wave.Play();
     }
+    void NoWave()
+    {
+        wave.Stop();
+    }
     public void Par()
     { ps.Play(); }
     public void NoPar()
     { ps.Stop(); }
     public void NoAttacking()
     {
+        arm.Stop();
         pickedAttack = false;
         Debug.Log("no attack");
            animator.SetBool("hasRoared", false);
