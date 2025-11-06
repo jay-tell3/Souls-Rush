@@ -7,7 +7,7 @@ public class GamerManger : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        everthing.SetActive(false);
+   //     everthing.SetActive(false);
     }
 
     // Update is called once per frame

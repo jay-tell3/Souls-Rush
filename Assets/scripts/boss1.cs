@@ -36,10 +36,12 @@ public class Boss1 : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("boss1 run"))
         {
             armCollider.enabled = false;
+            arm.Stop();
         }
         else
         {
             armCollider.enabled = true;
+            
         }
         radiusCheck = GetComponent<RadiusCheck>();
         // ps = GetComponentInChildren<ParticleSystem>();
@@ -54,7 +56,7 @@ public class Boss1 : MonoBehaviour
             direction.y = 0;
 
             // Check if the direction is valid (non-zero)
-            if (direction != Vector3.zero && !attacking)
+           // if (direction != Vector3.zero && !attacking)
             {
                 // Apply LookRotation constrained to the Y-axis
                 transform.rotation = Quaternion.LookRotation(direction);
@@ -93,12 +95,20 @@ public class Boss1 : MonoBehaviour
             }
             else
             {
+               
+                
+                
+
                 if (attack == 1 && !pickedAttack)
                 {
                     pickedAttack = true;
-                    Invoke("Par", 0.5f);
-                    Invoke("NoPar", 1f);
-                    Invoke("NoAttacking", 4f);
+
+                    if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+                    {
+                        Attack2();
+
+                    }
+
 
 
                 }
@@ -150,12 +160,13 @@ public class Boss1 : MonoBehaviour
     {
         float jumpTime = 0;
         while (jumpTime <= 5f)
-        {
+        {   
             radiusCheck.close = true;
             radiusCheck.animator.SetBool("inRange", true);
             jumpTime += Time.deltaTime;
             if (!grounded)
             {
+                arm.Play();
                 transform.Translate(Vector3.forward * 2 * Time.deltaTime);
             }
             yield return null;
@@ -174,6 +185,13 @@ public class Boss1 : MonoBehaviour
         animator.SetFloat("attack", attack);
         StartCoroutine("JumpAttack");
     }
+    void Attack2()
+    {
+        Invoke("Par", 0.5f);
+        Invoke("NoPar", 1f);
+        Invoke("NoAttacking", 4f);
+    }
+
     void StartAttack()
     {
         //if (!roar)
@@ -223,7 +241,7 @@ public class Boss1 : MonoBehaviour
         {
             Debug.Log("Player entered the trigger!");
             // Perform actions specific to the Player entering
-            player.playerHp.value -= 10;
+            player.playerHp.value -= 20;
         }
 
     }

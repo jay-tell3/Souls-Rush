@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
     {
         if(playerHp.value < 1)
         {
-           // SceneManager.LoadScene(0);
+            SceneManager.LoadScene(0);
         }
         Vector3 moveDirection = Vector3.zero;
 
