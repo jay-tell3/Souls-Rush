@@ -22,12 +22,22 @@ public class Boss1 : MonoBehaviour
     public bool pickedAttack;
     public ParticleSystem wave;
     public ParticleSystem arm;
+    public ParticleSystem bossSafeZone;
+    private bool attacked2;
+    public GameObject boss1SafeZone;
     private void Start()
     {
         animator.SetBool("hasRoared", false);
     }
     void Update()
     {
+        if( attack ==1 && !attacked2 && animator.GetCurrentAnimatorStateInfo(0).IsName("attacks"))
+        {
+            Debug.Log("A2222");
+            
+            Attack2();
+            attacked2 = true;
+        }
         if (boss1Hp.value < 1)
         {
             Instantiate(myPrefab, transform.position, transform.rotation);
@@ -71,11 +81,12 @@ public class Boss1 : MonoBehaviour
 
                 if (roar == false)
                 {
+                    boss1SafeZone.transform.Rotate(0,Random.Range(0,361),0);
                     transform.rotation = Quaternion.LookRotation(direction);
                     animator.SetTrigger("A1");
                     roar = true;
-
-                    Debug.Log("attacked");
+                    bossSafeZone.Play();
+                    
                     Invoke("StartAttack", 6f);
                     Invoke("Wave", 2);
                     Invoke("NoWave", 4);
@@ -105,7 +116,7 @@ public class Boss1 : MonoBehaviour
 
                     if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
                     {
-                        Attack2();
+                        //Attack2();
 
                     }
 
@@ -187,9 +198,10 @@ public class Boss1 : MonoBehaviour
     }
     void Attack2()
     {
-        Invoke("Par", 0.5f);
+        Invoke("Par", 0.1f);
+    
         Invoke("NoPar", 1f);
-        Invoke("NoAttacking", 4f);
+        Invoke("NoAttacking", 6f);
     }
 
     void StartAttack()
@@ -215,6 +227,7 @@ public class Boss1 : MonoBehaviour
     void Wave()
     {
         wave.Play();
+        bossSafeZone.Stop();
     }
     void NoWave()
     {
@@ -232,7 +245,8 @@ public class Boss1 : MonoBehaviour
            animator.SetBool("hasRoared", false);
         roar = false;
         attacking = false;
-
+        attacked2 = false;
+        attack = 99;
     }
     void OnTriggerEnter(Collider other)
     {
