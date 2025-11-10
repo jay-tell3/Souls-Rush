@@ -46,7 +46,7 @@ public class Boss1 : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("boss1 run"))
         {
             armCollider.enabled = false;
-            arm.Stop();
+           // arm.Stop();
         }
         else
         {
@@ -201,7 +201,7 @@ public class Boss1 : MonoBehaviour
         Invoke("Par", 0.1f);
     
         Invoke("NoPar", 1f);
-        Invoke("NoAttacking", 6f);
+        Invoke("NoAttacking", 4f);
     }
 
     void StartAttack()

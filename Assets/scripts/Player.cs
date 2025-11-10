@@ -120,14 +120,14 @@ public class Player : MonoBehaviour
             //StartCoroutine(MoveRoll());
 
             animator.SetTrigger("Roll");
-            Invoke("NoRoll", 1f);
+            Invoke("NoRoll", 0.5f);
         }
         if (Input.GetKey(KeyCode.E) && ver < 0 && !rolling && !attacking)
         {
             Brolling = true;
             rolling = true;
             animator.SetTrigger("Roll");
-            Invoke("NoRoll", 1f);
+            Invoke("NoRoll", 0.5f);
         }
         if (Input.GetKey(KeyCode.E) && horiz > 0 && !rolling && !attacking)
         {
@@ -135,23 +135,23 @@ public class Player : MonoBehaviour
             //StartCoroutine(MoveRoll());
             animator.SetTrigger("sideRoll");
             transform.Rotate(0, 90, 0);
-            Invoke("NoRoll", 1f);
+            Invoke("NoRoll", 0.5f);
         }
         if (Input.GetKey(KeyCode.E) && horiz < 0 && !rolling && !attacking)
         {
             rolling = true;
             animator.SetTrigger("sideRoll");
             transform.Rotate(0, -90, 0);
-            Invoke("NoRoll", 1f);
+            Invoke("NoRoll", 0.5f);
         }
 
         if (rolling && !Brolling)
         {
-            transform.Translate(Vector3.forward * 5 * Time.deltaTime);
+            transform.Translate(Vector3.forward * 10 * Time.deltaTime);
         }
         if (rolling && Brolling)
         {
-            transform.Translate(Vector3.forward * -5 * Time.deltaTime);
+            transform.Translate(Vector3.forward * -10 * Time.deltaTime);
         }
         if (Input.GetMouseButtonDown(0) && !attacking && !rolling)
         {

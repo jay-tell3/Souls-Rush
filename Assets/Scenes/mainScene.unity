@@ -12057,6 +12057,10 @@ PrefabInstance:
       value: Mutant
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6fe6d16ede5928343b5df89056853d4e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6fe6d16ede5928343b5df89056853d4e, type: 3}
       propertyPath: m_TagString
       value: enemy
       objectReference: {fileID: 0}
@@ -48873,7 +48877,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 250
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -90138,7 +90142,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!136 &871358697
 CapsuleCollider:
@@ -90153,7 +90157,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -101840,9 +101844,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.23355724
-  m_Height: 1.8165447
+  m_Height: 2.3700264
   m_Direction: 1
-  m_Center: {x: -0.0007418216, y: 0.64867055, z: -0.00022083006}
+  m_Center: {x: -0.00074184855, y: 0.92532766, z: -0.00020745625}
 --- !u!43 &1076574863
 Mesh:
   m_ObjectHideFlags: 0
@@ -185832,7 +185836,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 9d2b7e8c77b845f46b4305d5a957b519, type: 2}
-  - {fileID: 2100000, guid: 9d3dcfae311cd2f418047e848e3b45d8, type: 2}
+  - {fileID: 2100000, guid: 9d2b7e8c77b845f46b4305d5a957b519, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -185854,14 +185858,14 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
-  m_LengthScale: 2
+  m_LengthScale: 0
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
