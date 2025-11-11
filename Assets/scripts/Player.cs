@@ -166,19 +166,19 @@ public class Player : MonoBehaviour
         if (rolling)
         {
            gameObject.tag = "roll";
+            Invoke("Noroll", 0.4f);
         }
-        else
-        { 
-           gameObject.tag = "Player";
-        }
-
+       
         moveDirection.Normalize(); // To prevent faster diagonal movement
         moveDirection *= 5f; // Speed
 
         rb.linearVelocity = new Vector3(moveDirection.x, rb.linearVelocity.y, moveDirection.z);
 
     }
-
+    void Noroll()
+    {
+        gameObject.tag = "Player";
+    }
     public void NoRoll()
     {
         rolling = false;

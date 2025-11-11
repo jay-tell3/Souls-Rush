@@ -8,6 +8,7 @@ public class RadiusCheck : MonoBehaviour
     public bool close;
     private bool farRange;
     public Animator animator;
+    
     public Boss1 boss1;
     void Update()
     {
@@ -16,12 +17,14 @@ public class RadiusCheck : MonoBehaviour
         {
 
             animator.SetBool("inRange", true);
+            
             close = true;
 
         }
         else 
         {
-                animator.SetBool("inRange", false);
+            animator.SetBool("inRange", false);
+         
                 close = false;
         }
     }
