@@ -5,6 +5,7 @@ public class Boss2 : MonoBehaviour
     public Animator animator;
     public RadiusCheck radiusCheck;
     public Transform target;
+    private bool attacking;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,6 +15,8 @@ public class Boss2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
+        
+      
         if (animator.GetBool("inRange") == false)
         {
             transform.Translate(Vector3.forward * 2 * Time.deltaTime);
@@ -32,9 +35,17 @@ public class Boss2 : MonoBehaviour
         }
         else
         {
-            animator.SetTrigger("attack");
-            animator.SetFloat("Blend", Random.Range(0, 3));
-             
+            if (!attacking)
+            {
+                attacking = true;
+                animator.SetTrigger("attack");
+                animator.SetFloat("Blend", Random.Range(0, 3));
+                Invoke("Noattack", 3.6f);
+            }
         }
+    }
+    void Noattack ()
+    {
+        attacking = false;  
     }
 }
