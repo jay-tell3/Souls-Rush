@@ -22,7 +22,10 @@ public class Player : MonoBehaviour
     public bool Lrolling;
     private float attack;
     public bool attacking;
-    
+    private bool rollMo=false;
+    private bool roolMo;
+    private bool rollCoolDown;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -114,44 +117,61 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.E) && ver > 0 && !rolling && !attacking)
+        if (Input.GetKey(KeyCode.E) && ver > 0 && !rolling && !attacking && !rollCoolDown)
         {
+            rollCoolDown = true;
+
             rolling = true;
+            rollMo = true;
+            roolMo = false;
             //StartCoroutine(MoveRoll());
 
             animator.SetTrigger("Roll");
-            Invoke("NoRoll", 0.5f);
+            Invoke("NoRoll", 0.75f);
+            Invoke("RollCoolDown", 1f);
         }
-        if (Input.GetKey(KeyCode.E) && ver < 0 && !rolling && !attacking)
+        if (Input.GetKey(KeyCode.E) && ver < 0 && !rolling && !attacking && !rollCoolDown)
         {
+            rollCoolDown = true;
             Brolling = true;
             rolling = true;
+            rollMo = true;
+            roolMo = false;
             animator.SetTrigger("Roll");
-            Invoke("NoRoll", 0.5f);
+            Invoke("NoRoll", 0.75f);
+            Invoke("RollCoolDown", 1f);
         }
-        if (Input.GetKey(KeyCode.E) && horiz > 0 && !rolling && !attacking)
+        if (Input.GetKey(KeyCode.E) && horiz > 0 && !rolling && !attacking  && !rollCoolDown)
         {
+            rollCoolDown = true;
             rolling = true;
+            rollMo = true;
+            roolMo = false;
             //StartCoroutine(MoveRoll());
             animator.SetTrigger("sideRoll");
             transform.Rotate(0, 90, 0);
-            Invoke("NoRoll", 0.5f);
+            Invoke("NoRoll", 0.75f);
+            Invoke("RollCoolDown", 1f);
         }
-        if (Input.GetKey(KeyCode.E) && horiz < 0 && !rolling && !attacking)
+        if (Input.GetKey(KeyCode.E) && horiz < 0 && !rolling && !attacking  && !rollCoolDown)
         {
+            rollCoolDown = true;
             rolling = true;
+            rollMo = true;
+            roolMo = false;
             animator.SetTrigger("sideRoll");
             transform.Rotate(0, -90, 0);
-            Invoke("NoRoll", 0.5f);
+            Invoke("NoRoll", 0.75f);
+            Invoke("RollCoolDown", 1f);
         }
 
-        if (rolling && !Brolling)
+        if (rolling && !Brolling )
         {
-            transform.Translate(Vector3.forward * 10 * Time.deltaTime);
+            transform.Translate(Vector3.forward * 3 * Time.deltaTime);
         }
-        if (rolling && Brolling)
+        if (rolling && Brolling )
         {
-            transform.Translate(Vector3.forward * -10 * Time.deltaTime);
+            transform.Translate(Vector3.forward * -3 * Time.deltaTime);
         }
         if (Input.GetMouseButtonDown(0) && !attacking && !rolling)
         {
@@ -161,10 +181,12 @@ public class Player : MonoBehaviour
             attack = Random.Range(0, 3);
             animator.SetFloat("attack", attack);
             animator.SetTrigger("Attack");
-            Invoke("NoAttacking", 1f);
+            Invoke("NoAttacking", 0.5f);
         }
-        if (rolling)
+        if (roolMo == false)
         {
+            roolMo = true;
+            Debug.Log("mo");
            gameObject.tag = "roll";
             Invoke("Noroll", 0.4f);
         }
@@ -178,6 +200,8 @@ public class Player : MonoBehaviour
     void Noroll()
     {
         gameObject.tag = "Player";
+        rollMo = false;
+       // roolMo = false;
     }
     public void NoRoll()
     {
@@ -187,6 +211,10 @@ public class Player : MonoBehaviour
         Rrolling = false;
         Lrolling = false;
 
+    }
+    void RollCoolDown()
+    {
+        rollCoolDown = false;
     }
     public void NoAttacking()
     {

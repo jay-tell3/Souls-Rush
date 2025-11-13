@@ -4,6 +4,7 @@ public class Sword : MonoBehaviour
 {
     // public ParticleSystem fire;
     public Boss1 boss1;
+    public Boss2 boss2;
     public Player player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,6 +25,7 @@ public class Sword : MonoBehaviour
             Debug.Log("enemy entered the trigger!");
             // Perform actions specific to the Player entering
             boss1.boss1Hp.value -= 2;
+            boss2.boss2Hp.value -= 6;
         }
 
     }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss2 : MonoBehaviour
 {
@@ -6,6 +7,13 @@ public class Boss2 : MonoBehaviour
     public RadiusCheck radiusCheck;
     public Transform target;
     private bool attacking;
+    public Slider boss2Hp;
+    public Player player;
+    private bool phase2;
+    public ParticleSystem par;
+    public ParticleSystem par2;
+    public ParticleSystem par3;
+    private bool inPhase2;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,10 +22,21 @@ public class Boss2 : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
-        
-      
-        if (animator.GetBool("inRange") == false)
+    {
+        if (boss2Hp.value < 1 && !inPhase2 )
+        {
+            animator.SetTrigger("phase2");
+            par2.Play();
+            par3.Play();
+            phase2 = true;
+            animator.SetBool("phase2B",true);
+            attacking = false;
+            boss2Hp.value = 100;
+            Invoke("PhaseChange",5f);
+            inPhase2 = true;
+        }
+
+        if (animator.GetBool("inRange") == false && !phase2)
         {
             transform.Translate(Vector3.forward * 2 * Time.deltaTime);
             // Get the direction to the target
@@ -35,17 +54,38 @@ public class Boss2 : MonoBehaviour
         }
         else
         {
-            if (!attacking)
+            if (!attacking && !phase2)
             {
+                if (inPhase2)
+                {
+                    par.Play();
+                }
+                
                 attacking = true;
                 animator.SetTrigger("attack");
-                animator.SetFloat("Blend", Random.Range(0, 3));
+                animator.SetFloat("Blend", Random.Range(0, 4));
                 Invoke("Noattack", 3.6f);
             }
         }
     }
     void Noattack ()
     {
+        par.Stop();
         attacking = false;  
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        // Check if the entering collider has a specific tag
+        if (other.CompareTag("Player") && attacking) // Replace "Player" with your desired tag
+        {
+           
+            player.playerHp.value -= 0;
+        }
+
+    }
+    void PhaseChange()
+    {
+        animator.SetBool("phase2B", false);
+        phase2 = false;
     }
 }
