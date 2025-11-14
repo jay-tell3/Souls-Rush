@@ -13,7 +13,8 @@ public class Boss2 : MonoBehaviour
     public ParticleSystem par;
     public ParticleSystem par2;
     public ParticleSystem par3;
-    private bool inPhase2;
+    public ParticleSystem par4;
+    private bool inPhase2 ;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,8 +24,10 @@ public class Boss2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if (boss2Hp.value < 1 && !inPhase2 )
         {
+            radiusCheck.radius = 4;
             animator.SetTrigger("phase2");
             par2.Play();
             par3.Play();
@@ -36,7 +39,7 @@ public class Boss2 : MonoBehaviour
             inPhase2 = true;
         }
 
-        if (animator.GetBool("inRange") == false && !phase2)
+        if (animator.GetBool("inRange") == false && !phase2&& !attacking)
         {
             transform.Translate(Vector3.forward * 2 * Time.deltaTime);
             // Get the direction to the target
@@ -55,22 +58,27 @@ public class Boss2 : MonoBehaviour
         else
         {
             if (!attacking && !phase2)
-            {
-                if (inPhase2)
-                {
-                    par.Play();
-                }
-                
-                attacking = true;
+            { 
                 animator.SetTrigger("attack");
+                animator.SetBool("attacking",true);
+                attacking = true;
                 animator.SetFloat("Blend", Random.Range(0, 4));
                 Invoke("Noattack", 3.6f);
+                if (inPhase2)
+                {
+                    par4.Play();
+                    par.Play();
+                }
             }
         }
     }
     void Noattack ()
     {
+        par4.Clear();
+        par4.Stop();
+        par.Clear();
         par.Stop();
+        animator.SetBool("attacking", false);
         attacking = false;  
     }
     void OnTriggerEnter(Collider other)
