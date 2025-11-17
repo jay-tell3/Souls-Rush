@@ -15,6 +15,8 @@ public class Boss2 : MonoBehaviour
     public ParticleSystem par3;
     public ParticleSystem par4;
     private bool inPhase2 ;
+    private int attack;
+    public BruningAttack b;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -39,7 +41,7 @@ public class Boss2 : MonoBehaviour
             inPhase2 = true;
         }
 
-        if (animator.GetBool("inRange") == false && !phase2&& !attacking)
+        if (animator.GetBool("inRange") == false && !phase2 && !attacking)
         {
             transform.Translate(Vector3.forward * 2 * Time.deltaTime);
             // Get the direction to the target
@@ -58,18 +60,35 @@ public class Boss2 : MonoBehaviour
         else
         {
             if (!attacking && !phase2)
-            { 
-                animator.SetTrigger("attack");
-                animator.SetBool("attacking",true);
-                attacking = true;
-                animator.SetFloat("Blend", Random.Range(0, 4));
-                Invoke("Noattack", 3.6f);
-                if (inPhase2)
+            {  
+                attack = Random.Range(5, 6);
+
+                if (attack < 5 && !attacking)
                 {
-                    par4.Play();
-                    par.Play();
+                    Vector3 direction = target.position - transform.position;
+                    transform.rotation = Quaternion.LookRotation(direction);
+                    attacking = true;
+                    animator.SetTrigger("attack");
+                    animator.SetBool("attacking", true);
+
+                    animator.SetFloat("Blend", attack);
+                    Invoke("Noattack", 3.6f);
+                    if (inPhase2)
+                    {
+                        par4.Play();
+                        par.Play();
+                    }
                 }
+                else if (inPhase2)
+                {
+                    animator.SetTrigger("BruningAttack");
+                    b.A1();
+                    attacking = true;
+                    Invoke("Noattack", 3f);
+                }
+                
             }
+            
         }
     }
     void Noattack ()
