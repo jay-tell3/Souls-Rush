@@ -3,6 +3,7 @@ using UnityEngine;
 public class BruningAttack : MonoBehaviour
 {
     public GameObject player;
+    public Player play;
     public ParticleSystem par;
     public ParticleSystem par2;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,7 +29,7 @@ public class BruningAttack : MonoBehaviour
         Debug.Log("A2");
         par.Stop();
         par2.Play();
-        Invoke("End", 2f);
+        Invoke("End", 1f);
     }
     void End()
     {
@@ -36,9 +37,14 @@ public class BruningAttack : MonoBehaviour
         par2.Stop();
     }
 
-    void OnParticleTrigger()
-    { 
-        Debug.Log("parrrrrr");
-        
+    private void OnParticleCollision(GameObject other)
+    {
+
+        // You can also use other.CompareTag("YourTag") to check for specific objects
+        if (other.CompareTag("Player"))
+        {
+            play.playerHp.value -= 2;
+
+        }
     }
 }

@@ -61,7 +61,7 @@ public class Boss2 : MonoBehaviour
         {
             if (!attacking && !phase2)
             {  
-                attack = Random.Range(5, 6);
+                attack = Random.Range(0, 6);
 
                 if (attack < 5 && !attacking)
                 {
@@ -76,7 +76,7 @@ public class Boss2 : MonoBehaviour
                     if (inPhase2)
                     {
                         par4.Play();
-                        par.Play();
+                       // par.Play();
                     }
                 }
                 else if (inPhase2)
@@ -106,7 +106,7 @@ public class Boss2 : MonoBehaviour
         if (other.CompareTag("Player") && attacking) // Replace "Player" with your desired tag
         {
            
-            player.playerHp.value -= 0;
+            player.playerHp.value -= 5;
         }
 
     }

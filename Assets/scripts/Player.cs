@@ -1,8 +1,10 @@
+
 using System.Collections;
+
 using UnityEngine;
 using UnityEngine.ProBuilder;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {   //variable place
@@ -230,6 +232,7 @@ public class Player : MonoBehaviour
 
     }
     
+
 }
 
 
