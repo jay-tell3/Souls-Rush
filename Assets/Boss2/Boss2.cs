@@ -10,13 +10,16 @@ public class Boss2 : MonoBehaviour
     public Slider boss2Hp;
     public Player player;
     private bool phase2;
-    public ParticleSystem par;
+  public ParticleSystem par;
     public ParticleSystem par2;
     public ParticleSystem par3;
     public ParticleSystem par4;
-    private bool inPhase2 ;
+    public ParticleSystem par5;
+    public bool inPhase2 ;
     private int attack;
     public BruningAttack b;
+    public GameObject HitBx;
+    public GameObject Fire;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,6 +36,7 @@ public class Boss2 : MonoBehaviour
             animator.SetTrigger("phase2");
             par2.Play();
             par3.Play();
+            par5.Play();
             phase2 = true;
             animator.SetBool("phase2B",true);
             attacking = false;
@@ -75,12 +79,20 @@ public class Boss2 : MonoBehaviour
                     Invoke("Noattack", 3.6f);
                     if (inPhase2)
                     {
+                        
+                        HitBx.SetActive(true);
                         par4.Play();
-                       // par.Play();
+                       par.Play();
+                        if(attack == 0)
+                        {
+                            Invoke("FireT", 2f);
+
+                        }
                     }
                 }
                 else if (inPhase2)
                 {
+                    
                     animator.SetTrigger("BruningAttack");
                     b.A1();
                     attacking = true;
@@ -93,10 +105,11 @@ public class Boss2 : MonoBehaviour
     }
     void Noattack ()
     {
+        HitBx.SetActive(false);
         par4.Clear();
         par4.Stop();
-        par.Clear();
-        par.Stop();
+       par.Clear();
+       par.Stop();
         animator.SetBool("attacking", false);
         attacking = false;  
     }
@@ -105,7 +118,7 @@ public class Boss2 : MonoBehaviour
         // Check if the entering collider has a specific tag
         if (other.CompareTag("Player") && attacking) // Replace "Player" with your desired tag
         {
-           
+            Debug.Log("ouch");
             player.playerHp.value -= 5;
         }
 
@@ -114,5 +127,10 @@ public class Boss2 : MonoBehaviour
     {
         animator.SetBool("phase2B", false);
         phase2 = false;
+    }
+    void FireT()
+    {
+        Vector3 direction = target.position - transform.position;
+        Instantiate(Fire, transform.position, transform.rotation = Quaternion.LookRotation(direction));
     }
 }

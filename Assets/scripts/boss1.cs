@@ -32,6 +32,7 @@ public class Boss1 : MonoBehaviour
     }
     void Update()
     {
+        
         if( attack ==1 && !attacked2 && animator.GetCurrentAnimatorStateInfo(0).IsName("attacks"))
         {
             Debug.Log("A2222");

@@ -25,7 +25,15 @@ public class Sword : MonoBehaviour
             Debug.Log("enemy entered the trigger!");
             // Perform actions specific to the Player entering
             boss1.boss1Hp.value -= 2;
-            boss2.boss2Hp.value -= 6;
+            if (!boss2.inPhase2)
+            {
+             boss2.boss2Hp.value -= 6;
+            }
+            else
+            {
+             boss2.boss2Hp.value -= 3;
+            }
+               
         }
 
     }

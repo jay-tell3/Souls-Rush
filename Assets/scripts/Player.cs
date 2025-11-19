@@ -169,11 +169,11 @@ public class Player : MonoBehaviour
 
         if (rolling && !Brolling )
         {
-            transform.Translate(Vector3.forward * 3 * Time.deltaTime);
+            transform.Translate(Vector3.forward * 7 * Time.deltaTime);
         }
         if (rolling && Brolling )
         {
-            transform.Translate(Vector3.forward * -3 * Time.deltaTime);
+            transform.Translate(Vector3.forward * -7 * Time.deltaTime);
         }
         if (Input.GetMouseButtonDown(0) && !attacking && !rolling)
         {
@@ -231,8 +231,19 @@ public class Player : MonoBehaviour
         yield return null;
 
     }
-    
+    public void Hurt()
+    {
+        playerHp.value -= 20;
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        // Check if the entering collider has a specific tag
+        if (other.CompareTag("Brun")) // Replace "Player" with your desired tag
+        {
 
+            Hurt();
+        }
+    }
 }
 
 
