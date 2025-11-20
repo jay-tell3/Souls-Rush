@@ -15,15 +15,17 @@ public class Boss2 : MonoBehaviour
     public ParticleSystem par3;
     public ParticleSystem par4;
     public ParticleSystem par5;
-    public bool inPhase2 ;
+    public bool inPhase2=false ;
     private int attack;
     public BruningAttack b;
     public GameObject HitBx;
     public GameObject Fire;
+    public bool inAn;
+    public GameObject myPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        boss2Hp.value = 100;
     }
 
     // Update is called once per frame
@@ -31,7 +33,9 @@ public class Boss2 : MonoBehaviour
     {
        
         if (boss2Hp.value < 1 && !inPhase2 )
-        {
+        { 
+            inAn = true;
+            attacking = false;
             radiusCheck.radius = 4;
             animator.SetTrigger("phase2");
             par2.Play();
@@ -39,10 +43,14 @@ public class Boss2 : MonoBehaviour
             par5.Play();
             phase2 = true;
             animator.SetBool("phase2B",true);
-            attacking = false;
+           
             boss2Hp.value = 100;
             Invoke("PhaseChange",5f);
             inPhase2 = true;
+        }else if(boss2Hp.value < 1 && inPhase2 )
+        {
+            Instantiate(myPrefab, transform.position, transform.rotation);
+            gameObject.SetActive(false);
         }
 
         if (animator.GetBool("inRange") == false && !phase2 && !attacking)
@@ -64,8 +72,8 @@ public class Boss2 : MonoBehaviour
         else
         {
             if (!attacking && !phase2)
-            {  
-                attack = Random.Range(0, 6);
+            {
+                attack = Random.Range(5, 6);
 
                 if (attack < 5 && !attacking)
                 {
@@ -79,11 +87,11 @@ public class Boss2 : MonoBehaviour
                     Invoke("Noattack", 3.6f);
                     if (inPhase2)
                     {
-                        
+
                         HitBx.SetActive(true);
                         par4.Play();
-                       par.Play();
-                        if(attack == 0)
+                        par.Play();
+                        if (attack == 0)
                         {
                             Invoke("FireT", 2f);
 
@@ -92,15 +100,15 @@ public class Boss2 : MonoBehaviour
                 }
                 else if (inPhase2)
                 {
-                    
+
                     animator.SetTrigger("BruningAttack");
                     b.A1();
                     attacking = true;
                     Invoke("Noattack", 3f);
                 }
-                
+
             }
-            
+
         }
     }
     void Noattack ()
@@ -119,12 +127,21 @@ public class Boss2 : MonoBehaviour
         if (other.CompareTag("Player") && attacking) // Replace "Player" with your desired tag
         {
             Debug.Log("ouch");
+            if(!inPhase2)
+            {
             player.playerHp.value -= 5;
+            }
+            else
+            {
+            player.playerHp.value -= 10;
+            }
+           
         }
 
     }
     void PhaseChange()
     {
+        inAn = false;
         animator.SetBool("phase2B", false);
         phase2 = false;
     }

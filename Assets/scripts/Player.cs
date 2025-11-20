@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public Sword SwordPar;
     public ParticleSystem fire;
     public Slider playerHp;
-
+    public GamerManger gamerManger;
     private float ver, horiz;
     public bool rolling;
     public bool Frolling;
@@ -59,6 +59,8 @@ public class Player : MonoBehaviour
     */
     void Update()
     {
+       
+
         if(playerHp.value < 1)
         {
             SceneManager.LoadScene(0);

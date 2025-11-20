@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class FireNadow : MonoBehaviour
 {
-    
+    private Player player;
 
     private void Start()
     {
-        
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
     /*
     public Transform target;
@@ -42,7 +42,7 @@ public class FireNadow : MonoBehaviour
         // Check if the entering collider has a specific tag
         if (other.CompareTag("Player")) // Replace "Player" with your desired tag
         {
-            
+            player.playerHp.value -= 20;
             Debug.Log("awsedrftgyhj");
         }
     }

@@ -26,6 +26,7 @@ public class Boss1 : MonoBehaviour
     private bool attacked2;
     public GameObject boss1SafeZone;
     public Rigidbody rb;
+    public GamerManger gamerManger;
     private void Start()
     {
         animator.SetBool("hasRoared", false);
@@ -42,8 +43,10 @@ public class Boss1 : MonoBehaviour
         }
         if (boss1Hp.value < 1)
         {
+            gamerManger.BossDefeats = 1;
             Instantiate(myPrefab, transform.position, transform.rotation);
             gameObject.SetActive(false);
+            player.playerHp.value = 100;
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("boss1 run"))
         {
