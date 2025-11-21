@@ -17,8 +17,8 @@ public class BruningAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        parRad += 0.1f;
-        shapeModule.radius = parRad; // Set initial radius
+         shapeModule.radius = parRad; // Set initial radius
+         parRad += 0.1f;
     } 
    public void A1()
     {
@@ -48,7 +48,7 @@ public class BruningAttack : MonoBehaviour
         // You can also use other.CompareTag("YourTag") to check for specific objects
         if (other.CompareTag("Player"))
         {
-            play.playerHp.value -= 10;
+            play.playerHp.value -= 30;
 
         }
     }

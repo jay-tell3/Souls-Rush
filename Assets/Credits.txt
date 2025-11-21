@@ -6,3 +6,5 @@ FREE-Low Poly SwordS - RPG Weapons by Blink
 https://assetstore.unity.com/packages/3d/props/weapons/free-low-poly-swords-rpg-weapons-198166
 RPG_AnimationsPack_FREE by DoubleL
 https://assetstore.unity.com/packages/3d/animations/rpg-animations-pack-free-288783
+Magic Effects FREE by Hovl Studio
+https://assetstore.unity.com/packages/vfx/particles/spells/magic-effects-free-247933

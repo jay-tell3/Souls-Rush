@@ -73,7 +73,7 @@ public class Boss2 : MonoBehaviour
         {
             if (!attacking && !phase2)
             {
-                attack = Random.Range(5, 6);
+                attack = Random.Range(0, 6);
 
                 if (attack < 5 && !attacking)
                 {

@@ -19,7 +19,7 @@ public class CameraLockOn : MonoBehaviour
         } */
         if (gamerManger.BossDefeats == 0)
         {
-            target = GameObject.Find("target").transform;
+          //  target = GameObject.Find("target").transform;
         }
         else
         {
