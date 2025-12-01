@@ -1,9 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boss3 : MonoBehaviour
 {
-    private bool tp =true;
+    private bool tp = true;
     public Transform target;
+    public Animator animator;
+    private float TPnum;
+    private float NOnum = 1;
+    private bool change;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,15 +21,29 @@ public class Boss3 : MonoBehaviour
        
         if (tp)
         {
+           
             tp = false;
             Invoke("Tp", 0.5f);
         }
+       
+       
 
     }
 
     void Tp()
     {
+        TPnum = Random.Range(0, 5);
+        while(TPnum == NOnum)
+        {
+            TPnum = Random.Range(0, 5);
+        }
+        NOnum = TPnum;
         
+        animator.SetFloat("TpP", TPnum);
+        animator.SetTrigger("Tp");
+        
+            
+
         transform.position = new Vector3(Random.Range(-10, 11), -0.8177662f, Random.Range(-10, 11));
         Vector3 direction = target.position - transform.position;
 

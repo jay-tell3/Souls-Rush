@@ -49,6 +49,7 @@ public class Boss2 : MonoBehaviour
             inPhase2 = true;
         }else if(boss2Hp.value < 1 && inPhase2 )
         {
+            par5.Stop();
             Instantiate(myPrefab, transform.position, transform.rotation);
             gameObject.SetActive(false);
         }
