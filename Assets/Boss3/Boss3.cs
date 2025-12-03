@@ -14,34 +14,55 @@ public class Boss3 : MonoBehaviour
     private int attcks;
     private bool attcking;
     private int tpTime;
+    public ParticleSystem tpFX;
+    private bool inTor;
+   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        Invoke("Tor",3);
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-        if (tp && !attcking)
+        if (!inTor)
         {
-           ++ tpTime;
-            tp = false;
-            Invoke("Tp", 0.5f);
+
+
+            if (tp && !attcking && !inTor)
+            {
+                ++tpTime;
+                tp = false;
+                tpFX.Stop();
+                Invoke("Tp", 0.5f);
+            }
+            if (tpTime == 5)
+            {
+                attcking = true;
+                tpTime = 0;
+                Debug.Log("fffffff");
+                Attck();
+
+            }
         }
-        if (tpTime == 5)
+        else
         {
-            attcking = true;
-            tpTime = 0;
-            Debug.Log("fffffff");
-            Attck();
+            Tor();
             
         }
        
 
     }
+    void Tor()
+    {
+        inTor = true;
+        animator.SetTrigger("tornado");
+        transform.position = new Vector3(0, -0.8177662f, 0);
 
+        Invoke("Notor",5);
+    }
+    
     void Tp()
     {
         if (!attcking) {
@@ -51,6 +72,9 @@ public class Boss3 : MonoBehaviour
                 TPnum = Random.Range(0, 5);
             }
             NOnum = TPnum;
+            tpFX.Play();
+            
+            
 
             animator.SetFloat("TpP", TPnum);
             animator.SetTrigger("Tp");
@@ -112,8 +136,15 @@ public class Boss3 : MonoBehaviour
         
         Invoke("NoAttck",1.50f);
     }
+    void Notor()
+    {
+        animator.ResetTrigger("tornado");
+        animator.SetTrigger("NoTor");
+        inTor = false;
+    }
     void NoAttck()
     {
+       
         tpTime = 0;
         attcking = false;
         tp = true;
