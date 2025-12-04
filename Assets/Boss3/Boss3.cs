@@ -1,3 +1,4 @@
+
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -15,7 +16,9 @@ public class Boss3 : MonoBehaviour
     private bool attcking;
     private int tpTime;
     public ParticleSystem tpFX;
+    public ParticleSystem tpFX2;
     private bool inTor;
+    public GameObject lighting;
    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,6 +38,7 @@ public class Boss3 : MonoBehaviour
                 ++tpTime;
                 tp = false;
                 tpFX.Stop();
+                tpFX2.Stop();
                 Invoke("Tp", 0.5f);
             }
             if (tpTime == 5)
@@ -59,7 +63,7 @@ public class Boss3 : MonoBehaviour
         inTor = true;
         animator.SetTrigger("tornado");
         transform.position = new Vector3(0, -0.8177662f, 0);
-
+        
         Invoke("Notor",5);
     }
     
@@ -73,8 +77,8 @@ public class Boss3 : MonoBehaviour
             }
             NOnum = TPnum;
             tpFX.Play();
-            
-            
+            tpFX2.Play();
+
 
             animator.SetFloat("TpP", TPnum);
             animator.SetTrigger("Tp");
@@ -148,5 +152,14 @@ public class Boss3 : MonoBehaviour
         tpTime = 0;
         attcking = false;
         tp = true;
+    }
+    void Lighting()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            Instantiate(lighting, new Vector3(Random.Range(-10, 11), -0.8177662f, Random.Range(-10, 11)), Quaternion.identity);
+
+
+        }
     }
 }
