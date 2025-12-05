@@ -19,21 +19,31 @@ public class Boss3 : MonoBehaviour
     public ParticleSystem tpFX2;
     private bool inTor;
     public GameObject lighting;
-   
+    private float lightingTime;
+    private bool walk;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Invoke("Tor",3);
+       // Invoke("Tor", 3);
+        Invoke("Eacho",1);
+       // Lighting();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!inTor)
+        if (walk)
+        {
+            transform.Translate(Vector3.forward * 17 * Time.deltaTime);
+            transform.Rotate(0, -70 * Time.deltaTime, 0);
+            tpFX.Stop();
+            tpFX2.Stop();
+        }
+        if (!inTor || !walk)
         {
 
 
-            if (tp && !attcking && !inTor)
+            if (tp && !attcking && !inTor && !walk)
             {
                 ++tpTime;
                 tp = false;
@@ -52,10 +62,10 @@ public class Boss3 : MonoBehaviour
         }
         else
         {
-            Tor();
-            
+           
+
         }
-       
+
 
     }
     void Tor()
@@ -63,13 +73,14 @@ public class Boss3 : MonoBehaviour
         inTor = true;
         animator.SetTrigger("tornado");
         transform.position = new Vector3(0, -0.8177662f, 0);
-        
-        Invoke("Notor",5);
+
+        Invoke("Notor", 5);
     }
-    
+
     void Tp()
     {
-        if (!attcking) {
+        if (!attcking)
+        {
             TPnum = Random.Range(0, 5);
             while (TPnum == NOnum)
             {
@@ -98,15 +109,15 @@ public class Boss3 : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(direction);
             }
             tp = true;
-                }
+        }
     }
 
     void Attck()
     {
-        
+
         attcks = Random.Range(0, 4);
         animator.SetFloat("attcks", attcks);
-        switch (Random.Range(1,5))
+        switch (Random.Range(1, 5))
         {
             case 1:
                 transform.position = target.position + new Vector3(1, 0, 0);
@@ -115,7 +126,7 @@ public class Boss3 : MonoBehaviour
                 transform.position = target.position + new Vector3(-1, 0, 0);
                 break;
             case 3:
-                transform.position = target.position + new Vector3(0, 0,1);
+                transform.position = target.position + new Vector3(0, 0, 1);
                 break;
             case 4:
                 transform.position = target.position + new Vector3(0, 0, -1);
@@ -136,9 +147,9 @@ public class Boss3 : MonoBehaviour
         }
 
         animator.SetTrigger("Attack");
-       
-        
-        Invoke("NoAttck",1.50f);
+
+
+        Invoke("NoAttck", 1.50f);
     }
     void Notor()
     {
@@ -148,18 +159,47 @@ public class Boss3 : MonoBehaviour
     }
     void NoAttck()
     {
-       
+
         tpTime = 0;
         attcking = false;
         tp = true;
     }
     void Lighting()
     {
+
+        lightingTime = 0;
         for (int i = 0; i < 10; i++)
         {
-            Instantiate(lighting, new Vector3(Random.Range(-10, 11), -0.8177662f, Random.Range(-10, 11)), Quaternion.identity);
 
-
+            Invoke("LightingSpawn", lightingTime);
+            lightingTime += 0.5f;
         }
+    }
+    void LightingSpawn()
+    {
+        Instantiate(lighting, new Vector3(Random.Range(-10, 11), -0.8177662f, Random.Range(-10, 11)), Quaternion.identity);
+
+    }
+    void Eacho()
+    {
+        walk = true;
+        tpFX.Play();
+        tpFX2.Play();
+
+
+
+
+
+
+        transform.position = new Vector3(7, -0.8177662f, 10);
+        transform.rotation = Quaternion.LookRotation(new Vector3(0,0,0));
+        animator.SetTrigger("Walk");
+        
+
+    }
+    void NoEacho()
+    {
+        walk = false;
+        animator.SetTrigger("NoWalk");
     }
 }
