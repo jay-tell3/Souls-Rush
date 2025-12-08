@@ -21,23 +21,39 @@ public class Boss3 : MonoBehaviour
     public GameObject lighting;
     private float lightingTime;
     private bool walk;
+    private bool clone = true;
+    public GameObject Clone;
+    public int clones = 0;
+    public ParticleSystem TorPar;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       // Invoke("Tor", 3);
-        Invoke("Eacho",1);
-       // Lighting();
+       Invoke("Tor", 1);
+       Invoke("Eacho",15);
+       //Lighting();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(clones >= 10)
+        {
+            clones = 0;
+        }
         if (walk)
         {
             transform.Translate(Vector3.forward * 17 * Time.deltaTime);
             transform.Rotate(0, -70 * Time.deltaTime, 0);
+            if (clone)
+            {
+                clone = false;
+                Instantiate(Clone,transform.position, transform.rotation);
+                clones += 1;
+                Invoke("NoClone",0.2f);
+            }
             tpFX.Stop();
             tpFX2.Stop();
+            Invoke("NoEacho",10);
         }
         if (!inTor || !walk)
         {
@@ -60,11 +76,7 @@ public class Boss3 : MonoBehaviour
 
             }
         }
-        else
-        {
-           
-
-        }
+        
 
 
     }
@@ -73,7 +85,7 @@ public class Boss3 : MonoBehaviour
         inTor = true;
         animator.SetTrigger("tornado");
         transform.position = new Vector3(0, -0.8177662f, 0);
-
+        TorPar.Play();
         Invoke("Notor", 5);
     }
 
@@ -94,7 +106,7 @@ public class Boss3 : MonoBehaviour
             animator.SetFloat("TpP", TPnum);
             animator.SetTrigger("Tp");
 
-
+            
 
             transform.position = new Vector3(Random.Range(-10, 11), -0.8177662f, Random.Range(-10, 11));
             Vector3 direction = target.position - transform.position;
@@ -155,6 +167,7 @@ public class Boss3 : MonoBehaviour
     {
         animator.ResetTrigger("tornado");
         animator.SetTrigger("NoTor");
+        TorPar.Stop();
         inTor = false;
     }
     void NoAttck()
@@ -191,7 +204,7 @@ public class Boss3 : MonoBehaviour
 
 
 
-        transform.position = new Vector3(7, -0.8177662f, 10);
+        transform.position = new Vector3(12, -0.8177662f, 0);
         transform.rotation = Quaternion.LookRotation(new Vector3(0,0,0));
         animator.SetTrigger("Walk");
         
@@ -201,5 +214,10 @@ public class Boss3 : MonoBehaviour
     {
         walk = false;
         animator.SetTrigger("NoWalk");
+    }
+    void NoClone()
+    {
+        clone = true;
+
     }
 }
