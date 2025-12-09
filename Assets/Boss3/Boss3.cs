@@ -25,12 +25,21 @@ public class Boss3 : MonoBehaviour
     public GameObject Clone;
     public int clones = 0;
     public ParticleSystem TorPar;
+    private bool lightingAttack;
+    public GameObject eSword;
+    private bool tried;
+    public ParticleSystem deBuff;
+    public GameObject hitBox;
+     public Slider boss3Hp;
+    public Player player;
+   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       Invoke("Tor", 1);
-       Invoke("Eacho",15);
-       //Lighting();
+       //Invoke("Tor", 1);
+       Invoke("Eacho",5);
+       Invoke("Tried",20);
+       //Invoke("LightingAttack",5);
     }
 
     // Update is called once per frame
@@ -43,7 +52,7 @@ public class Boss3 : MonoBehaviour
         if (walk)
         {
             transform.Translate(Vector3.forward * 17 * Time.deltaTime);
-            transform.Rotate(0, -70 * Time.deltaTime, 0);
+            transform.Rotate(0, -76 * Time.deltaTime, 0);
             if (clone)
             {
                 clone = false;
@@ -55,11 +64,11 @@ public class Boss3 : MonoBehaviour
             tpFX2.Stop();
             Invoke("NoEacho",10);
         }
-        if (!inTor || !walk)
+        if (!inTor || !walk || !lightingAttack ||!tried)
         {
 
 
-            if (tp && !attcking && !inTor && !walk)
+            if (tp && !attcking && !inTor && !walk && !lightingAttack && !tried)
             {
                 ++tpTime;
                 tp = false;
@@ -99,8 +108,12 @@ public class Boss3 : MonoBehaviour
                 TPnum = Random.Range(0, 5);
             }
             NOnum = TPnum;
-            tpFX.Play();
-            tpFX2.Play();
+            if(!lightingAttack||!inTor || !tried)
+            {
+             tpFX.Play();
+            }
+            
+           // tpFX2.Play();
 
 
             animator.SetFloat("TpP", TPnum);
@@ -181,11 +194,11 @@ public class Boss3 : MonoBehaviour
     {
 
         lightingTime = 0;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 50; i++)
         {
 
             Invoke("LightingSpawn", lightingTime);
-            lightingTime += 0.5f;
+            lightingTime += 0.1f;
         }
     }
     void LightingSpawn()
@@ -197,14 +210,14 @@ public class Boss3 : MonoBehaviour
     {
         walk = true;
         tpFX.Play();
-        tpFX2.Play();
+        //tpFX2.Play();
 
 
 
 
 
 
-        transform.position = new Vector3(12, -0.8177662f, 0);
+        transform.position = new Vector3(13, -0.8177662f, 0);
         transform.rotation = Quaternion.LookRotation(new Vector3(0,0,0));
         animator.SetTrigger("Walk");
         
@@ -218,6 +231,80 @@ public class Boss3 : MonoBehaviour
     void NoClone()
     {
         clone = true;
+
+    }
+    void LightingAttack()
+    {
+        lightingAttack = true;
+        eSword.SetActive(true);
+        //B
+        attcks = Random.Range(0, 4);
+        animator.SetFloat("attcks", attcks);
+        switch (Random.Range(1, 5))
+        {
+            case 1:
+                transform.position = target.position + new Vector3(1, 0, 0);
+                break;
+            case 2:
+                transform.position = target.position + new Vector3(-1, 0, 0);
+                break;
+            case 3:
+                transform.position = target.position + new Vector3(0, 0, 1);
+                break;
+            case 4:
+                transform.position = target.position + new Vector3(0, 0, -1);
+                break;
+
+        }
+
+        Vector3 direction = target.position - transform.position;
+
+        // Zero out the Y component to constrain rotation to the Y-axis
+        direction.y = 0;
+
+        // Check if the direction is valid (non-zero)
+        if (direction != Vector3.zero)
+        {
+            //  Apply LookRotation constrained to the Y-axis
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
+        //E
+        animator.SetTrigger("Lighting");
+        Invoke("Lighting", 1.8f);
+        Invoke("NoLighting", 7);
+    }
+    void NoLighting()
+    {
+        eSword.SetActive(false);
+        animator.SetTrigger("NoLighting");
+        lightingAttack = false;
+    }
+    void Tried()
+    {
+        tried = true;
+        tpFX.Play();
+        transform.position = new Vector3(0, -0.8177662f, 0);
+        animator.SetTrigger("Tried");
+        deBuff.Play();
+        hitBox.SetActive(true);
+        Invoke("NoTried", 5);
+    }
+    void NoTried()
+    {
+        hitBox.SetActive(false);
+        tried = false;
+        animator.SetTrigger("NoTried");
+        deBuff.Stop();
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        // Check if the entering collider has a specific tag
+        if (other.CompareTag("Player") && attcking) // Replace "Player" with your desired tag
+        {
+            Debug.Log("Player entered the trigger!");
+            // Perform actions specific to the Player entering
+            player.playerHp.value -= 10;
+        }
 
     }
 }

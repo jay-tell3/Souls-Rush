@@ -5,6 +5,7 @@ public class Sword : MonoBehaviour
     // public ParticleSystem fire;
     public Boss1 boss1;
     public Boss2 boss2;
+    public Boss3 boss3; 
     public Player player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,8 +37,8 @@ public class Sword : MonoBehaviour
               boss2.boss2Hp.value -= 3;
              }
             }
-          
-               
+            boss3.boss3Hp.value -= 5;
+
         }
 
     }
