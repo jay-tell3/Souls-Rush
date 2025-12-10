@@ -1,7 +1,7 @@
 
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 
 public class Boss3 : MonoBehaviour
@@ -29,16 +29,19 @@ public class Boss3 : MonoBehaviour
     public GameObject eSword;
     private bool tried;
     public ParticleSystem deBuff;
-    public GameObject hitBox;
-     public Slider boss3Hp;
-    public Player player;
    
+
+    public Player player;
+    public ParticleSystem lRing;
+    public Slider boss3Hp;
+    public CapsuleCollider hittBox;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       //Invoke("Tor", 1);
-       Invoke("Eacho",5);
-       Invoke("Tried",20);
+      
+        //Invoke("Tor", 1);
+       // Invoke("Eacho",5);
+       
        //Invoke("LightingAttack",5);
     }
 
@@ -210,6 +213,7 @@ public class Boss3 : MonoBehaviour
     {
         walk = true;
         tpFX.Play();
+        lRing.Stop();
         //tpFX2.Play();
 
 
@@ -227,6 +231,7 @@ public class Boss3 : MonoBehaviour
     {
         walk = false;
         animator.SetTrigger("NoWalk");
+        lRing.Play();
     }
     void NoClone()
     {
@@ -286,12 +291,14 @@ public class Boss3 : MonoBehaviour
         transform.position = new Vector3(0, -0.8177662f, 0);
         animator.SetTrigger("Tried");
         deBuff.Play();
-        hitBox.SetActive(true);
+        hittBox.enabled = true;
+        
         Invoke("NoTried", 5);
     }
     void NoTried()
     {
-        hitBox.SetActive(false);
+       
+        hittBox.enabled=false;
         tried = false;
         animator.SetTrigger("NoTried");
         deBuff.Stop();
@@ -303,8 +310,20 @@ public class Boss3 : MonoBehaviour
         {
             Debug.Log("Player entered the trigger!");
             // Perform actions specific to the Player entering
-            player.playerHp.value -= 10;
+           
         }
 
     }
+    public void Hitplayer()
+    {
+    player.playerHp.value -= 10;
+    }
+    void SpecislAttck()
+    {
+       Tor();
+       Eacho();
+       LightingAttack();
+    }
+
+
 }

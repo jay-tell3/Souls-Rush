@@ -4,11 +4,11 @@ using UnityEngine;
 public class Lighting : MonoBehaviour
 {
     bool hitIsBoxActive;
-    private ParticleSystem particleSystem;
+    private ParticleSystem pSystem;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        particleSystem = GetComponent<ParticleSystem>();
+        pSystem = GetComponent<ParticleSystem>();
         
         Invoke("Hit",2.8f);
     }

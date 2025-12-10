@@ -6,6 +6,7 @@ public class Boss3Clone : MonoBehaviour
     private bool attack = false;
     private Transform target;
     private Boss3 B3;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -60,7 +61,8 @@ public class Boss3Clone : MonoBehaviour
         // Check if the entering collider has a specific tag
         if (other.CompareTag("Player") ) // Replace "Player" with your desired tag
         {
-        
+            Debug.Log("work");
+            B3.Hitplayer();
         }
     }
 }

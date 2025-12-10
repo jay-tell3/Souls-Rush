@@ -247,10 +247,3 @@ public class Player : MonoBehaviour
         }
     }
 }
-
-
-
-
-
-
-// There 200.
