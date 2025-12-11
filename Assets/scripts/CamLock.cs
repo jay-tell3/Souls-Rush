@@ -10,6 +10,9 @@ public class CameraLockOn : MonoBehaviour
     public float smoothSpeed = 5f; // Adjust for smooth camera movement
     private bool isLockedOn = true;
     public GamerManger gamerManger;
+    public Transform b1;
+    public Transform b2;
+    public Transform b3;
     void Update()
     {
         /* Check if "T" is pressed
@@ -19,11 +22,18 @@ public class CameraLockOn : MonoBehaviour
         } */
         if (gamerManger.BossDefeats == 0)
         {
-          //  target = GameObject.Find("target").transform;
+            //target = GameObject.Find("target").transform;
+            target = b1;
         }
-        else
+        else if (gamerManger.BossDefeats == 1)
         {
-            target = GameObject.Find("targetB2").transform;
+            // target = GameObject.Find("targetB2").transform;
+            target = b2;
+        }
+        else if (gamerManger.BossDefeats == 2)
+        {
+            //target = GameObject.Find("targetB3").transform;
+            target = b3;
         }
         // If locked on, smoothly move and rotate the camera to face the target
         if (isLockedOn && target != null)

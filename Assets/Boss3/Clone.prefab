@@ -705,7 +705,7 @@ PrefabInstance:
       addedObject: {fileID: 1223216112939128156}
     - targetCorrespondingSourceObject: {fileID: -1841058918131551357, guid: 5494dcedc33ab4945bf53b9255d78725, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6324251141430269519}
+      addedObject: {fileID: 8317248394695737113}
   m_SourcePrefab: {fileID: 100100000, guid: 5494dcedc33ab4945bf53b9255d78725, type: 3}
 --- !u!137 &612170879318239460 stripped
 SkinnedMeshRenderer:
@@ -5588,8 +5588,8 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!136 &6324251141430269519
-CapsuleCollider:
+--- !u!65 &8317248394695737113
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5606,8 +5606,6 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Height: 2.0303352
-  m_Direction: 1
-  m_Center: {x: -0.00004902048, y: 0.8936522, z: 0.025673524}
+  serializedVersion: 3
+  m_Size: {x: 0.76577616, y: 2.0303352, z: 2.0486224}
+  m_Center: {x: 0.032225847, y: 0.8936522, z: -0.7171401}

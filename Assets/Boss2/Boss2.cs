@@ -22,6 +22,7 @@ public class Boss2 : MonoBehaviour
     public GameObject Fire;
     public bool inAn;
     public GameObject myPrefab;
+    public GamerManger gameManger;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -49,6 +50,7 @@ public class Boss2 : MonoBehaviour
             inPhase2 = true;
         }else if(boss2Hp.value < 1 && inPhase2 )
         {
+            gameManger.BossDefeats = 2;
             par5.Stop();
             Instantiate(myPrefab, transform.position, transform.rotation);
             gameObject.SetActive(false);

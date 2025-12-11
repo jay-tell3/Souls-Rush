@@ -18,7 +18,7 @@ public class Door : MonoBehaviour
     {
         for (int i = 0; i < 90; i++)
         {
-            transform.Rotate(0, -1, 0);
+            transform.Rotate(0, -1* Time.deltaTime, 0);
         }
         opened = true;
     }

@@ -229,7 +229,7 @@ public class Player : MonoBehaviour
     {
         // while (rolling)
         //transform.Translate(Vector3.forward * 10 * Time.deltaTime); 
-        transform.Translate(Vector3.forward * 5);
+        transform.Translate(Vector3.forward * 5 * Time.deltaTime);
         yield return null;
 
     }

@@ -15,10 +15,7 @@ public class GamerManger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (BossDefeats == 1)
-        {
-            boss2.SetActive(true);
-        }
+       
     }
     public void Starter ()
     {

@@ -74,7 +74,7 @@ public class Boss1 : MonoBehaviour
 
                 if (roar == false)
                 {
-                    boss1SafeZone.transform.Rotate(0,Random.Range(0,361),0);
+                    boss1SafeZone.transform.Rotate(0,Random.Range(0,361)* Time.deltaTime,0);
                     transform.rotation = Quaternion.LookRotation(direction);
                     animator.SetTrigger("A1");
                     roar = true;

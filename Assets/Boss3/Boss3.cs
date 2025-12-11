@@ -11,8 +11,8 @@ public class Boss3 : MonoBehaviour
     public Animator animator;
     private float TPnum;
     private float NOnum = 1;
-    private bool change;
-    private int attcks;
+    private bool change = true;
+    private int attcks ;
     private bool attcking;
     private int tpTime;
     public ParticleSystem tpFX;
@@ -29,16 +29,18 @@ public class Boss3 : MonoBehaviour
     public GameObject eSword;
     private bool tried;
     public ParticleSystem deBuff;
-   
-
+    private int rNum;
+    public GameObject torG;
     public Player player;
     public ParticleSystem lRing;
     public Slider boss3Hp;
     public CapsuleCollider hittBox;
+    private bool tiredE;
+    public GameObject myPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-      
+      lRing.Play();
         //Invoke("Tor", 1);
        // Invoke("Eacho",5);
        
@@ -48,6 +50,19 @@ public class Boss3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (boss3Hp.value < 1)
+        {
+            
+            Instantiate(myPrefab, transform.position, transform.rotation);
+            gameObject.SetActive(false);
+            player.playerHp.value = 100;
+        }
+        if (change)
+        {
+            Debug.Log("Change");
+            Invoke("SpecislAttck", 10);
+            change = false;
+        }
         if(clones >= 10)
         {
             clones = 0;
@@ -65,6 +80,7 @@ public class Boss3 : MonoBehaviour
             }
             tpFX.Stop();
             tpFX2.Stop();
+            tiredE = true;
             Invoke("NoEacho",10);
         }
         if (!inTor || !walk || !lightingAttack ||!tried)
@@ -97,7 +113,7 @@ public class Boss3 : MonoBehaviour
         inTor = true;
         animator.SetTrigger("tornado");
         transform.position = new Vector3(0, -0.8177662f, 0);
-        TorPar.Play();
+        torG.SetActive(true);
         Invoke("Notor", 5);
     }
 
@@ -183,8 +199,9 @@ public class Boss3 : MonoBehaviour
     {
         animator.ResetTrigger("tornado");
         animator.SetTrigger("NoTor");
-        TorPar.Stop();
+        torG.SetActive(false);     
         inTor = false;
+        Tried();
     }
     void NoAttck()
     {
@@ -207,6 +224,7 @@ public class Boss3 : MonoBehaviour
     void LightingSpawn()
     {
         Instantiate(lighting, new Vector3(Random.Range(-10, 11), -0.8177662f, Random.Range(-10, 11)), Quaternion.identity);
+        Instantiate(lighting, new Vector3(target.position.x, -0.8177662f, target.position.z), Quaternion.identity);
 
     }
     void Eacho()
@@ -228,15 +246,21 @@ public class Boss3 : MonoBehaviour
 
     }
     void NoEacho()
-    {
+    {   
         walk = false;
         animator.SetTrigger("NoWalk");
         lRing.Play();
+        if(tiredE)
+        {
+            tiredE = false;
+         Tried();
+        }
+        
     }
     void NoClone()
     {
         clone = true;
-
+        animator.SetTrigger("Walk");
     }
     void LightingAttack()
     {
@@ -245,22 +269,7 @@ public class Boss3 : MonoBehaviour
         //B
         attcks = Random.Range(0, 4);
         animator.SetFloat("attcks", attcks);
-        switch (Random.Range(1, 5))
-        {
-            case 1:
-                transform.position = target.position + new Vector3(1, 0, 0);
-                break;
-            case 2:
-                transform.position = target.position + new Vector3(-1, 0, 0);
-                break;
-            case 3:
-                transform.position = target.position + new Vector3(0, 0, 1);
-                break;
-            case 4:
-                transform.position = target.position + new Vector3(0, 0, -1);
-                break;
-
-        }
+        transform.position = new Vector3(0, -0.8177662f, 0);
 
         Vector3 direction = target.position - transform.position;
 
@@ -276,13 +285,14 @@ public class Boss3 : MonoBehaviour
         //E
         animator.SetTrigger("Lighting");
         Invoke("Lighting", 1.8f);
-        Invoke("NoLighting", 7);
+        Invoke("NoLighting", 10);
     }
     void NoLighting()
     {
         eSword.SetActive(false);
         animator.SetTrigger("NoLighting");
         lightingAttack = false;
+        
     }
     void Tried()
     {
@@ -297,19 +307,18 @@ public class Boss3 : MonoBehaviour
     }
     void NoTried()
     {
-       
         hittBox.enabled=false;
         tried = false;
         animator.SetTrigger("NoTried");
         deBuff.Stop();
+        change = true;
     }
     void OnTriggerEnter(Collider other)
     {
         // Check if the entering collider has a specific tag
         if (other.CompareTag("Player") && attcking) // Replace "Player" with your desired tag
         {
-            Debug.Log("Player entered the trigger!");
-            // Perform actions specific to the Player entering
+            Hitplayer();
            
         }
 
@@ -320,9 +329,22 @@ public class Boss3 : MonoBehaviour
     }
     void SpecislAttck()
     {
-       Tor();
-       Eacho();
-       LightingAttack();
+       
+        rNum = Random.Range(1, 4);
+        if (rNum >= 3)
+        {
+
+            Eacho();
+            
+        }
+        else if (rNum >= 2)
+        {
+            LightingAttack();
+        }
+        else 
+        {
+            Tor();
+        }
     }
 
 
