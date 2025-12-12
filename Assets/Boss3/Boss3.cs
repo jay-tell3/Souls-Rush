@@ -40,7 +40,8 @@ public class Boss3 : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-      lRing.Play();
+        boss3Hp.value = 100;
+        lRing.Play();
         //Invoke("Tor", 1);
        // Invoke("Eacho",5);
        

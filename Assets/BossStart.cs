@@ -19,5 +19,10 @@ public class BossStart : MonoBehaviour
     {
         boss.SetActive(true);
         doors.SetActive(true);
+        Invoke("Off", 0.1f);
+    }
+    void Off()
+    {
+(gameObject).SetActive(false);
     }
 }

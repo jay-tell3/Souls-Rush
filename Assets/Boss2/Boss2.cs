@@ -23,6 +23,7 @@ public class Boss2 : MonoBehaviour
     public bool inAn;
     public GameObject myPrefab;
     public GamerManger gameManger;
+    public GameObject doors;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -53,6 +54,7 @@ public class Boss2 : MonoBehaviour
             gameManger.BossDefeats = 2;
             par5.Stop();
             Instantiate(myPrefab, transform.position, transform.rotation);
+            doors.SetActive(false);
             gameObject.SetActive(false);
         }
 

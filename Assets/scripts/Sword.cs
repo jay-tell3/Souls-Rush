@@ -27,7 +27,7 @@ public class Sword : MonoBehaviour
             // Perform actions specific to the Player entering
             boss1.boss1Hp.value -= 2;
             boss3.boss3Hp.value -= 5;
-            Debug.Log("dffsdcsffgffzxvdxgvdfsxfxd");
+            
             if ( !boss2.inAn)
             {
              if (!boss2.inPhase2 )
