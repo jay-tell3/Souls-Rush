@@ -1,6 +1,6 @@
 using System;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
+//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI.Table;
 
@@ -20,17 +20,17 @@ public class CameraLockOn : MonoBehaviour
         {
             isLockedOn = !isLockedOn; // Toggle lock-on state
         } */
-        if (gamerManger.BossDefeats == 0)
+        if (GamerManger.Instance.BossDefeats == 0)
         {
             //target = GameObject.Find("target").transform;
             target = b1;
         }
-        else if (gamerManger.BossDefeats == 1)
+        else if (GamerManger.Instance.BossDefeats == 1)
         {
             // target = GameObject.Find("targetB2").transform;
             target = b2;
         }
-        else if (gamerManger.BossDefeats == 2)
+        else if (GamerManger.Instance.BossDefeats == 2)
         {
             //target = GameObject.Find("targetB3").transform;
             target = b3;

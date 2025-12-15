@@ -44,7 +44,7 @@ public class Boss1 : MonoBehaviour
         }
         if (boss1Hp.value < 1)
         {
-            gamerManger.BossDefeats = 1;
+            GamerManger.Instance.BossK();
             Instantiate(myPrefab, transform.position, transform.rotation);
             door.SetActive(false);
             gameObject.SetActive(false);
@@ -63,10 +63,15 @@ public class Boss1 : MonoBehaviour
         }
         radiusCheck = GetComponent<RadiusCheck>();
         // ps = GetComponentInChildren<ParticleSystem>();
-
-        if (!radiusCheck.close && !animator.GetCurrentAnimatorStateInfo(0).IsName("BossA3"))
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("boss1 run"))
         {
-           
+            transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+            Vector3 direction = target.position - transform.position;
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
+        if (!radiusCheck.close && !animator.GetCurrentAnimatorStateInfo(0).IsName("BossA3") && !attacking)
+        {
+            
         }
         else
         {
@@ -77,7 +82,7 @@ public class Boss1 : MonoBehaviour
 
                 if (roar == false)
                 {
-                    boss1SafeZone.transform.Rotate(0,Random.Range(0,361)* Time.deltaTime,0);
+                    boss1SafeZone.transform.Rotate(0,Random.Range(0,361),0);
                     transform.rotation = Quaternion.LookRotation(direction);
                     animator.SetTrigger("A1");
                     roar = true;

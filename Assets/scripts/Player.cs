@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static System.Net.WebRequestMethods;
 
 public class Player : MonoBehaviour
 {   //variable place
@@ -15,7 +16,8 @@ public class Player : MonoBehaviour
     public Sword SwordPar;
     public ParticleSystem fire;
     public Slider playerHp;
-    public GamerManger gamerManger;
+    //public GamerManger gamerManger;
+
     private float ver, horiz;
     public bool rolling;
     public bool Frolling;
@@ -27,11 +29,31 @@ public class Player : MonoBehaviour
     private bool rollMo=false;
     private bool roolMo;
     private bool rollCoolDown;
+    public Transform Spawnn;
+    public Transform Spawn1;
+    public Transform Spawn2;
+    public Transform Spawn3;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerHp = GetComponentInChildren<Slider>();
+        if (GamerManger.Instance.BossDefeats == 0)
+        {
+            transform.position = Spawnn.position;
+        }
+        if (GamerManger.Instance.BossDefeats == 0 && GamerManger.Instance.Tp)
+        {
+            transform.position = Spawn1.position;
+        }
+        else if (GamerManger.Instance.BossDefeats == 1)
+        {
+            transform.position = Spawn2.position;
+        }
+        else if (GamerManger.Instance.BossDefeats == 2)
+        {
+            transform.position = Spawn3.position;
+        }
     }
 
     // Update is called once per frame
@@ -60,10 +82,19 @@ public class Player : MonoBehaviour
     void Update()
     {
        
-
+        if(transform.position.y < -100)
+        {
+           playerHp.value = 0;
+        }
+          
         if(playerHp.value < 1)
         {
             SceneManager.LoadScene(0);
+           
+            
+
+
+
         }
         Vector3 moveDirection = Vector3.zero;
 

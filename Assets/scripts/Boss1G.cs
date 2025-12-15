@@ -25,5 +25,7 @@ public class Boss1G : MonoBehaviour
             player.playerHp.value -= 5;
         }
     }
+
+   
     
 }

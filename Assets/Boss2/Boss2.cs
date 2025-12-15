@@ -51,7 +51,7 @@ public class Boss2 : MonoBehaviour
             inPhase2 = true;
         }else if(boss2Hp.value < 1 && inPhase2 )
         {
-            gameManger.BossDefeats = 2;
+            GamerManger.Instance.BossK();
             par5.Stop();
             Instantiate(myPrefab, transform.position, transform.rotation);
             doors.SetActive(false);
