@@ -19,6 +19,7 @@ public class BruningAttack : MonoBehaviour
     {
          shapeModule.radius = parRad; // Set initial radius
          parRad += 0.1f;
+        transform.Rotate(0, 150 * Time.deltaTime, 0);
     } 
    public void A1()
     {
