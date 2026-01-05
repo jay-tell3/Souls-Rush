@@ -15,7 +15,7 @@ public class GamerManger : MonoBehaviour
     
         
     }
-    public static GamerManger Instance { get; private set; }
+    public static GamerManger Instance { get; set; }
 
     void Awake()
     {
@@ -60,6 +60,7 @@ public class GamerManger : MonoBehaviour
     public void BossK()
     {
         BossDefeats += 1;
+        Debug.Log("deee");
     }
     public void Tped()
     {

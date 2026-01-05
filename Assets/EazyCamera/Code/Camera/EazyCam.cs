@@ -363,7 +363,7 @@ namespace EazyCamera
         public void ResetPositionAndRotation()
         {
             _rotation = new Vector2();
-            _focalPoint = _followTarget.position;
+          //  _focalPoint = _followTarget.position;
             ResetToDefaultDistance();
         }
 
