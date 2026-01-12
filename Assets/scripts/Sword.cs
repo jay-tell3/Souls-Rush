@@ -16,7 +16,7 @@ public class Sword : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-  
+
     }
     void OnTriggerEnter(Collider other)
     {
@@ -44,4 +44,5 @@ public class Sword : MonoBehaviour
         }
 
     }
+   
 }
