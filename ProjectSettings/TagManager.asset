@@ -9,6 +9,7 @@ TagManager:
   - ground
   - roll
   - Brun
+  - ult
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,7 @@ public class Ultcam : MonoBehaviour
     public GameObject charge;
     public GameObject beam;
     public GameObject cam;
+    public GameObject ult;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,4 +35,5 @@ public class Ultcam : MonoBehaviour
     {
         cam.SetActive(true);
     }
+   
 }

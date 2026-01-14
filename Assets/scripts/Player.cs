@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     public Transform Spawn1;
     public Transform Spawn2;
     public Transform Spawn3;
-
+    public GameObject myPrefab;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -81,6 +81,13 @@ public class Player : MonoBehaviour
     */
     void Update()
     {
+        if(Input.GetKey(KeyCode.Space))
+        {
+            Instantiate(myPrefab, transform.position, transform.rotation);
+            cam.SetActive(false);
+            targetCam.SetActive(true);
+            Ult();
+        }
        
         if(transform.position.y < -100)
         {
@@ -276,5 +283,10 @@ public class Player : MonoBehaviour
 
             Hurt();
         }
+    }
+
+    void Ult()
+    {
+        gameObject.SetActive(false);
     }
 }
