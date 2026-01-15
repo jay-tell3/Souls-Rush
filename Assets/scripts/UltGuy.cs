@@ -19,7 +19,7 @@ public class UltGuy : MonoBehaviour
        
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("throw"))
         {
-           
+            transform.position = new Vector3(gameObject.transform.position.x, 6, gameObject.transform.position.z);
             ulttt.Act();
             Invoke("Beam",19);
         }
