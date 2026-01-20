@@ -1,11 +1,12 @@
 
 using System.Collections;
-
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static System.Net.WebRequestMethods;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class Player : MonoBehaviour
 {   //variable place
@@ -34,6 +35,8 @@ public class Player : MonoBehaviour
     public Transform Spawn2;
     public Transform Spawn3;
     public GameObject myPrefab;
+    public float horizontal;
+    public float vertical;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -288,5 +291,11 @@ public class Player : MonoBehaviour
     void Ult()
     {
         gameObject.SetActive(false);
+    }
+
+    public void Move(InputAction.CallbackContext context)
+    {
+        horizontal = context.ReadValue<Vector2>().x;
+        vertical = context.ReadValue<Vector2>().y;
     }
 }
