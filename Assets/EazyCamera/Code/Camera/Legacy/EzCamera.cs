@@ -245,22 +245,22 @@ namespace EazyCamera.Legacy
 
         private void HandleInput()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+           // if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (_lockOnEnabled && !IsLockedOn)
                 {
-                    SetState(EzCameraState.State.LOCKON);
+               //     SetState(EzCameraState.State.LOCKON);
                 }
             }
 
             // Zoom the camera using the middle mouse button + drag
-            if (Input.GetMouseButton(2) || Input.GetKey(KeyCode.Z))
+          //  if (Input.GetMouseButton(2) || Input.GetKey(KeyCode.Z))
             {
-                _zoomDelta = Input.GetAxis(ExtensionMethods.MOUSEY);
+              // _zoomDelta = Input.GetAxis(ExtensionMethods.MOUSEY);
             }
-            else
+           // else
             {
-                _zoomDelta = 0;
+              //  _zoomDelta = 0;
             }
         }
 

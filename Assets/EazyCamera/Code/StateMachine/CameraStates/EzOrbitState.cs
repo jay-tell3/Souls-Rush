@@ -73,22 +73,22 @@ namespace EazyCamera.Legacy
 
         public override void HandleInput()
         {
-            if (_controlledCamera.OribtEnabled && Input.GetMouseButtonDown(0))
+          //  if (_controlledCamera.OribtEnabled && Input.GetMouseButtonDown(0))
             {
-                _controlledCamera.SetState(State.ORBIT);
+              //  _controlledCamera.SetState(State.ORBIT);
             }
-            else if (Input.GetMouseButtonUp(0))
+           // else if (Input.GetMouseButtonUp(0))
             {
-                _controlledCamera.SetState(State.FOLLOW);
-                return;
+              //  _controlledCamera.SetState(State.FOLLOW);
+                //return;
             }
 
             // cache the inputs
-            float horz = Input.GetAxis(MOUSEX);
-            float vert = Input.GetAxis(MOUSEY);
+            //float horz = Input.GetAxis(MOUSEX);
+           // float vert = Input.GetAxis(MOUSEY);
 
-            _horizontalInput = horz;
-            _verticalInput = vert;
+           // _horizontalInput = horz;
+           // _verticalInput = vert;
         }
     }
 }

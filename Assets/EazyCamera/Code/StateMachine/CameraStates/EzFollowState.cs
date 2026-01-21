@@ -50,9 +50,9 @@ namespace EazyCamera.Legacy
 
         public override void HandleInput()
         {
-            if (Input.GetKeyDown(KeyCode.R))
+           // if (Input.GetKeyDown(KeyCode.R))
             {
-                ResetBehindPlayer();
+              //  ResetBehindPlayer();
             }
         }
 

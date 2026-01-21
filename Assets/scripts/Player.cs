@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
     public GameObject myPrefab;
     public float horizontal;
     public float vertical;
+    private bool rollButton;
+    private bool lockButton;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -84,12 +86,12 @@ public class Player : MonoBehaviour
     */
     void Update()
     {
-        if(Input.GetKey(KeyCode.Space))
+        //if(Input.GetKey(KeyCode.Space))
         {
-            Instantiate(myPrefab, transform.position, transform.rotation);
-            cam.SetActive(false);
-            targetCam.SetActive(true);
-            Ult();
+        //    Instantiate(myPrefab, transform.position, transform.rotation);
+        //    cam.SetActive(false);
+        //   targetCam.SetActive(true);
+        //   Ult();
         }
        
         if(transform.position.y < -100)
@@ -108,10 +110,10 @@ public class Player : MonoBehaviour
         }
         Vector3 moveDirection = Vector3.zero;
 
-        ver = Input.GetAxis("Vertical");
-        horiz = Input.GetAxis("Horizontal");
+      //  ver = Input.GetAxis("Vertical");
+      //  horiz = Input.GetAxis("Horizontal");
         animator.SetFloat("ver", ver);
-        animator.SetFloat("horiz", horiz);
+        animator.SetFloat("horiz", horizontal);
 
 
         if (ver > 0 && !rolling && !attacking)
@@ -126,13 +128,13 @@ public class Player : MonoBehaviour
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
         }
 
-        if (horiz > 0 && !rolling && !attacking)
+        if (horizontal > 0 && !rolling && !attacking)
         {
             moveDirection += cam.transform.right;
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
 
         }
-        if (horiz < 0 && !rolling && !attacking)
+        if (horizontal < 0 && !rolling && !attacking)
         {
             moveDirection -= cam.transform.right;
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
@@ -150,7 +152,7 @@ public class Player : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (lockButton)
         {
             if (cam == playerCam)
             {
@@ -162,7 +164,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.E) && ver > 0 && !rolling && !attacking && !rollCoolDown)
+        if (rollButton && ver > 0 && !rolling && !attacking && !rollCoolDown)
         {
             rollCoolDown = true;
 
@@ -175,7 +177,7 @@ public class Player : MonoBehaviour
             Invoke("NoRoll", 0.75f);
             Invoke("RollCoolDown", 1f);
         }
-        if (Input.GetKey(KeyCode.E) && ver < 0 && !rolling && !attacking && !rollCoolDown)
+        if (rollButton && ver < 0 && !rolling && !attacking && !rollCoolDown)
         {
             rollCoolDown = true;
             Brolling = true;
@@ -186,7 +188,7 @@ public class Player : MonoBehaviour
             Invoke("NoRoll", 0.75f);
             Invoke("RollCoolDown", 1f);
         }
-        if (Input.GetKey(KeyCode.E) && horiz > 0 && !rolling && !attacking  && !rollCoolDown)
+        if (rollButton && horizontal > 0 && !rolling && !attacking  && !rollCoolDown)
         {
             rollCoolDown = true;
             rolling = true;
@@ -198,7 +200,7 @@ public class Player : MonoBehaviour
             Invoke("NoRoll", 0.75f);
             Invoke("RollCoolDown", 1f);
         }
-        if (Input.GetKey(KeyCode.E) && horiz < 0 && !rolling && !attacking  && !rollCoolDown)
+        if (rollButton && horizontal < 0 && !rolling && !attacking  && !rollCoolDown)
         {
             rollCoolDown = true;
             rolling = true;
@@ -298,4 +300,14 @@ public class Player : MonoBehaviour
         horizontal = context.ReadValue<Vector2>().x;
         vertical = context.ReadValue<Vector2>().y;
     }
+
+    public void Roll(InputAction.CallbackContext context)
+    {
+        rollButton = context.ReadValueAsButton();
+    }
+    public void Lock(InputAction.CallbackContext context)
+    {
+        lockButton = context.ReadValueAsButton();
+    }
+    
 }
