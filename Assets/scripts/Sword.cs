@@ -36,7 +36,7 @@ public class Sword : MonoBehaviour
              }
              else
              {
-              boss2.boss2Hp.value -= 12;
+              boss2.boss2Hp.value -= 6;
              }
             }
             

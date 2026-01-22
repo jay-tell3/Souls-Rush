@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     public float vertical;
     private bool rollButton;
     private bool lockButton;
+    private bool fireButton;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -99,7 +100,7 @@ public class Player : MonoBehaviour
            playerHp.value = 0;
         }
           
-        if(playerHp.value < 1)
+       if(playerHp.value < 1)
         {
             SceneManager.LoadScene(0);
            
@@ -112,29 +113,29 @@ public class Player : MonoBehaviour
 
       //  ver = Input.GetAxis("Vertical");
       //  horiz = Input.GetAxis("Horizontal");
-        animator.SetFloat("ver", ver);
+        animator.SetFloat("ver", vertical);
         animator.SetFloat("horiz", horizontal);
 
 
-        if (ver > 0 && !rolling && !attacking)
+        if (vertical > 0.5 && !rolling && !attacking)
         {
             moveDirection += cam.transform.forward;
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
             //transform.Rotate(Vector3.up, cam.transform.rotation.y);
         }
-        if (ver < 0 && !rolling && !attacking)
+        if (vertical < -0.5 && !rolling && !attacking)
         {
             moveDirection -= cam.transform.forward;
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
         }
 
-        if (horizontal > 0 && !rolling && !attacking)
+        if (horizontal > 0.5 && !rolling && !attacking)
         {
             moveDirection += cam.transform.right;
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
 
         }
-        if (horizontal < 0 && !rolling && !attacking)
+        if (horizontal < -0.5 && !rolling && !attacking)
         {
             moveDirection -= cam.transform.right;
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
@@ -164,7 +165,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (rollButton && ver > 0 && !rolling && !attacking && !rollCoolDown)
+        if (rollButton && vertical > 0.5 && !rolling && !attacking && !rollCoolDown)
         {
             rollCoolDown = true;
 
@@ -177,7 +178,7 @@ public class Player : MonoBehaviour
             Invoke("NoRoll", 0.75f);
             Invoke("RollCoolDown", 1f);
         }
-        if (rollButton && ver < 0 && !rolling && !attacking && !rollCoolDown)
+        if (rollButton && vertical < -0.5 && !rolling && !attacking && !rollCoolDown)
         {
             rollCoolDown = true;
             Brolling = true;
@@ -188,7 +189,7 @@ public class Player : MonoBehaviour
             Invoke("NoRoll", 0.75f);
             Invoke("RollCoolDown", 1f);
         }
-        if (rollButton && horizontal > 0 && !rolling && !attacking  && !rollCoolDown)
+        if (rollButton && horizontal > 0.5 && !rolling && !attacking  && !rollCoolDown)
         {
             rollCoolDown = true;
             rolling = true;
@@ -200,7 +201,7 @@ public class Player : MonoBehaviour
             Invoke("NoRoll", 0.75f);
             Invoke("RollCoolDown", 1f);
         }
-        if (rollButton && horizontal < 0 && !rolling && !attacking  && !rollCoolDown)
+        if (rollButton && horizontal < -0.5 && !rolling && !attacking  && !rollCoolDown)
         {
             rollCoolDown = true;
             rolling = true;
@@ -220,7 +221,7 @@ public class Player : MonoBehaviour
         {
             transform.Translate(Vector3.forward * -7 * Time.deltaTime);
         }
-        if (Input.GetMouseButtonDown(0) && !attacking && !rolling)
+        if (fireButton && !attacking && !rolling)
         {
             attacking = true;
             fire.Play();
@@ -309,5 +310,9 @@ public class Player : MonoBehaviour
     {
         lockButton = context.ReadValueAsButton();
     }
-    
+    public void Fire(InputAction.CallbackContext context)
+    {
+        fireButton = context.ReadValueAsButton();
+    }
+
 }
