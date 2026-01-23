@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
     private bool rollButton;
     private bool lockButton;
     private bool fireButton;
+    private bool ultButton;
+    public AudioSource source;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -87,12 +89,12 @@ public class Player : MonoBehaviour
     */
     void Update()
     {
-        //if(Input.GetKey(KeyCode.Space))
+        if(ultButton)
         {
-        //    Instantiate(myPrefab, transform.position, transform.rotation);
-        //    cam.SetActive(false);
-        //   targetCam.SetActive(true);
-        //   Ult();
+            Instantiate(myPrefab, transform.position, transform.rotation);
+           cam.SetActive(false);
+          targetCam.SetActive(true);
+          Ult();
         }
        
         if(transform.position.y < -100)
@@ -313,6 +315,10 @@ public class Player : MonoBehaviour
     public void Fire(InputAction.CallbackContext context)
     {
         fireButton = context.ReadValueAsButton();
+    }
+    public void Ult(InputAction.CallbackContext context)
+    {
+        ultButton = context.ReadValueAsButton();
     }
 
 }

@@ -6,10 +6,12 @@ public class UltGuy : MonoBehaviour
     public Animator animator;
     private UltStart ulttt;
     public GameObject beam;
+    public GameObject player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
    private void Start()
     {
         ulttt = GameObject.Find("====Random====").GetComponent<UltStart>();
+        player = GameObject.FindWithTag("Player");
 
     }
 
@@ -22,10 +24,17 @@ public class UltGuy : MonoBehaviour
             transform.position = new Vector3(gameObject.transform.position.x, 6, gameObject.transform.position.z);
             ulttt.Act();
             Invoke("Beam",19);
+            Invoke("End",25);
         }
     }
     void Beam()
     {
         beam.SetActive(true);
+    }
+    void End()
+    {
+        player.SetActive(true);
+        gameObject.SetActive(false);
+    
     }
 }

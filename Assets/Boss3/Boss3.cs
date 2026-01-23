@@ -293,6 +293,7 @@ public class Boss3 : MonoBehaviour
         eSword.SetActive(false);
         animator.SetTrigger("NoLighting");
         lightingAttack = false;
+        Tried();
         
     }
     void Tried()

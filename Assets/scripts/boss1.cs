@@ -84,6 +84,7 @@ public class Boss1 : MonoBehaviour
                 {
                     boss1SafeZone.transform.Rotate(0,Random.Range(0,361),0);
                     transform.rotation = Quaternion.LookRotation(direction);
+                 
                     animator.SetTrigger("A1");
                     roar = true;
                     bossSafeZone.Play();
