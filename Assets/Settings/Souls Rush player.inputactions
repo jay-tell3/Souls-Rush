@@ -48,7 +48,7 @@
                     "id": "d6a7fc19-29d7-4960-aba1-3317335fbd8a",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
                 },
                 {
@@ -318,7 +318,7 @@
                 {
                     "name": "",
                     "id": "61377fc4-03a0-4d11-8716-1acbcd298f88",
-                    "path": "<Gamepad>/leftStickPress",
+                    "path": "<Gamepad>/rightStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
