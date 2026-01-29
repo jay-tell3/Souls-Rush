@@ -8,3 +8,5 @@ RPG_AnimationsPack_FREE by DoubleL
 https://assetstore.unity.com/packages/3d/animations/rpg-animations-pack-free-288783
 Magic Effects FREE by Hovl Studio
 https://assetstore.unity.com/packages/vfx/particles/spells/magic-effects-free-247933
+FREE Stylized PBR Textures Pack by Lumo-Art 3D
+https://assetstore.unity.com/packages/2d/textures-materials/free-stylized-pbr-textures-pack-111778

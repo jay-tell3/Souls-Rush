@@ -1,5 +1,6 @@
 
 using System.Collections;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder;
@@ -296,8 +297,12 @@ public class Player : MonoBehaviour
     void Ult()
     {
         gameObject.SetActive(false);
+        Invoke("UltEnd",25);
     }
-
+    void UltEnd ()
+    {
+        gameObject.SetActive(true);
+    }
     public void Move(InputAction.CallbackContext context)
     {
         horizontal = context.ReadValue<Vector2>().x;

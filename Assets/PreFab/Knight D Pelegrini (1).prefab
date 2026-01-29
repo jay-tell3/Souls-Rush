@@ -4866,13 +4866,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5546603839336567070}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.35859877, y: 0.0000002637405, z: 0.00000067328085, w: 0.93349177}
-  m_LocalPosition: {x: 0.24999943, y: 1.64, z: -1.5500058}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6769991, y: 0.61, z: -1.6360043}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2244245901710235282}
-  m_LocalEulerAnglesHint: {x: 42.028, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2505823104974732337
 Camera:
   m_ObjectHideFlags: 0
@@ -4906,7 +4906,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 45
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -15441,3 +15441,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UltGuy
   animator: {fileID: 3836226454675003469}
   beam: {fileID: 8129264741531648806}
+  player: {fileID: 0}
+  lockOn: {fileID: 0}

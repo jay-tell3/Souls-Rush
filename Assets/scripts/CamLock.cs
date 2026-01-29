@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI.Table;
 
-public class CameraLockOn : MonoBehaviour
+public class CamLock : MonoBehaviour
 {
     public Transform target; // Assign the target GameObject in the Inspector
     public float smoothSpeed = 5f; // Adjust for smooth camera movement
@@ -13,6 +13,8 @@ public class CameraLockOn : MonoBehaviour
     public Transform b1;
     public Transform b2;
     public Transform b3;
+
+   
     void Update()
     {
         /* Check if "T" is pressed
