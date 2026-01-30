@@ -48,7 +48,7 @@ public class Boss1 : MonoBehaviour
             Instantiate(myPrefab, transform.position, transform.rotation);
             door.SetActive(false);
             gameObject.SetActive(false);
-            player.playerHp.value = 100;
+          
 
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("boss1 run"))
@@ -65,7 +65,7 @@ public class Boss1 : MonoBehaviour
         // ps = GetComponentInChildren<ParticleSystem>();
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("boss1 run"))
         {
-            transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+            transform.Translate(Vector3.forward * 8 * Time.deltaTime);
             Vector3 direction = target.position - transform.position;
             transform.rotation = Quaternion.LookRotation(direction);
         }

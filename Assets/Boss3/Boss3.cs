@@ -56,7 +56,7 @@ public class Boss3 : MonoBehaviour
             
             Instantiate(myPrefab, transform.position, transform.rotation);
             gameObject.SetActive(false);
-            player.playerHp.value = 100;
+            
         }
         if (change)
         {
