@@ -4,6 +4,7 @@ public class BobSword : MonoBehaviour
 {
     private Vector3 lastPosition;
     public float currentSpeed;
+    public ParticleSystem particleSystem;
 
     void Start()
     {
@@ -23,9 +24,10 @@ public class BobSword : MonoBehaviour
         lastPosition = transform.position;
 
         // You can log the speed
-        if(currentSpeed > 50)
+        if(currentSpeed > 90)
         {
  Debug.Log("Speed: " + currentSpeed);
+            particleSystem.Play();
         }
        
     }

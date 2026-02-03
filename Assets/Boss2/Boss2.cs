@@ -10,12 +10,12 @@ public class Boss2 : MonoBehaviour
     public Slider boss2Hp;
     public Player player;
     private bool phase2;
-  public ParticleSystem par;
+    public ParticleSystem par;
     public ParticleSystem par2;
     public ParticleSystem par3;
     public ParticleSystem par4;
     public ParticleSystem par5;
-    public bool inPhase2=false ;
+    public bool inPhase2 = false;
     private int attack;
     public BruningAttack b;
     public GameObject HitBx;
@@ -24,6 +24,7 @@ public class Boss2 : MonoBehaviour
     public GameObject myPrefab;
     public GamerManger gameManger;
     public GameObject doors;
+    public ParticleSystem stomp;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,9 +34,9 @@ public class Boss2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        if (boss2Hp.value < 1 && !inPhase2 )
-        { 
+
+        if (boss2Hp.value < 1 && !inPhase2)
+        {
             inAn = true;
             attacking = false;
             radiusCheck.radius = 4;
@@ -44,12 +45,12 @@ public class Boss2 : MonoBehaviour
             par3.Play();
             par5.Play();
             phase2 = true;
-            animator.SetBool("phase2B",true);
-           
+            animator.SetBool("phase2B", true);
+
             boss2Hp.value = 100;
-            Invoke("PhaseChange",5f);
+            Invoke("PhaseChange", 5f);
             inPhase2 = true;
-        }else if(boss2Hp.value < 1 && inPhase2 )
+        } else if (boss2Hp.value < 1 && inPhase2)
         {
             GamerManger.Instance.BossK();
             par5.Stop();
@@ -105,26 +106,40 @@ public class Boss2 : MonoBehaviour
                 }
                 else if (inPhase2)
                 {
-
-                    animator.SetTrigger("BruningAttack");
-                    b.A1();
-                    attacking = true;
-                    Invoke("Noattack", 3f);
+                    attack = Random.Range(0, 2);
+                    if (attack == 0)
+                    {
+                        animator.SetTrigger("BruningAttack");
+                        b.A1();
+                        attacking = true;
+                        Invoke("Noattack", 3f);
+                    }
+                    else
+                    {
+                        animator.SetTrigger("Stomp");
+                        Invoke("Stomp", 0.8f);
+                        attacking = true;
+                        Invoke("Noattack", 3f);
+                    }
                 }
 
             }
 
         }
     }
-    void Noattack ()
+    void Noattack()
     {
         HitBx.SetActive(false);
         par4.Clear();
         par4.Stop();
-       par.Clear();
-       par.Stop();
+        par.Clear();
+        par.Stop();
         animator.SetBool("attacking", false);
-        attacking = false;  
+        attacking = false;
+    }
+    void Stomp()
+    {
+    stomp.Play();
     }
     void OnTriggerEnter(Collider other)
     {
