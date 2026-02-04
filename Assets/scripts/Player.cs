@@ -1,13 +1,11 @@
 
 using System.Collections;
-using UnityEditor.Animations;
+//using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static System.Net.WebRequestMethods;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class Player : MonoBehaviour
 {   //variable place
@@ -309,6 +307,36 @@ public class Player : MonoBehaviour
         vertical = context.ReadValue<Vector2>().y;
     }
 
+    public void MoveInput(Vector2 context)
+    {
+        horizontal = context.x;
+        vertical = context.y;
+    }
+
+    public void RollInput(bool newJumpState)
+    {
+        rollButton = newJumpState;
+    }
+    public void OnRoll(InputValue value)
+    {
+        RollInput(value.isPressed);
+    }
+    public void LockInput(bool newJumpState)
+    {
+        lockButton = newJumpState;
+    }
+    public void OnLock(InputValue value)
+    {
+        LockInput(value.isPressed);
+    }
+    public void AttackInput(bool newJumpState)
+    {
+        fireButton = newJumpState;
+    }
+    public void OnAttack(InputValue value)
+    {
+        AttackInput(value.isPressed);
+    }
     public void Roll(InputAction.CallbackContext context)
     {
         rollButton = context.ReadValueAsButton();
