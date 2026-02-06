@@ -25,10 +25,14 @@ public class Boss2 : MonoBehaviour
     public GamerManger gameManger;
     public GameObject doors;
     public ParticleSystem stomp;
+    private AudioManger audioManger;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         boss2Hp.value = 100;
+        audioManger = GameObject.Find("AudioManger").GetComponent<AudioManger>();
+        audioManger.audioSource.clip = audioManger.audioClip3;
+        audioManger.audioSource.Play();
     }
 
     // Update is called once per frame
@@ -37,6 +41,8 @@ public class Boss2 : MonoBehaviour
 
         if (boss2Hp.value < 1 && !inPhase2)
         {
+            audioManger.audioSource.clip = audioManger.audioClip4;
+            audioManger.audioSource.Play();
             inAn = true;
             attacking = false;
             radiusCheck.radius = 4;
@@ -53,10 +59,13 @@ public class Boss2 : MonoBehaviour
         } else if (boss2Hp.value < 1 && inPhase2)
         {
             GamerManger.Instance.BossK();
+            audioManger.audioSource.clip = audioManger.audioClip1;
+            audioManger.audioSource.Play();
             par5.Stop();
             Instantiate(myPrefab, transform.position, transform.rotation);
             doors.SetActive(false);
             gameObject.SetActive(false);
+
         }
 
         if (animator.GetBool("inRange") == false && !phase2 && !attacking)
@@ -79,7 +88,7 @@ public class Boss2 : MonoBehaviour
         {
             if (!attacking && !phase2)
             {
-                attack = Random.Range(0, 6);
+                attack = Random.Range(0, 9);
 
                 if (attack < 5 && !attacking)
                 {

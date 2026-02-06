@@ -28,9 +28,14 @@ public class Boss1 : MonoBehaviour
     public Rigidbody rb;
     public GamerManger gamerManger;
     public GameObject door;
+    private AudioManger audioManger;
+    public AudioSource audioSource;
     private void Start()
-    {
+    {   
         animator.SetBool("hasRoared", false);
+        audioManger = GameObject.Find("AudioManger").GetComponent<AudioManger>();
+        audioManger.audioSource.clip = audioManger.audioClip2;
+        audioManger.audioSource.Play();
     }
     void Update()
     {
@@ -45,6 +50,8 @@ public class Boss1 : MonoBehaviour
         if (boss1Hp.value < 1)
         {
             GamerManger.Instance.BossK();
+            audioManger.audioSource.clip = audioManger.audioClip1;
+            audioManger.audioSource.Play();
             Instantiate(myPrefab, transform.position, transform.rotation);
             door.SetActive(false);
             gameObject.SetActive(false);
@@ -86,6 +93,7 @@ public class Boss1 : MonoBehaviour
                     transform.rotation = Quaternion.LookRotation(direction);
                  
                     animator.SetTrigger("A1");
+                    audioSource.Play();
                     roar = true;
                     bossSafeZone.Play();
                     

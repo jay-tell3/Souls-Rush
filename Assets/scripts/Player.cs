@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     private bool fireButton;
     private bool ultButton;
     public AudioSource source;
+    private AudioManger audioManger;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -61,6 +62,7 @@ public class Player : MonoBehaviour
         {
             transform.position = Spawn3.position;
         }
+        audioManger = GameObject.Find("AudioManger").GetComponent<AudioManger>();
     }
 
     // Update is called once per frame
@@ -103,6 +105,8 @@ public class Player : MonoBehaviour
           
        if(playerHp.value < 1)
         {
+            audioManger.audioSource.clip = audioManger.audioClip1;
+            audioManger.audioSource.Play();
             SceneManager.LoadScene(0);
            
             

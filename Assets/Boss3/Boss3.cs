@@ -37,15 +37,19 @@ public class Boss3 : MonoBehaviour
     public CapsuleCollider hittBox;
     private bool tiredE;
     public GameObject myPrefab;
+    private AudioManger audioManger;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         boss3Hp.value = 100;
         lRing.Play();
+        audioManger = GameObject.Find("AudioManger").GetComponent<AudioManger>();
+        audioManger.audioSource.clip = audioManger.audioClip5;
+        audioManger.audioSource.Play();
         //Invoke("Tor", 1);
-       // Invoke("Eacho",5);
-       
-       //Invoke("LightingAttack",5);
+        // Invoke("Eacho",5);
+
+        //Invoke("LightingAttack",5);
     }
 
     // Update is called once per frame
@@ -53,7 +57,8 @@ public class Boss3 : MonoBehaviour
     {
         if (boss3Hp.value < 1)
         {
-            
+            audioManger.audioSource.clip = audioManger.audioClip5;
+            audioManger.audioSource.Play();
             Instantiate(myPrefab, transform.position, transform.rotation);
             gameObject.SetActive(false);
             
