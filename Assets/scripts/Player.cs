@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
     private bool ultButton;
     public AudioSource source;
     private AudioManger audioManger;
+    public GameObject sound;
+    private GameObject soundClone;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -107,7 +109,7 @@ public class Player : MonoBehaviour
         {
             audioManger.audioSource.clip = audioManger.audioClip1;
             audioManger.audioSource.Play();
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
            
             
 
@@ -229,6 +231,9 @@ public class Player : MonoBehaviour
         if (fireButton && !attacking && !rolling)
         {
             attacking = true;
+            Instantiate(sound, transform.position, transform.rotation);
+            
+
             fire.Play();
             transform.localRotation = Quaternion.Euler(transform.rotation.x, cam.transform.eulerAngles.y, transform.rotation.z);
             attack = Random.Range(0, 3);
@@ -357,5 +362,6 @@ public class Player : MonoBehaviour
     {
         ultButton = context.ReadValueAsButton();
     }
+
 
 }
