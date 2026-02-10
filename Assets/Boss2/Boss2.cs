@@ -88,7 +88,7 @@ public class Boss2 : MonoBehaviour
         {
             if (!attacking && !phase2)
             {
-                attack = Random.Range(8, 9);
+                attack = Random.Range(0, 9);
 
                 if (attack < 5 && !attacking)
                 {
@@ -115,7 +115,7 @@ public class Boss2 : MonoBehaviour
                 }
                 else if (inPhase2)
                 {
-                    attack = Random.Range(1, 2);
+                    attack = Random.Range(0, 2);
                     if (attack == 0)
                     {
                          animator.SetTrigger("BruningAttack"); 

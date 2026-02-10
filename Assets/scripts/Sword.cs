@@ -10,7 +10,7 @@ public class Sword : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-     
+  
     }
 
     // Update is called once per frame
@@ -36,7 +36,8 @@ public class Sword : MonoBehaviour
              }
              else
              {
-              boss2.boss2Hp.value -= 6;
+                    //Seacond phase
+              boss2.boss2Hp.value -= 4;
              }
             }
             
