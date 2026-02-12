@@ -30,6 +30,7 @@ public class Boss1 : MonoBehaviour
     public GameObject door;
     private AudioManger audioManger;
     public AudioSource audioSource;
+    private bool heal;
     private void Start()
     {   
         animator.SetBool("hasRoared", false);
@@ -39,6 +40,12 @@ public class Boss1 : MonoBehaviour
     }
     void Update()
     {
+        if (!heal)
+        {
+            heal = true;
+            Invoke( "Heal", 1f);
+             
+        }
         
         if( attack ==1 && !attacked2 && animator.GetCurrentAnimatorStateInfo(0).IsName("attacks"))
         {
@@ -258,6 +265,11 @@ public class Boss1 : MonoBehaviour
         attacking = false;
         attacked2 = false;
         attack = 99;
+    }
+    public void Heal()
+    {
+        heal = false;
+        boss1Hp.value += 2 ;
     }
     void OnTriggerEnter(Collider other)
     {
