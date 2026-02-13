@@ -8,6 +8,7 @@ public class BruningAttack : MonoBehaviour
     public ParticleSystem par2;
     public float parRad = 1;
     private ParticleSystem.ShapeModule shapeModule;
+    public AudioSource audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,6 +28,7 @@ public class BruningAttack : MonoBehaviour
         Debug.Log("hyjgf");
         transform.position = player.transform.position;
         par.Play();
+        //audioSource.Play();
         Invoke("A2",1f);
     }
     void A2()

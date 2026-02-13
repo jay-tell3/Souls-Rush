@@ -18,7 +18,8 @@ public class Boss2 : MonoBehaviour
     public bool inPhase2 = false;
     private int attack;
     public BruningAttack b;
-    public GameObject HitBx;
+    public GameObject HitBx1;
+    public GameObject HitBx2;
     public GameObject Fire;
     public bool inAn;
     public GameObject myPrefab;
@@ -26,6 +27,7 @@ public class Boss2 : MonoBehaviour
     public GameObject doors;
     public ParticleSystem stomp;
     private AudioManger audioManger;
+    public AudioSource audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,7 +40,11 @@ public class Boss2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("idleB2"))
+        {
+            HitBx1.SetActive(false);
+            HitBx2.SetActive(false);
+        }
         if (boss2Hp.value < 1 && !inPhase2)
         {
             audioManger.audioSource.clip = audioManger.audioClip4;
@@ -94,24 +100,15 @@ public class Boss2 : MonoBehaviour
                 {
                     Vector3 direction = target.position - transform.position;
                     transform.rotation = Quaternion.LookRotation(direction);
+                    Invoke("AttackHit",0.5f);
                     attacking = true;
+
                     animator.SetTrigger("attack");
                     animator.SetBool("attacking", true);
 
                     animator.SetFloat("Blend", attack);
                     Invoke("Noattack", 3.6f);
-                    if (inPhase2)
-                    {
-
-                        HitBx.SetActive(true);
-                        par4.Play();
-                        par.Play();
-                        if (attack == 0)
-                        {
-                            Invoke("FireT", 2f);
-
-                        }
-                    }
+                    
                 }
                 else if (inPhase2)
                 {
@@ -142,7 +139,8 @@ public class Boss2 : MonoBehaviour
     }
     void Noattack()
     {
-        HitBx.SetActive(false);
+        HitBx1.SetActive(false);
+        HitBx2.SetActive(false);
         par4.Clear();
         par4.Stop();
         par.Clear();
@@ -182,5 +180,23 @@ public class Boss2 : MonoBehaviour
     {
         Vector3 direction = target.position - transform.position;
         Instantiate(Fire, transform.position, transform.rotation = Quaternion.LookRotation(direction));
+    }
+
+    void AttackHit()
+    {
+        Debug.Log("HitBox on");
+        HitBx1.SetActive(true);
+        if (inPhase2)
+        {
+            audioSource.Play();
+            HitBx2.SetActive(true);
+            par4.Play();
+            par.Play();
+            if (attack == 0)
+            {
+                Invoke("FireT", 2f);
+
+            }
+        }
     }
 }
