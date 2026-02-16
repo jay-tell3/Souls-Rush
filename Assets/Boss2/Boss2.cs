@@ -28,6 +28,8 @@ public class Boss2 : MonoBehaviour
     public ParticleSystem stomp;
     private AudioManger audioManger;
     public AudioSource audioSource;
+    public GameObject a2;
+    public GameObject fSword;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -94,9 +96,9 @@ public class Boss2 : MonoBehaviour
         {
             if (!attacking && !phase2)
             {
-                attack = Random.Range(0, 9);
+                attack = Random.Range(5, 7);
 
-                if (attack < 5 && !attacking)
+                if (attack < 7 && !attacking)
                 {
                     Vector3 direction = target.position - transform.position;
                     transform.rotation = Quaternion.LookRotation(direction);
@@ -139,6 +141,8 @@ public class Boss2 : MonoBehaviour
     }
     void Noattack()
     {
+        fSword.SetActive(false);
+        a2.SetActive(false);
         HitBx1.SetActive(false);
         HitBx2.SetActive(false);
         par4.Clear();
@@ -185,9 +189,17 @@ public class Boss2 : MonoBehaviour
     void AttackHit()
     {
         Debug.Log("HitBox on");
+        if (attack == 5)
+        {
+            fSword.SetActive(true);
+        }
         HitBx1.SetActive(true);
         if (inPhase2)
         {
+            if (attack == 1 || attack == 4)
+            {
+                a2.SetActive(true);
+            }
             audioSource.Play();
             HitBx2.SetActive(true);
             par4.Play();
