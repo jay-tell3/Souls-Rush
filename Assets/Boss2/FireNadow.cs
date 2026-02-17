@@ -34,7 +34,7 @@ public class FireNadow : MonoBehaviour
     void Update()
     {
         
-        transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+        transform.Translate(Vector3.forward * 8 * Time.deltaTime);
 
     }
     void OnTriggerEnter(Collider other)

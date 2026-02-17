@@ -30,6 +30,9 @@ public class Boss2 : MonoBehaviour
     public AudioSource audioSource;
     public GameObject a2;
     public GameObject fSword;
+    public GameObject fSword2;
+    public ParticleSystem sign;
+    private bool movingAttck = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,8 +45,14 @@ public class Boss2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (movingAttck)
+        {
+            transform.Translate(Vector3.forward * 1.3f * Time.deltaTime);
+        }
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("idleB2"))
         {
+            movingAttck =false;
             HitBx1.SetActive(false);
             HitBx2.SetActive(false);
         }
@@ -96,10 +105,14 @@ public class Boss2 : MonoBehaviour
         {
             if (!attacking && !phase2)
             {
-                attack = Random.Range(5, 7);
+                attack = Random.Range(0, 12);
 
                 if (attack < 7 && !attacking)
                 {
+                    if (attack == 1)
+                    {
+                        sign.Play();
+                    }
                     Vector3 direction = target.position - transform.position;
                     transform.rotation = Quaternion.LookRotation(direction);
                     Invoke("AttackHit",0.5f);
@@ -141,7 +154,9 @@ public class Boss2 : MonoBehaviour
     }
     void Noattack()
     {
+        movingAttck = false;
         fSword.SetActive(false);
+        fSword2.SetActive(false);
         a2.SetActive(false);
         HitBx1.SetActive(false);
         HitBx2.SetActive(false);
@@ -192,11 +207,17 @@ public class Boss2 : MonoBehaviour
         if (attack == 5)
         {
             fSword.SetActive(true);
+            movingAttck = true;
+            if (inPhase2)
+            {
+                fSword2.SetActive(true);
+                    
+            }
         }
         HitBx1.SetActive(true);
         if (inPhase2)
         {
-            if (attack == 1 || attack == 4)
+            if (attack == 1)
             {
                 a2.SetActive(true);
             }

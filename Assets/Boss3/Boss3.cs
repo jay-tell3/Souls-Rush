@@ -33,6 +33,7 @@ public class Boss3 : MonoBehaviour
     public GameObject torG;
     public Player player;
     public ParticleSystem lRing;
+    public ParticleSystem lRing2;
     public Slider boss3Hp;
     public CapsuleCollider hittBox;
     private bool tiredE;
@@ -230,7 +231,7 @@ public class Boss3 : MonoBehaviour
     void LightingSpawn()
     {
         Instantiate(lighting, new Vector3(Random.Range(-10, 11), -0.8177662f, Random.Range(-10, 11)), Quaternion.identity);
-        Instantiate(lighting, new Vector3(target.position.x, -0.8177662f, target.position.z), Quaternion.identity);
+        //Instantiate(lighting, new Vector3(target.position.x, -0.8177662f, target.position.z), Quaternion.identity);
 
     }
     void Eacho()
@@ -238,6 +239,7 @@ public class Boss3 : MonoBehaviour
         walk = true;
         tpFX.Play();
         lRing.Stop();
+        lRing2.Play();
         //tpFX2.Play();
 
 
@@ -256,6 +258,7 @@ public class Boss3 : MonoBehaviour
         walk = false;
         animator.SetTrigger("NoWalk");
         lRing.Play();
+        lRing2.Stop();
         if(tiredE)
         {
             tiredE = false;
