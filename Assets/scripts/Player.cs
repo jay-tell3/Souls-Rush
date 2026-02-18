@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
     private AudioManger audioManger;
     public GameObject sound;
     private GameObject soundClone;
+    public GameObject menu;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -94,11 +95,9 @@ public class Player : MonoBehaviour
     {
         if(ultButton)
         {
-            Instantiate(myPrefab, transform.position, transform.rotation);
-           cam.SetActive(false);
-          targetCam.SetActive(true);
-          Ult();
+           menu.SetActive(true);
         }
+       
        
         if(transform.position.y < -100)
         {

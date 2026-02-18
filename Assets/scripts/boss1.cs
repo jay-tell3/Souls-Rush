@@ -31,6 +31,7 @@ public class Boss1 : MonoBehaviour
     private AudioManger audioManger;
     public AudioSource audioSource;
     private bool heal;
+    public GameObject armHitBox;
     private void Start()
     {   
         animator.SetBool("hasRoared", false);
@@ -40,6 +41,12 @@ public class Boss1 : MonoBehaviour
     }
     void Update()
     {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("idleB2"))
+        {
+
+            armHitBox.SetActive(false);
+           
+        }
         if (!heal)
         {
             heal = true;
@@ -143,6 +150,7 @@ public class Boss1 : MonoBehaviour
                 else if (attack == 0 && !pickedAttack)
                 {
                     pickedAttack = true;
+                    Invoke("ArmHitBox", 1f); 
                     arm.Play();
                     Invoke("NoAttacking", 3.5f);
 
@@ -151,7 +159,9 @@ public class Boss1 : MonoBehaviour
                 else if (attack == 2 && !pickedAttack)
                 {
                     
+                 
                     pickedAttack = true;
+                    Invoke("ArmHitBox", 1f);
                     Debug.Log("jumping");
                     arm.Play();
                     StartCoroutine("JumpAttack");
@@ -299,5 +309,9 @@ public class Boss1 : MonoBehaviour
             grounded = false;
 
         }
+    }
+    public void ArmHitBox()
+    {
+        armHitBox.SetActive(true);
     }
 }
