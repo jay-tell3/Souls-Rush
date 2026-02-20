@@ -3,7 +3,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 public static class SaveData
 {
-   public static void SaveManger (GamerManger gamerManger)
+   public static void SavePlayerData (GamerManger gamerManger)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/saveData.fun";
@@ -15,7 +15,7 @@ public static class SaveData
         stream.Close();
     }
 
-    public static Data loadData ()
+    public static Data LoadData ()
     {
         string path = Application.persistentDataPath + "/saveData.fun";
         if (File.Exists(path))

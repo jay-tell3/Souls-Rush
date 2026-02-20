@@ -96,8 +96,10 @@ public class Player : MonoBehaviour
         if(ultButton)
         {
            menu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
         }
        
+        
        
         if(transform.position.y < -100)
         {
@@ -362,5 +364,9 @@ public class Player : MonoBehaviour
         ultButton = context.ReadValueAsButton();
     }
 
-
+    public void Resume()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        menu.SetActive(false);
+    }
 }

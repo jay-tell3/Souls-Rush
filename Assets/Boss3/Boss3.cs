@@ -39,6 +39,8 @@ public class Boss3 : MonoBehaviour
     private bool tiredE;
     public GameObject myPrefab;
     private AudioManger audioManger;
+    public CapsuleCollider capsuleCollidera;
+    public CapsuleCollider capsuleCollidera2;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -56,6 +58,14 @@ public class Boss3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("idleB2"))
+        {
+         
+            capsuleCollidera.enabled = false;
+            capsuleCollidera2.enabled = false;
+        }
+        */
         if (boss3Hp.value < 1)
         {
             audioManger.audioSource.clip = audioManger.audioClip5;
@@ -105,6 +115,7 @@ public class Boss3 : MonoBehaviour
             if (tpTime == 5)
             {
                 attcking = true;
+                Invoke("AttackHitBox",0.5f);
                 tpTime = 0;
                 Debug.Log("fffffff");
                 Attck();
@@ -120,8 +131,12 @@ public class Boss3 : MonoBehaviour
         inTor = true;
         animator.SetTrigger("tornado");
         transform.position = new Vector3(0, -0.8177662f, 0);
+      Invoke("TorPar2",1);
+        Invoke("Notor", 7);
+    }
+    void TorPar2()
+    {
         torG.SetActive(true);
-        Invoke("Notor", 5);
     }
 
     void Tp()
@@ -215,6 +230,8 @@ public class Boss3 : MonoBehaviour
 
         tpTime = 0;
         attcking = false;
+        capsuleCollidera.enabled = false;
+        capsuleCollidera2.enabled = false;
         tp = true;
     }
     void Lighting()
@@ -258,6 +275,7 @@ public class Boss3 : MonoBehaviour
         walk = false;
         animator.SetTrigger("NoWalk");
         lRing.Play();
+        lRing2.Clear();
         lRing2.Stop();
         if(tiredE)
         {
@@ -357,5 +375,10 @@ public class Boss3 : MonoBehaviour
         }
     }
 
+    void AttackHitBox()
+    {
+        capsuleCollidera.enabled = true;
+        capsuleCollidera2.enabled = true;
+    }
 
 }

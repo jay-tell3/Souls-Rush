@@ -150,7 +150,8 @@ public class Boss1 : MonoBehaviour
                 else if (attack == 0 && !pickedAttack)
                 {
                     pickedAttack = true;
-                    Invoke("ArmHitBox", 1f); 
+                    Invoke("ArmHitBox", 1f);
+                    Invoke("ArmHitBox", 1.5f);
                     arm.Play();
                     Invoke("NoAttacking", 3.5f);
 
@@ -161,7 +162,7 @@ public class Boss1 : MonoBehaviour
                     
                  
                     pickedAttack = true;
-                    Invoke("ArmHitBox", 1f);
+                    Invoke("ArmHitBox", 2f);
                     Debug.Log("jumping");
                     arm.Play();
                     StartCoroutine("JumpAttack");
@@ -267,6 +268,7 @@ public class Boss1 : MonoBehaviour
     { ps.Stop(); }
     public void NoAttacking()
     {
+        armHitBox.SetActive(false);
         arm.Stop();
         pickedAttack = false;
         Debug.Log("no attack");
@@ -279,7 +281,7 @@ public class Boss1 : MonoBehaviour
     public void Heal()
     {
         heal = false;
-        boss1Hp.value += 2 ;
+        boss1Hp.value += 1 ;
     }
     void OnTriggerEnter(Collider other)
     {
@@ -313,5 +315,11 @@ public class Boss1 : MonoBehaviour
     public void ArmHitBox()
     {
         armHitBox.SetActive(true);
+
+    }
+    public void ArmHitBoxOff()
+    {
+        armHitBox.SetActive(false);
+
     }
 }

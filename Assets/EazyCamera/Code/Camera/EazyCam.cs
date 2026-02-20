@@ -119,7 +119,7 @@ namespace EazyCamera
 
             if (Application.isPlaying)
             {
-                Cursor.lockState = CursorLockMode.Locked;
+               Cursor.lockState = CursorLockMode.Locked;
             }
         }
 
