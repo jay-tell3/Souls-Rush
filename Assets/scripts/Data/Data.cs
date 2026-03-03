@@ -7,7 +7,7 @@ public class Data : MonoBehaviour
 
     public Data (GamerManger gamerManger)
     {
-        Boss = gamerManger.BossDefeats;
+        Boss = GamerManger.BossDefeats;
     }
     
 }

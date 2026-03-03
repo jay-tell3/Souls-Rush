@@ -41,6 +41,7 @@ public class Boss3 : MonoBehaviour
     private AudioManger audioManger;
     public CapsuleCollider capsuleCollidera;
     public CapsuleCollider capsuleCollidera2;
+    public AudioSource audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -68,6 +69,7 @@ public class Boss3 : MonoBehaviour
         */
         if (boss3Hp.value < 1)
         {
+            GamerManger.Instance.BossK();
             audioManger.audioSource.clip = audioManger.audioClip5;
             audioManger.audioSource.Play();
             Instantiate(myPrefab, transform.position, transform.rotation);
@@ -163,6 +165,7 @@ public class Boss3 : MonoBehaviour
             
 
             transform.position = new Vector3(Random.Range(-10, 11), -0.8177662f, Random.Range(-10, 11));
+            audioSource.Play();
             Vector3 direction = target.position - transform.position;
 
             // Zero out the Y component to constrain rotation to the Y-axis

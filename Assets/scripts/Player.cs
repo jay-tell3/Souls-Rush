@@ -45,26 +45,29 @@ public class Player : MonoBehaviour
     public GameObject sound;
     private GameObject soundClone;
     public GameObject menu;
+    
+    public static bool noHit = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerHp = GetComponentInChildren<Slider>();
-        if (GamerManger.Instance.BossDefeats == 0)
+        if (GamerManger.BossDefeats == 0)
         {
             transform.position = Spawnn.position;
         }
-        if (GamerManger.Instance.BossDefeats == 0 && GamerManger.Instance.Tp)
+        if (GamerManger.BossDefeats == 0 && GamerManger.Instance.Tp)
         {
             transform.position = Spawn1.position;
         }
-        else if (GamerManger.Instance.BossDefeats == 1)
+        else if (GamerManger.BossDefeats == 1)
         {
             transform.position = Spawn2.position;
         }
-        else if (GamerManger.Instance.BossDefeats == 2)
+        else if (GamerManger.BossDefeats == 2)
         {
             transform.position = Spawn3.position;
         }
+        
         audioManger = GameObject.Find("AudioManger").GetComponent<AudioManger>();
     }
 
@@ -93,7 +96,13 @@ public class Player : MonoBehaviour
     */
     void Update()
     {
-        if(ultButton)
+        if (GamerManger.BossDefeats > 2 & noHit ==true)
+        {
+            Main.noHitTroph = true;
+            Debug.Log("yes trophe");
+        }
+
+        if (ultButton)
         {
            menu.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
@@ -105,8 +114,12 @@ public class Player : MonoBehaviour
         {
            playerHp.value = 0;
         }
-          
-       if(playerHp.value < 1)
+        if (playerHp.value <= 99)
+        {
+            noHit = false;
+            Debug.Log("no trophe");
+        }
+        if (playerHp.value < 1)
         {
             audioManger.audioSource.clip = audioManger.audioClip1;
             audioManger.audioSource.Play();

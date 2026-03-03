@@ -6,7 +6,8 @@ public class GamerManger : MonoBehaviour
    
     public GameObject startScreen;
     public GameObject everthing;
-    public int BossDefeats = 0;
+    public static int BossDefeats = 0;
+
     public bool Tp = false;
   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -51,6 +52,7 @@ public class GamerManger : MonoBehaviour
            
         }
         */
+
     }
     public void Starter ()
     {

@@ -22,7 +22,7 @@ public class Boss3Clone : MonoBehaviour
         if (attack)
         {
             animator.SetTrigger("Attack");
-            transform.Translate(Vector3.forward * 70 * Time.deltaTime);
+            transform.Translate(Vector3.forward * 30 * Time.deltaTime);
             Invoke("Destroyy", 5);
         }
     }
