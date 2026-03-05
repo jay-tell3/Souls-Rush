@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class Heal : MonoBehaviour
 {
+    public static bool noHeal = true;
     public Player player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+         noHeal = true;
     }
 
     // Update is called once per frame
@@ -20,7 +21,7 @@ public class Heal : MonoBehaviour
         // You can also use other.CompareTag("YourTag") to check for specific objects
         if (other.CompareTag("Player"))
         {
-
+            noHeal = false;  
             player.playerHp.value += 5;
         }
     }

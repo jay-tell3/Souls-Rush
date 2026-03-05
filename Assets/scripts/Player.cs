@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public GameObject targetCam, playerCam;
     public Animator animator;
     public Sword SwordPar;
+    public CamLock camLock;
     public ParticleSystem fire;
     public Slider playerHp;
     //public GamerManger gamerManger;
@@ -50,6 +51,8 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        CamLock.camUsed = false;
+        noHit = true;
         playerHp = GetComponentInChildren<Slider>();
         if (GamerManger.BossDefeats == 0)
         {
@@ -96,10 +99,23 @@ public class Player : MonoBehaviour
     */
     void Update()
     {
+       
         if (GamerManger.BossDefeats > 2 & noHit ==true)
         {
             Main.noHitTroph = true;
             Debug.Log("yes trophe");
+        }
+
+        if (GamerManger.BossDefeats > 2 & CamLock.camUsed  == false)
+        {
+            Main.noCamTroph = true;
+            Debug.Log("yes cam trophe");
+        }
+
+        if (GamerManger.BossDefeats > 2 & Heal.noHeal == true)
+        {
+            Main.noHealTroph = true;
+            Debug.Log("yes heal trophe");
         }
 
         if (ultButton)

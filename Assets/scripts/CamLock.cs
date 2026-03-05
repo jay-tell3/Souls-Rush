@@ -14,6 +14,7 @@ public class CamLock : MonoBehaviour
     public Transform b2;
     public Transform b3;
 
+    public static bool camUsed = false;
    
     void Update()
     {
@@ -41,7 +42,7 @@ public class CamLock : MonoBehaviour
         if (isLockedOn && target != null)
         {
             Debug.Log("fhhhhhhhhhhhh");
-            Main.noCamTroph = false;
+            camUsed = true;
 
               Quaternion desiredRotation = Quaternion.LookRotation(target.position - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, smoothSpeed * Time.deltaTime);

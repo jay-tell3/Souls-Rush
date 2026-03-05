@@ -4058,7 +4058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1157966585
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4880,6 +4880,10 @@ MonoBehaviour:
   nohitCheckMark: {fileID: 595851765}
   nocamX: {fileID: 697642159}
   nocamCheckMark: {fileID: 915012829}
+  nohealX: {fileID: 502934885}
+  nohealCheckMark: {fileID: 814707625}
+  nogoldX: {fileID: 1150632297}
+  nogoldCheckMark: {fileID: 1008628902}
 --- !u!1 &1384446534
 GameObject:
   m_ObjectHideFlags: 0
@@ -5662,7 +5666,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -10970,7 +10974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1752124732
 RectTransform:
   m_ObjectHideFlags: 0

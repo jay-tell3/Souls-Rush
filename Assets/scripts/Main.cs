@@ -6,9 +6,15 @@ public class Main : MonoBehaviour
     public static bool noHitTroph = false;
     public GameObject nohitX;
     public GameObject nohitCheckMark;
-    public static bool noCamTroph = true;
+    public static bool noCamTroph = false;
     public GameObject nocamX;
     public GameObject nocamCheckMark;
+    public static bool noHealTroph = false;
+    public GameObject nohealX;
+    public GameObject nohealCheckMark;
+    public static bool goldTroph = false;
+    public GameObject nogoldX;
+    public GameObject nogoldCheckMark;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,7 +24,10 @@ public class Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        noCamTroph = true;
+        if (noCamTroph && noHealTroph && noHitTroph)
+        {
+            goldTroph = true;
+        }
         if (noHitTroph)
         {
             nohitX.SetActive(false);
@@ -32,14 +41,37 @@ public class Main : MonoBehaviour
 
         if (noCamTroph == true)
         {
-            nohitX.SetActive(false);
-            nohitCheckMark.SetActive(true);
+            nocamX.SetActive(false);
+            nocamCheckMark.SetActive(true);
         }
         else
         {
-            nohitX.SetActive(true);
-            nohitCheckMark.SetActive(false);
+            nocamX.SetActive(true);
+            nocamCheckMark.SetActive(false);
         }
+
+        if (noHealTroph == true)
+        {
+            nohealX.SetActive(false);
+            nohealCheckMark.SetActive(true);
+        }
+        else
+        {
+            nohealX.SetActive(true);
+            nohealCheckMark.SetActive(false);
+        }
+
+        if (goldTroph == true)
+        {
+            nogoldX.SetActive(false);
+            nogoldCheckMark.SetActive(true);
+        }
+        else
+        {
+            nogoldX.SetActive(true);
+            nogoldCheckMark.SetActive(false);
+        }
+
 
     }
     public void BossSeclect(int boss)
