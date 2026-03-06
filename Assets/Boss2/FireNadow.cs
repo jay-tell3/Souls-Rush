@@ -8,6 +8,7 @@ public class FireNadow : MonoBehaviour
     private void Start()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
+        Invoke("Despawn",6f);
     }
     /*
     public Transform target;
@@ -45,5 +46,10 @@ public class FireNadow : MonoBehaviour
             player.playerHp.value -= 20;
             Debug.Log("awsedrftgyhj");
         }
+    }
+
+    void Despawn()
+    {
+        Destroy(this);
     }
 }

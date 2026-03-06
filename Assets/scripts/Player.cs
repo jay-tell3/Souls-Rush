@@ -46,13 +46,25 @@ public class Player : MonoBehaviour
     public GameObject sound;
     private GameObject soundClone;
     public GameObject menu;
-    
+    public bool wait;
     public static bool noHit = true;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if ( Main.start == true || GamerManger.BossDefeats == 0)
+        {
         CamLock.camUsed = false;
-        noHit = true;
+          
+        }
+        else
+        {
+            Debug.Log("trophy nooo");
+        }
+
+
+            noHit = true;
+
         playerHp = GetComponentInChildren<Slider>();
         if (GamerManger.BossDefeats == 0)
         {
@@ -139,6 +151,7 @@ public class Player : MonoBehaviour
         {
             audioManger.audioSource.clip = audioManger.audioClip1;
             audioManger.audioSource.Play();
+            Main.start = false;
             SceneManager.LoadScene(1);
            
             
@@ -190,7 +203,7 @@ public class Player : MonoBehaviour
         }
 
 
-        if (lockButton)
+        if (lockButton && wait == true)
         {
             if (cam == playerCam)
             {
@@ -200,7 +213,10 @@ public class Player : MonoBehaviour
             {
                 cam = playerCam;
             }
+            wait = false;
+            lockButton = false;
         }
+        else { wait = true; }
 
         if (rollButton && vertical > 0.5 && !rolling && !attacking && !rollCoolDown)
         {
