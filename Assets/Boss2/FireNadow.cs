@@ -50,6 +50,6 @@ public class FireNadow : MonoBehaviour
 
     void Despawn()
     {
-        Destroy(this);
+        Destroy(gameObject);
     }
 }
