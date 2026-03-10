@@ -10783,6 +10783,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 300343706508050439, guid: dad4813f622a3a842bb70c551630ae04, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 2309276420174984656, guid: dad4813f622a3a842bb70c551630ae04, type: 3}
       propertyPath: m_Name
       value: BlackHole

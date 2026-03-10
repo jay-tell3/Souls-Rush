@@ -2,6 +2,7 @@
 using System.Collections;
 //using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder;
 using UnityEngine.SceneManagement;
@@ -48,22 +49,27 @@ public class Player : MonoBehaviour
     public GameObject menu;
     public bool wait;
     public static bool noHit = true;
-    
+    public EventSystem eventSystem;
+    public GameObject notrophy;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if ( Main.start == true || GamerManger.BossDefeats == 0)
+        if ( Main.start == true)
         {
         CamLock.camUsed = false;
-          
+        noHit = true;
+        notrophy.SetActive(false);
         }
         else
         {
             Debug.Log("trophy nooo");
+            noHit = false;
+            CamLock.camUsed = true;
+            notrophy.SetActive(true);
         }
 
 
-            noHit = true;
+       
 
         playerHp = GetComponentInChildren<Slider>();
         if (GamerManger.BossDefeats == 0)
@@ -132,8 +138,10 @@ public class Player : MonoBehaviour
 
         if (ultButton)
         {
+
            menu.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
+           
         }
        
         

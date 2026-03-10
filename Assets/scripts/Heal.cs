@@ -7,7 +7,15 @@ public class Heal : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-         noHeal = true;
+        if (Main.start == true || GamerManger.BossDefeats == 0)
+        {
+            noHeal = true;
+        }
+        else
+        {
+            noHeal = false;
+            Debug.Log("trporpopr nooo");
+        }
     }
 
     // Update is called once per frame
