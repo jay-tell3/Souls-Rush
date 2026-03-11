@@ -82,6 +82,14 @@ public class Main : MonoBehaviour
     }
     public void Starttt()
     {
-        start = true;
+        GamerManger.BossDefeats = 0;
+       start = true;
+    }
+    public void ResetTrophies()
+    {
+        goldTroph = false;
+        noCamTroph = false;
+        noHealTroph = false;
+        noHitTroph = false;
     }
 }

@@ -30,7 +30,7 @@ public class Heal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             noHeal = false;  
-            player.playerHp.value += 5;
+            player.playerHp.value += 1;
         }
     }
 }

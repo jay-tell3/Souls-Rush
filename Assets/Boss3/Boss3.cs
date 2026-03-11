@@ -42,6 +42,7 @@ public class Boss3 : MonoBehaviour
     public CapsuleCollider capsuleCollidera;
     public CapsuleCollider capsuleCollidera2;
     public AudioSource audioSource;
+    public GameObject win;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -73,7 +74,12 @@ public class Boss3 : MonoBehaviour
             audioManger.audioSource.clip = audioManger.audioClip5;
             audioManger.audioSource.Play();
             Instantiate(myPrefab, transform.position, transform.rotation);
-            gameObject.SetActive(false);
+            lRing.Stop();
+            if (Main.start == true)
+            { 
+             win.SetActive(true);
+            }
+                gameObject.SetActive(false);
             
         }
         if (change)

@@ -138,10 +138,8 @@ public class Player : MonoBehaviour
 
         if (ultButton)
         {
-
-           menu.SetActive(true);
+            menu.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
-           
         }
        
         
