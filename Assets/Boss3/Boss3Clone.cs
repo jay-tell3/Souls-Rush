@@ -29,7 +29,7 @@ public class Boss3Clone : MonoBehaviour
 
     void Sattack()
     {
-        if (B3.clones == 9)
+        if (B3.clones == 1)
         {
 
 

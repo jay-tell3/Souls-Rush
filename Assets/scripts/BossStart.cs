@@ -17,9 +17,12 @@ public class BossStart : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        boss.SetActive(true);
-        doors.SetActive(true);
-        Invoke("Off", 0.1f);
+        if (other.CompareTag("Player"))
+        {
+            boss.SetActive(true);
+            doors.SetActive(true);
+            Invoke("Off", 0.1f);
+        }
     }
     void Off()
     {

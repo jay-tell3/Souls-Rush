@@ -17,6 +17,7 @@ public class Main : MonoBehaviour
     public GameObject nogoldCheckMark;
 
     public static bool start = false;
+    public static bool start2 = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -83,7 +84,16 @@ public class Main : MonoBehaviour
     public void Starttt()
     {
         GamerManger.BossDefeats = 0;
-       start = true;
+        start = true;
+        start2 = true;
+
+    }
+    public void Bstarttt()
+    {
+        
+        start = false;
+        start2 = false;
+
     }
     public void ResetTrophies()
     {

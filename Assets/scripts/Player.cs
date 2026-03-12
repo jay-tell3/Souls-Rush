@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public CamLock camLock;
     public ParticleSystem fire;
     public Slider playerHp;
+    private int rollspeed =15000;
     //public GamerManger gamerManger;
 
     private float ver, horiz;
@@ -274,11 +275,11 @@ public class Player : MonoBehaviour
 
         if (rolling && !Brolling )
         {
-            transform.Translate(Vector3.forward * 7 * Time.deltaTime);
+            rb.AddForce(transform.forward * rollspeed * Time.deltaTime);
         }
         if (rolling && Brolling )
         {
-            transform.Translate(Vector3.forward * -7 * Time.deltaTime);
+            rb.AddForce(transform.forward * -rollspeed * Time.deltaTime);
         }
         if (fireButton && !attacking && !rolling)
         {
@@ -335,7 +336,7 @@ public class Player : MonoBehaviour
     {
         // while (rolling)
         //transform.Translate(Vector3.forward * 10 * Time.deltaTime); 
-        transform.Translate(Vector3.forward * 5 * Time.deltaTime);
+        rb.AddForce(Vector3.forward * 5 * Time.deltaTime);
         yield return null;
 
     }

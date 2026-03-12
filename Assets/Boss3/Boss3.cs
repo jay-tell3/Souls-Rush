@@ -75,9 +75,10 @@ public class Boss3 : MonoBehaviour
             audioManger.audioSource.Play();
             Instantiate(myPrefab, transform.position, transform.rotation);
             lRing.Stop();
-            if (Main.start == true)
+            if (Main.start2 == true)
             { 
              win.SetActive(true);
+             Cursor.lockState = CursorLockMode.None;
             }
                 gameObject.SetActive(false);
             
@@ -88,7 +89,7 @@ public class Boss3 : MonoBehaviour
             Invoke("SpecislAttck", 10);
             change = false;
         }
-        if(clones >= 10)
+        if(clones >= 2)//yfhffjghj
         {
             clones = 0;
         }
