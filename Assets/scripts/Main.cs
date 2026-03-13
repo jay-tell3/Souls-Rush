@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Main : MonoBehaviour
 {
@@ -15,13 +16,18 @@ public class Main : MonoBehaviour
     public static bool goldTroph = false;
     public GameObject nogoldX;
     public GameObject nogoldCheckMark;
-
+    public Slider soundfxSlider, musicSlider, masterSlider;
     public static bool start = false;
     public static bool start2 = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
- 
+        if (masterSlider != null)
+            masterSlider.value = PreferencesManager.GetMasterVolume();
+        if (musicSlider != null)
+            musicSlider.value = PreferencesManager.GetMusicVolume();
+        if (soundfxSlider != null)
+            soundfxSlider.value = PreferencesManager.GetSoundfxVolume();
     }
 
     // Update is called once per frame
@@ -101,5 +107,17 @@ public class Main : MonoBehaviour
         noCamTroph = false;
         noHealTroph = false;
         noHitTroph = false;
+    }
+    public void ChangeSoundVolume(float soundLevel)
+    {
+        AudioManger.Instance.ChangeSoundVolume(soundLevel);
+    }
+    public void ChangeSoundfxVolume(float soundLevel)
+    {
+        AudioManger.Instance.ChangeSoundfxVolume(soundLevel);
+    }
+    public void ChangemusicVolume(float soundLevel)
+    {
+        AudioManger.Instance.ChangemusicVolume(soundLevel);
     }
 }
