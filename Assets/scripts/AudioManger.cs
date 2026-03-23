@@ -66,7 +66,7 @@ public class AudioManger : MonoBehaviour
         audioSource.Stop();
 
        
-         
+         audioSource.clip = audioClip1;
 
         // Play the new clip
         audioSource.Play();

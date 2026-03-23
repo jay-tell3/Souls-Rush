@@ -14,6 +14,7 @@ public class Boss3Clone : MonoBehaviour
         target = GameObject.FindWithTag("Player").transform;
         animator.SetFloat("walkT",Random.Range(0,3));
         Invoke("Sattack", 0.8f);
+
     }
 
     // Update is called once per frame
@@ -24,6 +25,11 @@ public class Boss3Clone : MonoBehaviour
             animator.SetTrigger("Attack");
             transform.Translate(Vector3.forward * 30 * Time.deltaTime);
             Invoke("Destroyy", 5);
+        }
+
+        if (B3.tried == true)
+        {
+            Destroy(gameObject);
         }
     }
 

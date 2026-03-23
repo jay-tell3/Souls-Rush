@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
     public static bool noHit = true;
     public EventSystem eventSystem;
     public GameObject notrophy;
+    public GameObject mainMenuButton;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -140,6 +141,7 @@ public class Player : MonoBehaviour
         if (ultButton)
         {
             menu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(mainMenuButton);
             Cursor.lockState = CursorLockMode.None;
         }
        

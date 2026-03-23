@@ -1,6 +1,7 @@
 
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -27,7 +28,7 @@ public class Boss3 : MonoBehaviour
     public ParticleSystem TorPar;
     private bool lightingAttack;
     public GameObject eSword;
-    private bool tried;
+    public bool tried;
     public ParticleSystem deBuff;
     private int rNum;
     public GameObject torG;
@@ -43,6 +44,14 @@ public class Boss3 : MonoBehaviour
     public CapsuleCollider capsuleCollidera2;
     public AudioSource audioSource;
     public GameObject win;
+    public GameObject mainMenuButton2;
+
+    public AudioClip audioClip1;
+    public AudioClip audioClip2;
+    public AudioClip audioClip3;
+    public AudioClip audioClip4;
+    public AudioClip audioClip5;
+    public AudioClip audioClip6;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -78,7 +87,9 @@ public class Boss3 : MonoBehaviour
             if (Main.start2 == true)
             { 
              win.SetActive(true);
-             Cursor.lockState = CursorLockMode.None;
+                EventSystem.current.SetSelectedGameObject(mainMenuButton2);
+                Cursor.lockState = CursorLockMode.None;
+
             }
                 gameObject.SetActive(false);
             
@@ -303,6 +314,8 @@ public class Boss3 : MonoBehaviour
     {
         lightingAttack = true;
         eSword.SetActive(true);
+        audioSource.clip = audioClip1;
+        audioSource.Play();
         //B
         attcks = Random.Range(0, 4);
         animator.SetFloat("attcks", attcks);
