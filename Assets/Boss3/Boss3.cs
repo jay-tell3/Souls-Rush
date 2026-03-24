@@ -148,6 +148,8 @@ public class Boss3 : MonoBehaviour
     }
     void Tor()
     {
+        audioSource.clip = audioClip6;
+        audioSource.Play();
         inTor = true;
         animator.SetTrigger("tornado");
         transform.position = new Vector3(0, -0.8177662f, 0);
@@ -183,6 +185,7 @@ public class Boss3 : MonoBehaviour
             
 
             transform.position = new Vector3(Random.Range(-10, 11), -0.8177662f, Random.Range(-10, 11));
+            audioSource.clip = audioClip2;
             audioSource.Play();
             Vector3 direction = target.position - transform.position;
 
@@ -274,6 +277,8 @@ public class Boss3 : MonoBehaviour
     }
     void Eacho()
     {
+        audioSource.clip = audioClip3;
+        audioSource.Play();
         walk = true;
         tpFX.Play();
         lRing.Stop();
@@ -314,7 +319,7 @@ public class Boss3 : MonoBehaviour
     {
         lightingAttack = true;
         eSword.SetActive(true);
-        audioSource.clip = audioClip1;
+        audioSource.clip = audioClip4;
         audioSource.Play();
         //B
         attcks = Random.Range(0, 4);
@@ -348,6 +353,8 @@ public class Boss3 : MonoBehaviour
     void Tried()
     {
         tried = true;
+        audioSource.clip = audioClip5;
+        audioSource.Play();
         tpFX.Play();
         transform.position = new Vector3(0, -0.8177662f, 0);
         animator.SetTrigger("Tried");
