@@ -7,6 +7,10 @@ public class Sword : MonoBehaviour
     public Boss2 boss2;
     public Boss3 boss3; 
     public Player player;
+    public GameObject pinkFlash;
+    private int pFlash = 101;
+    
+   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,7 +20,14 @@ public class Sword : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (boss1.isActive == true)
+        {
+            Debug.Log("on");
+        }
+        else
+        {
+            Debug.Log("off");
+        }
     }
     void OnTriggerEnter(Collider other)
     {
@@ -25,25 +36,64 @@ public class Sword : MonoBehaviour
         {
             Debug.Log("enemy entered the trigger!");
             // Perform actions specific to the Player entering
-            boss1.boss1Hp.value -= 2;
-            boss3.boss3Hp.value -= 2;
+
+            if (Random.Range(1, 101) == 1)
+            {
+               
+                Instantiate(pinkFlash, transform.position, transform.rotation);
+                boss1.boss1Hp.value -= 30;
+            }
+            else
+            {
+              boss1.boss1Hp.value -= 2;
+            }
+
+            if (Random.Range(1, 101) == 1)
+            {
+                Instantiate(pinkFlash, transform.position, transform.rotation);
+                boss3.boss3Hp.value -= 20;
+            }
+            else
+            {
+                boss3.boss3Hp.value -= 2;
+            }
+           
             
             if ( !boss2.inAn)
             {
              if (!boss2.inPhase2 )
              {
-             boss2.boss2Hp.value -= 6;
+
+                    if (Random.Range(1, 101) == 1)
+                    {
+                        Instantiate(pinkFlash, transform.position, transform.rotation);
+                        boss2.boss2Hp.value -= 30;
+                    }
+                    else
+                    {
+                        boss2.boss2Hp.value -= 6;
+                    }
+                   
              }
              else
              {
-                    //Seacond phase
-              boss2.boss2Hp.value -= 4;
+                    if (Random.Range(1, 101) == 1)
+                    {
+                        Instantiate(pinkFlash, transform.position, transform.rotation);
+                        boss2.boss2Hp.value -= 20;
+                    }
+                    else
+                    {
+                        boss2.boss2Hp.value -= 4;
+                    }
              }
+
             }
             
 
         }
 
     }
-   
+
+    
 }

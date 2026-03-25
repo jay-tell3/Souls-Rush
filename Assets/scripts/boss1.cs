@@ -32,12 +32,14 @@ public class Boss1 : MonoBehaviour
     public AudioSource audioSource;
     private bool heal;
     public GameObject armHitBox;
+    public bool isActive = false;
     private void Start()
     {   
         animator.SetBool("hasRoared", false);
         audioManger = GameObject.Find("AudioManger").GetComponent<AudioManger>();
         audioManger.audioSource.clip = audioManger.audioClip2;
         audioManger.audioSource.Play();
+        isActive = true;
     }
     void Update()
     {
@@ -281,7 +283,7 @@ public class Boss1 : MonoBehaviour
     public void Heal()
     {
         heal = false;
-        boss1Hp.value += 1 ;
+        boss1Hp.value += 2 ;
     }
     void OnTriggerEnter(Collider other)
     {
