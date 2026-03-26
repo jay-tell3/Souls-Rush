@@ -36,60 +36,64 @@ public class Sword : MonoBehaviour
         {
             Debug.Log("enemy entered the trigger!");
             // Perform actions specific to the Player entering
+            if (boss1.isActive) 
+            {
+                if (Random.Range(1, 101) == 1)
+                {
 
-            if (Random.Range(1, 101) == 1)
-            {
-               
-                Instantiate(pinkFlash, transform.position, transform.rotation);
-                boss1.boss1Hp.value -= 30;
+                    Instantiate(pinkFlash, transform.position, transform.rotation);
+                    boss1.boss1Hp.value -= 20;
+                }
+                else
+                {
+                    boss1.boss1Hp.value -= 2;
+                }
             }
-            else
+            if (boss3.isActive)
             {
-              boss1.boss1Hp.value -= 2;
+                if (Random.Range(1, 101) == 1)
+                {
+                    Instantiate(pinkFlash, transform.position, transform.rotation);
+                    boss3.boss3Hp.value -= 20;
+                }
+                else
+                {
+                    boss3.boss3Hp.value -= 2;
+                }
             }
-
-            if (Random.Range(1, 101) == 1)
+            if (boss2.isActive)
             {
-                Instantiate(pinkFlash, transform.position, transform.rotation);
-                boss3.boss3Hp.value -= 20;
-            }
-            else
-            {
-                boss3.boss3Hp.value -= 2;
-            }
-           
-            
-            if ( !boss2.inAn)
-            {
-             if (!boss2.inPhase2 )
-             {
-
-                    if (Random.Range(1, 101) == 1)
+                if (!boss2.inAn)
+                {
+                    if (!boss2.inPhase2)
                     {
-                        Instantiate(pinkFlash, transform.position, transform.rotation);
-                        boss2.boss2Hp.value -= 30;
+
+                        if (Random.Range(1, 101) == 1)
+                        {
+                            Instantiate(pinkFlash, transform.position, transform.rotation);
+                            boss2.boss2Hp.value -= 30;
+                        }
+                        else
+                        {
+                            boss2.boss2Hp.value -= 6;
+                        }
+
                     }
                     else
                     {
-                        boss2.boss2Hp.value -= 6;
+                        if (Random.Range(1, 101) == 1)
+                        {
+                            Instantiate(pinkFlash, transform.position, transform.rotation);
+                            boss2.boss2Hp.value -= 20;
+                        }
+                        else
+                        {
+                            boss2.boss2Hp.value -= 4;
+                        }
                     }
-                   
-             }
-             else
-             {
-                    if (Random.Range(1, 101) == 1)
-                    {
-                        Instantiate(pinkFlash, transform.position, transform.rotation);
-                        boss2.boss2Hp.value -= 20;
-                    }
-                    else
-                    {
-                        boss2.boss2Hp.value -= 4;
-                    }
-             }
 
+                }
             }
-            
 
         }
 

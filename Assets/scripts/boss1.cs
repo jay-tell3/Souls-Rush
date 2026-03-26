@@ -66,6 +66,7 @@ public class Boss1 : MonoBehaviour
         if (boss1Hp.value < 1)
         {
             GamerManger.Instance.BossK();
+            isActive = false;
             audioManger.audioSource.clip = audioManger.audioClip1;
             audioManger.audioSource.Play();
             Instantiate(myPrefab, transform.position, transform.rotation);
@@ -283,7 +284,7 @@ public class Boss1 : MonoBehaviour
     public void Heal()
     {
         heal = false;
-        boss1Hp.value += 2 ;
+        boss1Hp.value += 1 ;
     }
     void OnTriggerEnter(Collider other)
     {

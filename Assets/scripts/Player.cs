@@ -356,11 +356,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Ult()
-    {
-        gameObject.SetActive(false);
-        Invoke("UltEnd",25);
-    }
+    
     void UltEnd ()
     {
         gameObject.SetActive(true);
@@ -417,6 +413,7 @@ public class Player : MonoBehaviour
     {
         ultButton = context.ReadValueAsButton();
     }
+
 
     public void Resume()
     {

@@ -45,6 +45,7 @@ public class Boss3 : MonoBehaviour
     public AudioSource audioSource;
     public GameObject win;
     public GameObject mainMenuButton2;
+    public bool isActive = false;
 
     public AudioClip audioClip1;
     public AudioClip audioClip2;
@@ -56,6 +57,7 @@ public class Boss3 : MonoBehaviour
     void Start()
     {
         boss3Hp.value = 100;
+        isActive = true;
         lRing.Play();
         audioManger = GameObject.Find("AudioManger").GetComponent<AudioManger>();
         audioManger.audioSource.clip = audioManger.audioClip5;
@@ -84,6 +86,7 @@ public class Boss3 : MonoBehaviour
             audioManger.audioSource.Play();
             Instantiate(myPrefab, transform.position, transform.rotation);
             lRing.Stop();
+            isActive = false;
             if (Main.start2 == true)
             { 
              win.SetActive(true);

@@ -33,6 +33,7 @@ public class Boss2 : MonoBehaviour
     public GameObject fSword2;
     public ParticleSystem sign;
     private bool movingAttck = false;
+    public bool isActive = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,6 +41,7 @@ public class Boss2 : MonoBehaviour
         audioManger = GameObject.Find("AudioManger").GetComponent<AudioManger>();
         audioManger.audioSource.clip = audioManger.audioClip3;
         audioManger.audioSource.Play();
+        isActive = true;
     }
 
     // Update is called once per frame
@@ -76,6 +78,7 @@ public class Boss2 : MonoBehaviour
         } else if (boss2Hp.value < 1 && inPhase2)
         {
             GamerManger.Instance.BossK();
+            isActive = false;
             audioManger.audioSource.clip = audioManger.audioClip1;
             audioManger.audioSource.Play();
             par5.Stop();
