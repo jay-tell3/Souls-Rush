@@ -38,11 +38,11 @@ public class Sword : MonoBehaviour
             // Perform actions specific to the Player entering
             if (boss1.isActive) 
             {
-                if (Random.Range(1, 101) == 1)
+                if (Random.Range(1, 51) == 1)
                 {
 
                     Instantiate(pinkFlash, transform.position, transform.rotation);
-                    boss1.boss1Hp.value -= 20;
+                    boss1.boss1Hp.value -= 10;
                 }
                 else
                 {
@@ -51,10 +51,10 @@ public class Sword : MonoBehaviour
             }
             if (boss3.isActive)
             {
-                if (Random.Range(1, 101) == 1)
+                if (Random.Range(1, 51) == 1)
                 {
                     Instantiate(pinkFlash, transform.position, transform.rotation);
-                    boss3.boss3Hp.value -= 20;
+                    boss3.boss3Hp.value -= 10;
                 }
                 else
                 {
@@ -68,10 +68,10 @@ public class Sword : MonoBehaviour
                     if (!boss2.inPhase2)
                     {
 
-                        if (Random.Range(1, 101) == 1)
+                        if (Random.Range(1, 51) == 1)
                         {
                             Instantiate(pinkFlash, transform.position, transform.rotation);
-                            boss2.boss2Hp.value -= 30;
+                            boss2.boss2Hp.value -= 15;
                         }
                         else
                         {
@@ -81,10 +81,10 @@ public class Sword : MonoBehaviour
                     }
                     else
                     {
-                        if (Random.Range(1, 101) == 1)
+                        if (Random.Range(1, 51) == 1)
                         {
                             Instantiate(pinkFlash, transform.position, transform.rotation);
-                            boss2.boss2Hp.value -= 20;
+                            boss2.boss2Hp.value -= 10;
                         }
                         else
                         {
