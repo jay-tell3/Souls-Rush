@@ -28,6 +28,12 @@ public class Main : MonoBehaviour
             musicSlider.value = PreferencesManager.GetMusicVolume();
         if (soundfxSlider != null)
             soundfxSlider.value = PreferencesManager.GetSoundfxVolume();
+
+        noHitTroph=PlayerData.Instance.noHitTroph;
+        noHealTroph = PlayerData.Instance.noHealTroph;
+        noCamTroph = PlayerData.Instance.noCamTroph;
+        goldTroph = PlayerData.Instance.goldTroph;
+
     }
 
     // Update is called once per frame
@@ -36,6 +42,8 @@ public class Main : MonoBehaviour
         if (noCamTroph && noHealTroph && noHitTroph)
         {
             goldTroph = true;
+            PlayerData.Instance.goldTroph = true;
+            SaveData.SavePlayerData(PlayerData.Instance);
         }
         if (noHitTroph)
         {
@@ -103,6 +111,7 @@ public class Main : MonoBehaviour
     }
     public void ResetTrophies()
     {
+        SaveData.DelData();
         goldTroph = false;
         noCamTroph = false;
         noHealTroph = false;

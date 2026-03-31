@@ -124,18 +124,24 @@ public class Player : MonoBehaviour
         {
             Main.noHitTroph = true;
             Debug.Log("yes trophe");
+            PlayerData.Instance.noHitTroph= true;
+            SaveData.SavePlayerData(PlayerData.Instance);
         }
 
         if (GamerManger.BossDefeats > 2 & CamLock.camUsed  == false)
         {
             Main.noCamTroph = true;
             Debug.Log("yes cam trophe");
+            PlayerData.Instance.noCamTroph = true;
+            SaveData.SavePlayerData(PlayerData.Instance);
         }
 
         if (GamerManger.BossDefeats > 2 & Heal.noHeal == true)
         {
             Main.noHealTroph = true;
             Debug.Log("yes heal trophe");
+            PlayerData.Instance.noHealTroph = true;
+            SaveData.SavePlayerData(PlayerData.Instance);
         }
 
         if (ultButton)
