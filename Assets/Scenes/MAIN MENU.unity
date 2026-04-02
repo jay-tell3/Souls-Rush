@@ -1921,7 +1921,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -774, y: 371.45}
+  m_AnchoredPosition: {x: -774, y: 501.06}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &467890552
@@ -1947,46 +1947,93 @@ MonoBehaviour:
   m_text: 'Credits
 
 
+    -unity asset store-
+
+
     Low Poly Axe Warrior by polymiragee
 
     https://assetstore.unity.com/packages/3d/characters/humanoids/low-poly-axe-warrior-314095
 
-    
 
     Eazy
     Camera by Lint & Buttons
 
     https://assetstore.unity.com/packages/3d/characters/eazy-camera-102275
 
-    
 
     FREE-Low
     Poly SwordS - RPG Weapons by Blink
 
     https://assetstore.unity.com/packages/3d/props/weapons/free-low-poly-swords-rpg-weapons-198166
 
-    
 
     RPG_AnimationsPack_FREE
     by DoubleL
 
     https://assetstore.unity.com/packages/3d/animations/rpg-animations-pack-free-288783
 
-    
 
     Magic
     Effects FREE by Hovl Studio
 
     https://assetstore.unity.com/packages/vfx/particles/spells/magic-effects-free-247933
 
-    
 
     FREE
     Stylized PBR Textures Pack by Lumo-Art 3D
 
     https://assetstore.unity.com/packages/2d/textures-materials/free-stylized-pbr-textures-pack-111778
 
-'
+
+    -pixabay-
+
+
+    Evil
+    Heavy Metal by Emmraan
+
+    https://pixabay.com/music/metal-evil-heavy-metal-261243/
+
+
+    Piano
+    Theme #99-2(102) by MartinWiller
+
+    https://pixabay.com/music/solo-piano-piano-theme-99-2102-419263/
+
+
+    Boss
+    Fight by PHANTASTICBEATS
+
+    https://pixabay.com/music/beats-boss-fight-301722/
+
+
+    Video
+    Game Boss Fight Music by IHateTuesdays
+
+    https://pixabay.com/music/beats-video-game-boss-fight-music-287355/
+
+
+    Arcade
+    Boss Funk (Type Beat) by TheMediaGuy
+
+    https://pixabay.com/music/upbeat-arcade-boss-funk-type-beat-378908/
+
+
+    Computer
+    Mouse Click by SoundReality
+
+    https://pixabay.com/sound-effects/technology-computer-mouse-click-478758/
+
+
+    Basic
+    Fire whoosh by Niedec (Freesound)
+
+    https://pixabay.com/sound-effects/film-special-effects-basic-fire-whoosh-104224/
+
+
+    teleport
+    by Leszek_Szary (Freesound)
+
+    https://pixabay.com/sound-effects/film-special-effects-teleport-14639/'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2013,8 +2060,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
