@@ -82,7 +82,7 @@ public class Boss3 : MonoBehaviour
         if (boss3Hp.value < 1)
         {
             GamerManger.Instance.BossK();
-            audioManger.audioSource.clip = audioManger.audioClip5;
+            audioManger.audioSource.clip = audioManger.audioClip1;
             audioManger.audioSource.Play();
             Instantiate(myPrefab, transform.position, transform.rotation);
             lRing.Stop();
