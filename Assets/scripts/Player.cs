@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
         if ( Main.start == true)
         {
         CamLock.camUsed = false;
@@ -363,10 +364,7 @@ public class Player : MonoBehaviour
     }
 
     
-    void UltEnd ()
-    {
-        gameObject.SetActive(true);
-    }
+    
     public void Move(InputAction.CallbackContext context)
     {
         horizontal = context.ReadValue<Vector2>().x;
@@ -382,6 +380,10 @@ public class Player : MonoBehaviour
     public void RollInput(bool newJumpState)
     {
         rollButton = newJumpState;
+    }
+    public void PauseInput(bool newJumpState)
+    {
+        ultButton = newJumpState;
     }
     public void OnRoll(InputValue value)
     {

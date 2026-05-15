@@ -129,4 +129,10 @@ public class Main : MonoBehaviour
     {
         AudioManger.Instance.ChangemusicVolume(soundLevel);
     }
+
+    public void Quit()
+    {
+        Debug.Log("Quit button pressed");
+        Application.Quit(); 
+    }
 }

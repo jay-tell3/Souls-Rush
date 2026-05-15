@@ -119,8 +119,12 @@ namespace EazyCamera
         private void OnOrbit(InputAction.CallbackContext ctx)
         {
             _rotation = ctx.ReadValue<Vector2>();
-        }
 
+        }
+        public void OrbitInput(Vector2 work)
+        {
+            _rotation = work;
+        }
         private void Validate()
         {
             if (_toggleLockOn.bindings.Count == 0)
